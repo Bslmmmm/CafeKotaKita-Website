@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Kafe;
 use Illuminate\Database\Seeder;
 
 class KafeSeeder extends Seeder
@@ -12,6 +12,8 @@ class KafeSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Kafe::factory()
+            ->count(28)
+            ->create();
     }
 }

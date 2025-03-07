@@ -7,12 +7,11 @@ use Illuminate\Http\Request;
 
 class KafeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index()
     {
-        //
+        $data = Kafe::all();
+        return view('home');
     }
 
     /**
@@ -20,7 +19,7 @@ class KafeController extends Controller
      */
     public function create()
     {
-        //
+      
     }
 
     /**
@@ -28,38 +27,55 @@ class KafeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = [
+            "nama" => "Kafe Kita",
+            "alamat" => "Jl. Raya Kita No. 1",
+            "telp" => "08123456789",
+            "latitude" => "-6.123456",
+            "longitude" => "106.123456",
+            "status" => "buka"
+        ];
+        Kafe::create($data);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Kafe $kafe)
+    public function show( $id)
     {
-        //
+        $data = Kafe::find($id);
+        return view('home');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Kafe $kafe)
+    public function edit()
     {
-        //
+        
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Kafe $kafe)
+    public function update(Request $request, $id)
     {
-        //
+        $data = [
+            "nama" => "Kafe Kita",
+            "alamat" => "Jl. Raya Kita No. 1",
+            "telp" => "08123456789",
+            "latitude" => "-6.123456",
+            "longitude" => "106.123456",
+            "status" => "tutup"
+        ];
+        Kafe::where('id', $id)->update($data);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Kafe $kafe)
+    public function destroy($id)
     {
-        //
+        Kafe::destroy($id);
     }
 }

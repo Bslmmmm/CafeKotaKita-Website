@@ -10,12 +10,11 @@ class GenreSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
+    public function run($faker): void
     {
-        $faker = Faker::create();
-        // for($i = 0; $i < 10; i++)
-        // {
-
-        // }   
+       for($i = 0; $i < 10; $i++)
+       {
+            
+       }
     }
 }
