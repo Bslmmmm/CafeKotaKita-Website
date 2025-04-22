@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('gallery', function (Blueprint $table) {
             $table->uuid("id")->primary();
             $table->uuid("kafe_id");
-            $table->string("nama");
+            $table->string("url");
             $table->timestamps();
             $table->softDeletes();
 

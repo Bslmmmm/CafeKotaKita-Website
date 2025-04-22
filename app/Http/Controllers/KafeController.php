@@ -8,10 +8,10 @@ use Illuminate\Http\Request;
 class KafeController extends Controller
 {
     
-    public function index()
+    public function index(Request $req)
     {
         $data = Kafe::all();
-        return view('home');
+        return view('admin.kafe.index', compact('data'));
     }
 
     /**
@@ -19,8 +19,8 @@ class KafeController extends Controller
      */
     public function create()
     {
-      
-    }
+        return view('admin.kafe.form');
+    }   
 
     /**
      * Store a newly created resource in storage.
@@ -50,9 +50,10 @@ class KafeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit()
+    public function edit($id)
     {
-        
+        $data = Kafe::findOrFail($id);
+        return view('admin.kafe.form', compact('data'));
     }
 
     /**

@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Kafe;
+use App\Models\Menu;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +22,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Gate::define('create-kafe-menu', function (Kafe $kafe, Menu $menu) {
+            return $kafe->id === $menu->kafe_id;
+        });
     }
 }

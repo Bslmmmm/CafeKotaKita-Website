@@ -18,4 +18,7 @@ class Menu extends Model
     public function Kategori() {
         return $this->belongsTo(Kategori::class, "menu_kategori");
     }
+    public function Kafe() {
+        return $this->belongsTo(Kafe::class, "kafe_id");
+    }
 }

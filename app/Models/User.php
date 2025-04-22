@@ -14,7 +14,7 @@ class User extends Authenticatable
 {
     use HasUuids, SoftDeletes;
 
-    protected $table="user";
+    protected $table="users";
     protected $primaryKey = "id";
     protected $guarded = "id";
     
