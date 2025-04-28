@@ -34,7 +34,7 @@
                             action="{{ isset($data) ? route('genre.update', $data->id) : route('genre.store') }}">
                             @csrf
                             @if (isset($data))
-                                @method('PUT')
+                                @method('PATCH')
                             @endif
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-md-2 col-form-label form-control-label">Nama

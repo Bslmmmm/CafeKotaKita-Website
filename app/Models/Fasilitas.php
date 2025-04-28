@@ -12,8 +12,8 @@ class Fasilitas extends Model
 
     protected $table="fasilitas";
     protected $primaryKey = "id";
-    protected $guarded = "id";
-    
+    protected $fillable = ['nama', 'deskripsi', 'image'];
+
     public function Kafe() {
         return $this->belongsTo(Kafe::class);
     }

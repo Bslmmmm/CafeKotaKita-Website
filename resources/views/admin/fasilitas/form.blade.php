@@ -30,11 +30,11 @@
                 <div class="card">
                     <!-- Card body -->
                     <div class="card-body">
-                        <form method="POST"
+                        <form method="POST" enctype="multipart/form-data"
                             action="{{ isset($data) ? route('fasilitas.update', $data->id) : route('fasilitas.store') }}">
                             @csrf
                             @if (isset($data))
-                                @method('PUT')
+                                @method('PATCH')
                             @endif
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-md-2 col-form-label form-control-label">Nama
@@ -48,50 +48,27 @@
                                 <label for="example-text-input"
                                     class="col-md-2 col-form-label form-control-label">Deskripsi</label>
                                 <div class="col-md-10">
-                                    <input class="form-control" type="text" value="{{ $data->deskripsi ?? old('deskripsi') }}"
-                                        name="deskripsi">
+                                    <input class="form-control" type="text"
+                                        value="{{ $data->deskripsi ?? old('deskripsi') }}" name="deskripsi">
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label for="example-text-input"
-                                    class="col-md-2 col-form-label form-control-label">Image</label>
-                                    <div class="dropzone dropzone-multiple col-md-10" data-toggle="dropzone" data-dropzone-multiple data-dropzone-url="http://">
-                                        <div class="fallback">
-                                          <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="customFileUploadMultiple" multiple>
-                                            <label class="custom-file-label" for="customFileUploadMultiple">Choose file</label>
-                                          </div>
-                                        </div>
-                                        <ul class="dz-preview dz-preview-multiple list-group list-group-lg list-group-flush">
-                                          <li class="list-group-item px-0">
-                                            <div class="row align-items-center">
-                                              <div class="col-auto">
-                                                <div class="avatar">
-                                                  <img class="avatar-img rounded" src="..." alt="..." data-dz-thumbnail>
-                                                </div>
-                                              </div>
-                                              <div class="col ml--3">
-                                                <h4 class="mb-1" data-dz-name>...</h4>
-                                                <p class="small text-muted mb-0" data-dz-size>...</p>
-                                              </div>
-                                              <div class="col-auto">
-                                                <div class="dropdown">
-                                                  <a href="#" class="dropdown-ellipses dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fe fe-more-vertical"></i>
-                                                  </a>
-                                                  <div class="dropdown-menu dropdown-menu-right">
-                                                    <a href="#" class="dropdown-item" data-dz-remove>
-                                                      Remove
-                                                    </a>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </li>
-                                        </ul>
-                                      </div>
-                            </div>
                             
+                            <div class="form-group row">
+                              <label class="col-md-2 col-form-label form-control-label">Image</label>
+                              <div class="col-md-10">
+                                  <input type="file" class="form-control" name="image" id="customFileLang" lang="en" multiple onchange="previewImage(this);">
+
+                                  <!-- Image Preview -->
+                                  @if(isset($data) && $data->image)
+                                      <img id="gambar-preview" src="{{ url('storage/'.$data->image) }}" alt="Gambar Pratinjau" 
+                                           style="max-width: 50%; margin-top: 20px; display: block;">
+                                  @else
+                                      <img id="gambar-preview" src="#" alt="Gambar Pratinjau" 
+                                           style="max-width: 50%; margin-top: 20px; display: none;">
+                                  @endif
+                              </div>
+                          </div>
+
                             <button type="submit"
                                 class="btn btn-success float-right">{{ isset($data) ? 'Update' : 'Simpan' }}</button>
                         </form>
@@ -101,3 +78,23 @@
         </div>
     </div>
 @endsection
+<script>
+  // Function to preview the image when selected
+  function previewImage(input) {
+      var preview = document.getElementById('gambar-preview');
+      var file = input.files[0];
+      var reader = new FileReader();
+
+      reader.onloadend = function () {
+          preview.src = reader.result;
+          preview.style.display = 'block';  // Ensure the image preview is visible
+      };
+
+      if (file) {
+          reader.readAsDataURL(file);
+      } else {
+          preview.src = '#';
+          preview.style.display = 'none';
+      }
+  }
+</script>

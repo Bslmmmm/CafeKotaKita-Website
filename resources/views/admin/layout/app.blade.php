@@ -1,3 +1,4 @@
+@include('sweetalert::alert')
 @include('admin.layout.header')
 @include('admin.layout.sidebar')
 @include('admin.layout.navbar')

@@ -22,8 +22,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Gate::define('create-kafe-menu', function (Kafe $kafe, Menu $menu) {
-            return $kafe->id === $menu->kafe_id;
-        });
+       
     }
 }

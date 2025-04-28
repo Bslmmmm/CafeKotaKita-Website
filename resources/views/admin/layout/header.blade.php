@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="{{asset('assets/vendor/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css')}}">
   <link rel="stylesheet" href="{{asset('assets/vendor/datatables.net-select-bs4/css/select.bootstrap4.min.css')}}">
   <!-- Argon CSS -->
+
   <link rel="stylesheet" href="{{asset('assets/css/argon.css?v=1.2.1')}}" type="text/css">
 </head>
 <body>
