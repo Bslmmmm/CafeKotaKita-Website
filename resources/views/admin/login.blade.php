@@ -17,7 +17,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
-  <title>Argon Dashboard PRO - Premium Bootstrap 4 Admin Template</title>
+  <title>Login - KafeKotaKita</title>
   <!-- Favicon -->
   <link rel="icon" href="{{asset('assets/img/brand/favicon.png')}}" type="image/png">
   <!-- Fonts -->
@@ -92,6 +92,11 @@
                 <div class="text-center">
                   <button type="submit" class="btn btn-primary my-4">Sign in</button>
                 </div>
+                <div class="text-center">
+                    <p class="mt-2 text-muted">
+                      Belum mempunyai akun? <a href="{{ route('register') }}" class="text-primary font-weight-bold">Register</a>
+                    </p>
+                  </div>
               </form>
             </div>
           </div>
