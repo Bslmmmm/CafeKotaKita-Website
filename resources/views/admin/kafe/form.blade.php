@@ -54,6 +54,14 @@
                             </div>
                             <div class="form-group row">
                                 <label for="example-text-input"
+                                    class="col-md-2 col-form-label form-control-label">No Telp</label>
+                                <div class="col-md-10">
+                                    <input class="form-control" type="text" value="{{ $data->telp ?? old('telp') }}"
+                                        name="telp">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-text-input"
                                     class="col-md-2 col-form-label form-control-label">Latitude</label>
                                 <div class="col-md-10">
                                     <input class="form-control" type="text"
@@ -72,13 +80,16 @@
                                 <label for="example-search-input"
                                     class="col-md-2 col-form-label form-control-label">Status</label>
                                 <label class="ml-2 mt-2 custom-toggle custom-toggle-success ">
-                                    <input type="checkbox" checked="{{ $data->status ?? old('status') === 'buka' }}">
+                                    <input type="checkbox" name="status" checked="{{ $data->status ?? old('status') === 'buka' }}">
                                     <span class="custom-toggle-slider rounded-circle" data-label-off="Tutup"
                                         data-label-on="Buka"></span>
                                 </label>
                             </div>
-                            <button type="submit"
-                                class="btn btn-success float-right">{{ isset($data) ? 'Update' : 'Simpan' }}</button>
+                            <div class="row">
+                                <div class="col-md-12 text-right">
+                                    <a href="{{ route('kafe.index') }}" class="btn btn-secondary">Batal</a>
+                                    <button type="submit" class="btn btn-success">{{ isset($data) ? 'Update' : 'Simpan' }}</button>
+                                </div>
                         </form>
                     </div>
                 </div>

@@ -36,6 +36,7 @@
                                 <tr>
                                     <th>Nama</th>
                                     <th>Alamat</th>
+                                    <th>No Telp</th>
                                     <th>Latitude</th>
                                     <th>Longitude</th>
                                     <th>Status</th>
@@ -47,6 +48,7 @@
                                     <tr>
                                         <td>{{ $d->nama }}</td>
                                         <td>{{ $d->alamat }}</td>
+                                        <td>{{ $d->telp }}</td>
                                         <td>{{ $d->latitude }}</td>
                                         <td>{{ $d->longitude }}</td>
                                         <td>{{ $d->status }}</td>
@@ -55,10 +57,15 @@
                                                 data-original-title="Edit product">
                                                 <i class="fas fa-user-edit"></i>
                                             </a>
-                                            <a href="#!" class="table-action table-action-delete" data-toggle="tooltip"
-                                                data-original-title="Delete product">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
+                                            <form action="{{ route('kafe.destroy', $d->id) }}" method="POST" class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="table-action table-action-delete btn btn-link p-0"
+                                                data-toggle="tooltip" data-original-title="Delete product"
+                                                onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach

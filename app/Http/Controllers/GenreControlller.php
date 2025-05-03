@@ -7,8 +7,7 @@ use Illuminate\Http\Request;
 
 class GenreControlller extends Controller
 {
-       
-    public function index(Request $req)
+    public function index()
     {
         $data = Genre::all();
         return view('admin.genre.index', compact('data'));
@@ -20,31 +19,31 @@ class GenreControlller extends Controller
     public function create()
     {
         return view('admin.genre.form');
-    }   
+    }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        $data = [
-            "nama" => "Genre Kita",
-            "alamat" => "Jl. Raya Kita No. 1",
-            "telp" => "08123456789",
-            "latitude" => "-6.123456",
-            "longitude" => "106.123456",
-            "status" => "buka"
-        ];
-        Genre::create($data);
+        $request->validate([
+            "nama" => "required|string|max:255",
+        ]);
+
+        Genre::create([
+            'nama' => $request->nama,
+        ]);
+
+        return redirect()->route('genre.index')->with('success', 'Genre berhasil ditambahkan');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show( $id)
+    public function show($id)
     {
-        $data = Genre::find($id);
-        return view('home');
+        $data = Genre::findOrFail($id);
+        return view('admin.genre.show', compact('data')); // optional
     }
 
     /**
@@ -61,15 +60,15 @@ class GenreControlller extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = [
-            "nama" => "Genre Kita",
-            "alamat" => "Jl. Raya Kita No. 1",
-            "telp" => "08123456789",
-            "latitude" => "-6.123456",
-            "longitude" => "106.123456",
-            "status" => "tutup"
-        ];
-        Genre::where('id', $id)->update($data);
+        $request->validate([
+            "nama" => "required|string|max:255",
+        ]);
+
+        Genre::where('id', $id)->update([
+            'nama' => $request->nama,
+        ]);
+
+        return redirect()->route('genre.index')->with('success', 'Genre berhasil diperbarui');
     }
 
     /**
@@ -78,5 +77,6 @@ class GenreControlller extends Controller
     public function destroy($id)
     {
         Genre::destroy($id);
+        return redirect()->route('genre.index')->with('success', 'Genre berhasil dihapus');
     }
 }

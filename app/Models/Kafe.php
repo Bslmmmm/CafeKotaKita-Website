@@ -13,8 +13,8 @@ class Kafe extends Model
 
     protected $table="kafe";
     protected $primaryKey = "id";
-    protected $guarded = "id";
-    
+    protected $fillable = ['nama', 'alamat', 'telp', 'latitude', 'longitude', 'status'];
+
     public function Menu() {
         return $this->hasMany(Menu::class);
     }

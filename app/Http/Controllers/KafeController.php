@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class KafeController extends Controller
 {
-    
+
     public function index(Request $req)
     {
         $data = Kafe::all();
@@ -20,22 +20,39 @@ class KafeController extends Controller
     public function create()
     {
         return view('admin.kafe.form');
-    }   
+    }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'alamat' => 'required|string|max:255',
+            'telp' => 'required|string|max:15',
+            'latitude' => 'required|string|max:255',
+            'longitude' => 'required|string|max:255',
+        ]);
+
+        // Handle status dari toggle switch
+        $status = "tutup";
+        if ($request->has('status')) {
+            $status = "buka";
+        }
+
         $data = [
-            "nama" => "Kafe Kita",
-            "alamat" => "Jl. Raya Kita No. 1",
-            "telp" => "08123456789",
-            "latitude" => "-6.123456",
-            "longitude" => "106.123456",
-            "status" => "buka"
+            "nama" => $request->nama,
+            "alamat" => $request->alamat,
+            "telp" => $request->telp,
+            "latitude" => $request->latitude,
+            "longitude" => $request->longitude,
+            "status" => $status
         ];
+
         Kafe::create($data);
+
+        return redirect()->route('kafe.index')->with('succes', 'Data berhasil ditambahkan!');
     }
 
     /**
@@ -61,15 +78,32 @@ class KafeController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'alamat' => 'required|string|max:255',
+            'telp' => 'required|string|max:15',
+            'latitude' => 'required|string|max:255',
+            'longitude' => 'required|string|max:255',
+        ]);
+        // Handle status dari toggle switch
+        $status = "tutup"; // Default status
+        if ($request->has('status')) {
+            $status = "buka";
+        }
+
         $data = [
-            "nama" => "Kafe Kita",
-            "alamat" => "Jl. Raya Kita No. 1",
-            "telp" => "08123456789",
-            "latitude" => "-6.123456",
-            "longitude" => "106.123456",
-            "status" => "tutup"
+            "nama" => $request->nama,
+            "alamat" => $request->alamat,
+            "telp" => $request->telp,
+            "latitude" => $request->latitude,
+            "longitude" => $request->longitude,
+            "status" => $status
         ];
-        Kafe::where('id', $id)->update($data);
+
+        $kafe = Kafe::findOrFail($id);
+        $kafe->update($data);
+
+        return redirect()->route('kafe.index')->with('succes', 'Data berhasil diupdate!');
     }
 
     /**
@@ -77,6 +111,9 @@ class KafeController extends Controller
      */
     public function destroy($id)
     {
-        Kafe::destroy($id);
+        $kafe = Kafe::findOrFail($id);
+        $kafe->delete();
+
+        return redirect()->route('kafe.index')->with('success', 'Data berhasil diihapus!');
     }
 }
