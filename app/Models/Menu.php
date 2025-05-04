@@ -13,8 +13,8 @@ class Menu extends Model
 
     protected $table="menu";
     protected $primaryKey = "id";
-    protected $guarded = "id";
-    
+    protected $fillable = ['nama', 'harga', 'status'];
+
     public function Kategori() {
         return $this->belongsTo(Kategori::class, "menu_kategori");
     }

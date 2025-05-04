@@ -47,10 +47,15 @@
                                                 data-original-title="Edit product">
                                                 <i class="fas fa-user-edit"></i>
                                             </a>
-                                            <a href="#!" class="table-action table-action-delete" data-toggle="tooltip"
-                                                data-original-title="Delete product">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
+                                            <form action="{{ route('kategori.destroy', $d->id) }}" method="POST" class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="table-action table-action-delete btn btn-link p-0"
+                                                data-toggle="tooltip" data-original-title="Delete kategori"
+                                                onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach

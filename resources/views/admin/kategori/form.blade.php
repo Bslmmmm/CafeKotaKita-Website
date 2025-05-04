@@ -44,8 +44,11 @@
                                         value="{{ $data->nama ?? old('nama') }}" autocomplete="off">
                                 </div>
                             </div>
-                            <button type="submit"
-                                class="btn btn-success float-right">{{ isset($data) ? 'Update' : 'Simpan' }}</button>
+                            <div class="row">
+                                <div class="col-md-12 text-right">
+                                    <a href="{{ route('kategori.index') }}" class="btn btn-secondary">Batal</a>
+                                    <button type="submit" class="btn btn-success">{{ isset($data) ? 'Update' : 'Simpan' }}</button>
+                                </div>
                         </form>
                     </div>
                 </div>
