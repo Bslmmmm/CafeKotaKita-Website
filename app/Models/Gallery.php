@@ -12,8 +12,11 @@ class Gallery extends Model
 
     protected $table="gallery";
     protected $primaryKey = "id";
-    protected $guarded = "id";
-    
+    protected $fillable = [
+        'kafe_id',
+        'image',
+    ];
+
     public function Kafe() {
         return $this->belongsTo(Kafe::class);
     }

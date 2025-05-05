@@ -38,54 +38,72 @@
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-md-2 col-form-label form-control-label">Nama
                                     Kafe</label>
-                                    <div class="col-md-10">
-                                        <select class="form-control" id="exampleFormControlSelect1">
-                                            <option>-- Pilih Kafe --</option>
-                                            @foreach($kafe as $d)
-                                            <option value="{{$d->id}}">{{$d->nama}}</option>
-                                            @endforeach
-                                          </select>
-                                    </div>
+                                <div class="col-md-10">
+                                    <select class="form-control" id="exampleFormControlSelect1">
+                                        <option>-- Pilih Kafe --</option>
+                                        @foreach ($kafe as $d)
+                                            <option value="{{ $d->id }}"
+                                                {{ isset($data) && $data->kafe_id == $d->id ? 'selected' : '' }}>
+                                                {{ $d->nama }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group row">
                                 <label for="example-text-input"
-                                class="col-md-2 col-form-label form-control-label">Image</label>
-                                <div class="dropzone dropzone-multiple col-md-10" data-toggle="dropzone" data-dropzone-multiple data-dropzone-url="http://">
+                                    class="col-md-2 col-form-label form-control-label">Image</label>
+                                <div class="dropzone dropzone-multiple col-md-10" data-toggle="dropzone"
+                                    data-dropzone-multiple data-dropzone-url="http://">
                                     <div class="fallback">
-                                      <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="customFileUploadMultiple" multiple>
-                                        <label class="custom-file-label" for="customFileUploadMultiple">Choose file</label>
-                                      </div>
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="customFileUploadMultiple"
+                                                multiple>
+                                            <label class="custom-file-label" for="customFileUploadMultiple">Choose
+                                                file</label>
+                                        </div>
                                     </div>
                                     <ul class="dz-preview dz-preview-multiple list-group list-group-lg list-group-flush">
-                                      <li class="list-group-item px-0">
-                                        <div class="row align-items-center">
-                                          <div class="col-auto">
-                                            <div class="avatar">
-                                              <img class="avatar-img rounded" src="..." alt="..." data-dz-thumbnail>
+                                        <li class="list-group-item px-0">
+                                            <div class="row align-items-center">
+                                                <div class="col-auto">
+                                                    <div class="avatar">
+                                                        <img class="avatar-img rounded" src="..." alt="..."
+                                                            data-dz-thumbnail>
+                                                    </div>
+                                                </div>
+                                                <div class="col ml--3">
+                                                    <h4 class="mb-1" data-dz-name>...</h4>
+                                                    <p class="small text-muted mb-0" data-dz-size>...</p>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <div class="dropdown">
+                                                        <a href="#" class="dropdown-ellipses dropdown-toggle"
+                                                            role="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <i class="fe fe-more-vertical"></i>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a href="#" class="dropdown-item" data-dz-remove>
+                                                                Remove
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                          </div>
-                                          <div class="col ml--3">
-                                            <h4 class="mb-1" data-dz-name>...</h4>
-                                            <p class="small text-muted mb-0" data-dz-size>...</p>
-                                          </div>
-                                          <div class="col-auto">
-                                            <div class="dropdown">
-                                              <a href="#" class="dropdown-ellipses dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="fe fe-more-vertical"></i>
-                                              </a>
-                                              <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="#" class="dropdown-item" data-dz-remove>
-                                                  Remove
-                                                </a>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </li>
+                                        </li>
                                     </ul>
-                                  </div>
+                                </div>
                             </div>
+                            @if (isset($data) && $data->image)
+                                <div class="form-group row">
+                                    <label class="col-md-2 col-form-label form-control-label">Current Image</label>
+                                    <div class="col-md-10">
+                                        <img src="{{ asset('storage/' . $data->image) }}" alt="Gallery Image"
+                                            class="img-fluid mt-2" style="max-height: 200px;">
+                                    </div>
+                                </div>
+                            @endif
                             <button type="submit"
                                 class="btn btn-success float-right">{{ isset($data) ? 'Update' : 'Simpan' }}</button>
                         </form>
@@ -95,3 +113,13 @@
         </div>
     </div>
 @endsection
+
+@push('js')
+<script>
+    // Show filename when selecting file
+    $('.custom-file-input').on('change', function() {
+        let fileName = $(this)[0].files[0].name;
+        $(this).next('.custom-file-label').html(fileName);
+    });
+</script>
+@endpush

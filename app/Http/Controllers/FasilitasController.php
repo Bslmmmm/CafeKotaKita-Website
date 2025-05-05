@@ -10,7 +10,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class FasilitasController extends Controller
 {
-       
+
     public function index(Request $req)
     {
         $data = Fasilitas::all();
@@ -23,7 +23,7 @@ class FasilitasController extends Controller
     public function create()
     {
         return view('admin.fasilitas.form');
-    }   
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -95,7 +95,7 @@ class FasilitasController extends Controller
             $file = $request->file('image');
             $filename = Str::uuid() . time() . '.' . $file->getClientOriginalExtension();
             $path = $file->storeAs('fasilitas', $filename, 'public');
-            
+
             // Update path gambar
             $fasilitas->image = $path;
         }

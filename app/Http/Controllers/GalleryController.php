@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Gallery;
 use App\Models\Kafe;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class GalleryController extends Controller
 {
@@ -14,70 +16,91 @@ class GalleryController extends Controller
         return view('admin.gallery.index', compact('data'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         $kafe = Kafe::all();
         return view('admin.gallery.form', compact('kafe'));
-    }   
+    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
-        $data = [
-            "nama" => "Kafe Kita",
-            "alamat" => "Jl. Raya Kita No. 1",
-            "telp" => "08123456789",
-            "latitude" => "-6.123456",
-            "longitude" => "106.123456",
-            "status" => "buka"
-        ];
-        Gallery::create($data);
+        $request->validate([
+            'kafe_id' => 'required|exists:kafe,id',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+
+        if($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = Str::uuid() . time() . '.' . $file->getClientOriginalExtension();
+            $path = $file->storeAs('galeri', $filename, 'public');
+
+            $data = [
+                "kafe_id" => $request->kafe_id,
+                "image" => $path
+            ];
+
+            Gallery::create($data);
+            return redirect()->route('gallery.index')->with('success', 'Data Berhasil Ditambahkan');
+        }
+
+        return back()->with('error', 'Please select a valid image file.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show( $id)
+
+    public function show($id)
     {
         $data = Gallery::find($id);
-        return view('home');
+        return view('admin.gallery.show', compact('data'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit($id)
     {
         $data = Gallery::findOrFail($id);
-        return view('admin.gallery.form', compact('data'));
+        $kafe = Kafe::all();
+        return view('admin.gallery.form', compact('data', 'kafe'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, $id)
     {
-        $data = [
-            "nama" => "Kafe Kita",
-            "alamat" => "Jl. Raya Kita No. 1",
-            "telp" => "08123456789",
-            "latitude" => "-6.123456",
-            "longitude" => "106.123456",
-            "status" => "tutup"
-        ];
-        Gallery::where('id', $id)->update($data);
+        $request->validate([
+            'kafe_id' => 'required|exists:kafe,id',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+
+        $galeri = Gallery::findOrFail($id);
+
+        $galeri->kafe_id = $request->kafe_id;
+
+        if ($request->hasFile('image')) {
+            if ($galeri->image) {
+                Storage::disk('public')->delete($galeri->image);
+            }
+
+            $file = $request->file('image');
+            $filename = Str::uuid() . time() . '.' . $file->getClientOriginalExtension();
+            $path = $file->storeAs('galeri', $filename, 'public');
+
+            $galeri->image = $path;
+        }
+
+        $galeri->save();
+
+        return redirect()->route('gallery.index')->with('success', 'Galeri berhasil diperbarui');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy($id)
     {
-        Gallery::destroy($id);
+        $galeri = Gallery::findOrFail($id);
+
+        if ($galeri->image) {
+            Storage::disk('public')->delete($galeri->image);
+        }
+
+        $galeri->delete();
+
+        return redirect()->route('gallery.index')->with('success', 'Data berhasil dihapus');
     }
 }
