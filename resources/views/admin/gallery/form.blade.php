@@ -2,7 +2,6 @@
 @section('title', 'Dashboard')
 @section('content')
     <div class="header bg-primary pb-6">
-
         <div class="container-fluid">
             <div class="header-body">
                 <div class="row align-items-center py-4">
@@ -29,18 +28,30 @@
                 <div class="card">
                     <!-- Card body -->
                     <div class="card-body">
-                        <form method="POST"
-                            action="{{ isset($data) ? route('kafe.update', $data->id) : route('kafe.store') }}">
+                        <form method="POST" enctype="multipart/form-data"
+                            action="{{ isset($data) ? route('gallery.update', $data->id) : route('gallery.store') }}">
                             @csrf
                             @if (isset($data))
                                 @method('PATCH')
                             @endif
+
+                            <!-- Display validation errors if any -->
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul class="mb-0">
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+
                             <div class="form-group row">
-                                <label for="example-text-input" class="col-md-2 col-form-label form-control-label">Nama
+                                <label for="kafe_id" class="col-md-2 col-form-label form-control-label">Nama
                                     Kafe</label>
                                 <div class="col-md-10">
-                                    <select class="form-control" id="exampleFormControlSelect1">
-                                        <option>-- Pilih Kafe --</option>
+                                    <select class="form-control" id="kafe_id" name="kafe_id">
+                                        <option value="">-- Pilih Kafe --</option>
                                         @foreach ($kafe as $d)
                                             <option value="{{ $d->id }}"
                                                 {{ isset($data) && $data->kafe_id == $d->id ? 'selected' : '' }}>
@@ -51,55 +62,20 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="example-text-input"
+                                <label for="url"
                                     class="col-md-2 col-form-label form-control-label">Image</label>
-                                <div class="dropzone dropzone-multiple col-md-10" data-toggle="dropzone"
-                                    data-dropzone-multiple data-dropzone-url="http://">
-                                    <div class="fallback">
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="customFileUploadMultiple"
-                                                multiple>
-                                            <label class="custom-file-label" for="customFileUploadMultiple">Choose
-                                                file</label>
-                                        </div>
+                                <div class="col-md-10">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="url" name="url">
+                                        <label class="custom-file-label" for="url">Choose file</label>
                                     </div>
-                                    <ul class="dz-preview dz-preview-multiple list-group list-group-lg list-group-flush">
-                                        <li class="list-group-item px-0">
-                                            <div class="row align-items-center">
-                                                <div class="col-auto">
-                                                    <div class="avatar">
-                                                        <img class="avatar-img rounded" src="..." alt="..."
-                                                            data-dz-thumbnail>
-                                                    </div>
-                                                </div>
-                                                <div class="col ml--3">
-                                                    <h4 class="mb-1" data-dz-name>...</h4>
-                                                    <p class="small text-muted mb-0" data-dz-size>...</p>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <div class="dropdown">
-                                                        <a href="#" class="dropdown-ellipses dropdown-toggle"
-                                                            role="button" data-toggle="dropdown" aria-haspopup="true"
-                                                            aria-expanded="false">
-                                                            <i class="fe fe-more-vertical"></i>
-                                                        </a>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <a href="#" class="dropdown-item" data-dz-remove>
-                                                                Remove
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
                                 </div>
                             </div>
-                            @if (isset($data) && $data->image)
+                            @if (isset($data) && $data->url)
                                 <div class="form-group row">
                                     <label class="col-md-2 col-form-label form-control-label">Current Image</label>
                                     <div class="col-md-10">
-                                        <img src="{{ asset('storage/' . $data->image) }}" alt="Gallery Image"
+                                        <img src="{{ asset('storage/' . $data->url) }}" alt="Gallery Image"
                                             class="img-fluid mt-2" style="max-height: 200px;">
                                     </div>
                                 </div>
