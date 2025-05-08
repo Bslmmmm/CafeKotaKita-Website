@@ -1,5 +1,5 @@
 @extends('admin.layout.app')
-@section('title', 'Dashboard')
+@section('title', 'Admmin - KafeKotaKita')
 @section('content')
 
   <!-- Main content -->
@@ -1372,5 +1372,5 @@
         </div>
       </div>
     </div>
-  
+
 @endsection
