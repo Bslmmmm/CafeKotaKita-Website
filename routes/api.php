@@ -16,7 +16,9 @@ Route::prefix("auth")->group(function () {
 });
 Route::prefix("kafe")->group(function () {
     Route::get("/", [KafeController::class, "index"]);
-    Route::get("{id}", [KafeController::class, "show"]);
+    Route::get("/detail/{id}", [KafeController::class, "getDetailKafe"]);
+    Route::get("/search", [KafeController::class, "searchKafe"]);
+    Route::get("/searchByGenre", [KafeController::class], "searchByGenre");
     Route::post("store", [KafeController::class, "store"]);
     Route::patch("update/{id}", [KafeController::class, "update"]);
     Route::delete("delete/{id}", [KafeController::class, "destroy"]);

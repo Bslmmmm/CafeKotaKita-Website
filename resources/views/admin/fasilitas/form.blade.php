@@ -78,23 +78,3 @@
         </div>
     </div>
 @endsection
-<script>
-  // Function to preview the image when selected
-  function previewImage(input) {
-      var preview = document.getElementById('gambar-preview');
-      var file = input.files[0];
-      var reader = new FileReader();
-
-      reader.onloadend = function () {
-          preview.src = reader.result;
-          preview.style.display = 'block';  // Ensure the image preview is visible
-      };
-
-      if (file) {
-          reader.readAsDataURL(file);
-      } else {
-          preview.src = '#';
-          preview.style.display = 'none';
-      }
-  }
-</script>

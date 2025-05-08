@@ -31,6 +31,7 @@
                     <!-- Card body -->
                     <div class="card-body">
                         <form method="POST"
+                        enctype="multipart/form-data"
                             action="{{ isset($data) ? route('menu.update', $data->id) : route('menu.store') }}">
                             @csrf
                             @if (isset($data))
@@ -47,10 +48,12 @@
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-md-2 col-form-label form-control-label">Nama Kafe</label>
                                 <div class="col-md-10">
-                                    <select class="form-control" id="exampleFormControlSelect1">
+                                    <select class="form-control" name="kafe_id" id="exampleFormControlSelect1">
                                         <option>-- Pilih Kafe --</option>
                                         @foreach($kafe as $d)
-                                        <option value="{{$d->id}}">{{$d->nama}}</option>
+                                        <option value="{{ $d->id }}" @isset($data)
+                                            @selected($d->id == $data->kafe_id)
+                                        @endisset >{{ $d->nama }}</option>
                                         @endforeach
                                       </select>
                                 </div>
@@ -62,11 +65,26 @@
                                         value="{{ $data->harga ?? old('harga') }}" autocomplete="off">
                                 </div>
                             </div>
+                              
+                            <div class="form-group row">
+                                <label class="col-md-2 col-form-label form-control-label">Image</label>
+                                <div class="col-md-10">
+                                    <input type="file" class="form-control" value="{{$data->image ?? old('image')}}" name="image" id="customFileLang" lang="en" multiple onchange="previewImage(this);">
+  
+                                    <!-- Image Preview -->
+                                    @if(isset($data) && $data->image)
+                                        <img id="gambar-preview" src="{{ asset('storage/'.$data->image) }}" alt="Gambar Pratinjau" 
+                                             style="max-width: 50%; margin-top: 20px; display: block;">
+                                    @else
+                                        <img id="gambar-preview" src="#" alt="Gambar Pratinjau" 
+                                             style="max-width: 50%; margin-top: 20px; display: none;">
+                                    @endif
+                                </div>
+                            </div>
                              <div class="form-group row">
-                                <label for="example-text-input" class="col-md-2 col-form-label form-control-label">Nama
-                                    Menu</label>
+                                <label for="example-text-input" class="col-md-2 col-form-label form-control-label">Status</label>
                                     <label class="ml-2 mt-2 custom-toggle custom-toggle-success ">
-                                        <input type="checkbox" checked="{{ $data->status ?? old('status') === 'tersedia' }}">
+                                        <input type="checkbox" name="status" checked="{{ $data->status ?? old('status') === 'tersedia' }}">
                                         <span class="custom-toggle-slider rounded-circle" data-label-off="Habis"
                                             data-label-on="Tersedia"></span>
                                     </label>

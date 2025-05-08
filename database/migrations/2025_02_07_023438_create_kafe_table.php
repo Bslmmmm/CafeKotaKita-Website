@@ -15,8 +15,9 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('nama');
             $table->string('alamat');
-            $table->decimal('latitude');
-            $table->decimal('longitude');
+            $table->string('telp');
+            $table->string('latitude');
+            $table->string('longitude');
             $table->enum('status', ["buka", "tutup"]);
             $table->timestamps();
             $table->softDeletes();

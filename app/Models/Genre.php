@@ -15,6 +15,6 @@ class Genre extends Model
     protected $fillable = ["nama"];
 
     public function Kafe() {
-        return $this->belongsTo(Kafe::class);
+        return $this->belongsToMany(Kafe::class, "genre_kafe");
     }
 }

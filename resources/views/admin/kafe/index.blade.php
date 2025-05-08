@@ -37,8 +37,7 @@
                                     <th>Nama</th>
                                     <th>Alamat</th>
                                     <th>No Telp</th>
-                                    <th>Latitude</th>
-                                    <th>Longitude</th>
+                                    <th>Genre</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -49,8 +48,11 @@
                                         <td>{{ $d->nama }}</td>
                                         <td>{{ $d->alamat }}</td>
                                         <td>{{ $d->telp }}</td>
-                                        <td>{{ $d->latitude }}</td>
-                                        <td>{{ $d->longitude }}</td>
+                                        <td>
+                                            @foreach ($d->genre as $item)
+                                                {{ $item->nama }}
+                                            @endforeach
+                                            </td>
                                         <td>{{ $d->status }}</td>
                                         <td class="table-actions">
                                             <a href="{{route('kafe.edit', $d->id)}}" class="table-action" data-toggle="tooltip"

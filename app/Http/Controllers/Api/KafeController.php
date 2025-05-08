@@ -3,14 +3,69 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Genre;
 use App\Models\Kafe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class KafeController extends Controller{
     function index() {
-        $kafe = Kafe::all();
-        return response()->json($kafe, 200);
+        $kafe = Kafe::where(["status" => "buka"])->get();
+        return response()->json([
+            "status" => "success",
+            "message" => "Berhasil mengambil data kafe", 
+            "data" => $kafe], 200);
+    }
+    function getRecommendedKafe()
+    {
+        // $kafe = Kafe::
+    }
+    function searchKafe(Request $req)
+    {
+        $keyword = $req->input("q");
+        $query = Kafe::with("genre");
+        if ($keyword) {
+        $query->where(function ($q) use ($keyword) {
+            $q->where('nama', 'LIKE', "%{$keyword}%")
+              ->orWhereHas('genre', function ($q2) use ($keyword) {
+                  $q2->where('nama', 'LIKE', "%{$keyword}%");
+              });
+        });
+    }
+
+        $query->get();
+        return response()->json([
+            "status" => "success",
+            "message" => "Berhasil mengambil data kafe", 
+            "data" => $query], 200); 
+
+    }
+    
+public function searchByGenreName(Request $request)
+{
+    $keyword = $request->input('q');
+
+    $genres = Genre::with('kafe')
+        ->where('nama', 'LIKE', "%{$keyword}%")
+        ->get();
+
+    // Flatten kafes from matching genres (in case multiple genres match)
+    $kafes = $genres->flatMap(function ($genre) {
+        return $genre->kafes;
+    })->unique('id')->values(); // remove duplicates if any
+
+    return response()->json([
+        'success' => true,
+        'data' => $kafes
+    ]);
+}
+    function getDetailKafe($id)
+    {
+        $data = Kafe::with("gallery")->findOrFail($id); 
+          return response()->json([
+            "status" => "success",
+            "message" => "Berhasil mengambil data kafe", 
+            "data" => $data], 200); 
     }
     function storeData(Request $req) {
         $validator = Validator::make($req->all(),[

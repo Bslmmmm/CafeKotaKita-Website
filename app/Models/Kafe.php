@@ -18,6 +18,13 @@ class Kafe extends Model
     public function Menu() {
         return $this->hasMany(Menu::class);
     }
+    public function Gallery() {
+        return $this->hasMany(Gallery::class);
+    }
+    public function Genre()
+    {
+        return $this->belongsToMany(Genre::class, "genre_kafe");
+    }
 
     public function Komentar() {
         return $this->hasMany(Komentar::class);

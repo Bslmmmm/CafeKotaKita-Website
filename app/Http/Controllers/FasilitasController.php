@@ -36,10 +36,10 @@ class FasilitasController extends Controller
             'deskripsi' => 'required|string|max:100',
         ]);
 
-        if($request->hasFile('image')) {
+        if ($request->hasFile('image')) {
             $file = $request->file('image');
             $filename = Str::uuid() . time() . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('fasilitas',$filename, 'public');
+            $path = $file->storeAs('fasilitas', $filename, 'public');
 
             $data = [
                 "nama" => $request->nama,
@@ -55,7 +55,7 @@ class FasilitasController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show( $id)
+    public function show($id)
     {
         $data = Fasilitas::find($id);
         return view('home');
@@ -116,16 +116,15 @@ class FasilitasController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy($id)
-{
-    $fasilitas = Fasilitas::findOrFail($id);
+    {
+        $fasilitas = Fasilitas::findOrFail($id);
 
-    if ($fasilitas->image) {
-        Storage::disk('public')->delete($fasilitas->image);
+        if ($fasilitas->image) {
+            Storage::disk('public')->delete($fasilitas->image);
+        }
+
+        $fasilitas->delete();
+
+        return redirect()->route('fasilitas.index')->with('success', 'Data Berhasil Dihapus');
     }
-
-    $fasilitas->delete();
-
-    return redirect()->route('fasilitas.index')->with('success', 'Data Berhasil Dihapus');
-}
-
 }

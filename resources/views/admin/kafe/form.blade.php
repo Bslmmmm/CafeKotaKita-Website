@@ -77,6 +77,20 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label for="example-text-input"
+                                    class="col-md-2 col-form-label form-control-label">Genre</label>
+                                <div class="container">
+  <div class="row">
+    @foreach ($genre as $item)
+    <div class="col-3">
+      <input type="checkbox"  name="genre[]" value="{{$item->id}}"/> {{ $item->nama }}
+    </div>
+    @endforeach
+   
+  </div>
+</div>
+                            </div>
+                            <div class="form-group row">
                                 <label for="example-search-input"
                                     class="col-md-2 col-form-label form-control-label">Status</label>
                                 <label class="ml-2 mt-2 custom-toggle custom-toggle-success ">

@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Genre;
 use App\Models\Kafe;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 class KafeController extends Controller
 {
 
     public function index(Request $req)
     {
-        $data = Kafe::all();
+        $data = Kafe::with("genre")->get();
         return view('admin.kafe.index', compact('data'));
     }
 
@@ -19,7 +22,8 @@ class KafeController extends Controller
      */
     public function create()
     {
-        return view('admin.kafe.form');
+        $genre = Genre::all();
+        return view('admin.kafe.form', compact("genre"));
     }
 
     /**
@@ -35,12 +39,13 @@ class KafeController extends Controller
             'longitude' => 'required|string|max:255',
         ]);
 
+
+
         // Handle status dari toggle switch
         $status = "tutup";
         if ($request->has('status')) {
             $status = "buka";
         }
-
         $data = [
             "nama" => $request->nama,
             "alamat" => $request->alamat,
@@ -50,8 +55,15 @@ class KafeController extends Controller
             "status" => $status
         ];
 
-        Kafe::create($data);
-
+        $kafe_id = Kafe::create($data)->id;
+        foreach($request->genre as $item)
+        {
+            DB::table('genre_kafe')->insert([
+                "id" => Str::uuid(),
+                "kafe_id" => $kafe_id,
+                "genre_id" => $item
+            ]);
+        }
         return redirect()->route('kafe.index')->with('succes', 'Data berhasil ditambahkan!');
     }
 
