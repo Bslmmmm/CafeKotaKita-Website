@@ -14,6 +14,7 @@ class Gallery extends Model
     protected $primaryKey = "id";
     protected $fillable = [
         'kafe_id',
+        'type',
         'url',
     ];
 

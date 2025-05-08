@@ -53,8 +53,8 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="example-text-input"
-                                    class="col-md-2 col-form-label form-control-label">No Telp</label>
+                                <label for="example-text-input" class="col-md-2 col-form-label form-control-label">No
+                                    Telp</label>
                                 <div class="col-md-10">
                                     <input class="form-control" type="text" value="{{ $data->telp ?? old('telp') }}"
                                         name="telp">
@@ -80,21 +80,38 @@
                                 <label for="example-text-input"
                                     class="col-md-2 col-form-label form-control-label">Genre</label>
                                 <div class="container">
-  <div class="row">
-    @foreach ($genre as $item)
-    <div class="col-3">
-      <input type="checkbox"  name="genre[]" value="{{$item->id}}"/> {{ $item->nama }}
-    </div>
-    @endforeach
-   
-  </div>
-</div>
+                                    <div class="row">
+                                        @foreach ($genre as $item)
+                                            <div class="col-3">
+                                                <input type="checkbox" name="genre[]" value="{{ $item->id }}" @if($data->genre->contains('id', $item->id)) checked @endif />
+                                                {{ $item->nama }}
+                                            </div>
+                                        @endforeach
+
+                                    </div>
+                                </div>
+                            </div>
+                               <div class="form-group row">
+                                <label for="example-text-input"
+                                    class="col-md-2 col-form-label form-control-label">Fasilitas</label>
+                                <div class="container">
+                                    <div class="row">
+                                        @foreach ($fasilitas as $item)
+                                            <div class="col-3">
+                                                <input type="checkbox" name="fasilitas[]" value="{{ $item->id }}" @if($data->fasilitas->contains('id', $item->id)) checked @endif />
+                                                {{ $item->nama }}
+                                            </div>
+                                        @endforeach
+
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group row">
                                 <label for="example-search-input"
                                     class="col-md-2 col-form-label form-control-label">Status</label>
                                 <label class="ml-2 mt-2 custom-toggle custom-toggle-success ">
-                                    <input type="checkbox" name="status" checked="{{ $data->status ?? old('status') === 'buka' }}">
+                                    <input type="checkbox" name="status"
+                                        checked="{{ $data->status ?? old('status') === 'buka' }}">
                                     <span class="custom-toggle-slider rounded-circle" data-label-off="Tutup"
                                         data-label-on="Buka"></span>
                                 </label>
@@ -102,7 +119,8 @@
                             <div class="row">
                                 <div class="col-md-12 text-right">
                                     <a href="{{ route('kafe.index') }}" class="btn btn-secondary">Batal</a>
-                                    <button type="submit" class="btn btn-success">{{ isset($data) ? 'Update' : 'Simpan' }}</button>
+                                    <button type="submit"
+                                        class="btn btn-success">{{ isset($data) ? 'Update' : 'Simpan' }}</button>
                                 </div>
                         </form>
                     </div>

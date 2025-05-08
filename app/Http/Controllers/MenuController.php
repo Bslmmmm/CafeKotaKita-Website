@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kafe;
+use App\Models\Kategori;
 use App\Models\Menu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -12,14 +14,15 @@ class MenuController extends Controller
 {
     public function index()
     {
-        $data = Menu::with('kafe')->get();
+        $data = Menu::with(['kafe', 'kategori'])->get();
         return view('admin.menu.index', compact('data'));
     }
 
     public function create()
     {
         $kafe = Kafe::all();
-        return view('admin.menu.form', compact('kafe'));
+        $kategori = Kategori::all();
+        return view('admin.menu.form', compact('kafe', 'kategori'));
     }
 
     public function store(Request $request)
@@ -37,17 +40,24 @@ class MenuController extends Controller
             $file = $request->file('image');
             $filename = Str::uuid() . time() . '.' . $file->getClientOriginalExtension();
             $path = $file->storeAs('menu', $filename, 'public');
-            $status = $request->status == "on" ? "tersedia" : "habis";
-            $data = [
-                "kafe_id" => $request->kafe_id,
-                "nama" => $request->nama,
-                "harga" => $request->harga,
-                "image" => $path,
-                "status" => $status,
-            ];
-            Menu::create($data);
-            return redirect()->route('menu.index')->with('success', 'Data Berhasil Ditambahkan');
         }
+        $status = $request->status == "on" ? "tersedia" : "habis";
+        $data = [
+            "kafe_id" => $request->kafe_id,
+            "nama" => $request->nama,
+            "harga" => $request->harga,
+            "image" => $path,
+            "status" => $status,
+        ];
+        $menu_id = Menu::create($data)->id;
+        foreach ($request->kategori as $item) {
+            DB::table('menu_kategori')->insert([
+                "id" => Str::uuid(),
+                "menu_id" => $menu_id,
+                "kategori_id" => $item
+            ]);
+        } 
+        return redirect()->route('menu.index')->with('success', 'Data Berhasil Ditambahkan');
         return back()->with('error', 'Please select a valid image file.');
     }
 
@@ -62,9 +72,10 @@ class MenuController extends Controller
 
     public function edit($id)
     {
-        $data = Menu::findOrFail($id);
+        $data = Menu::with(["kategori"])->findOrFail($id);
         $kafe = Kafe::all();
-        return view('admin.menu.form', compact('data', 'kafe'));
+        $kategori = Kategori::all();
+        return view('admin.menu.form', compact('data', 'kafe', 'kategori'));
     }
 
     public function update(Request $request, $id)
@@ -73,40 +84,47 @@ class MenuController extends Controller
             'nama' => 'required|string|max:35',
             'kafe_id' => 'required|string|max:100',
             'harga' => 'required|string|max:100',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // max 2MB
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // max 2MB
         ]);
-        
+        $path = "";
         // Mencari fasilitas berdasarkan ID
         $menu = Menu::findOrFail($id);
-
         // Jika ada file gambar yang diupload
         if ($request->hasFile('image')) {
-            // Hapus gambar lama jika ada
-            if ($request->image != $menu->image) {
+            // Delete old image if it exists
+            if ($menu->image && Storage::disk('public')->exists($menu->image)) {
                 Storage::disk('public')->delete($menu->image);
-                // Proses upload gambar baru
-                $file = $request->file('image');
-                $filename = Str::uuid() . time() . '.' . $file->getClientOriginalExtension();
-                $path = $file->storeAs('menu', $filename, 'public');
-            }else{
-                $path = $menu->image;
             }
 
-            $status = $request->status == "on" ? "tersedia" : "habis";
-
-            $data = [
-                "kafe_id" => $request->kafe_id,
-                "nama" => $request->nama,
-                "harga" => $request->harga,
-                "image" => $path,
-                "status" => $status,
-            ];
+            // Process new image upload
+            $file = $request->file('image');
+            $filename = Str::uuid() . time() . '.' . $file->getClientOriginalExtension();
+            $path = $file->storeAs('menu', $filename, 'public');
+        } else {
+            // Keep the existing image if no new image was uploaded
+            $path = $menu->image;
         }
+        $status = $request->status == "on" ? "tersedia" : "habis";
+
+        $data = [
+            "kafe_id" => $request->kafe_id,
+            "nama" => $request->nama,
+            "harga" => $request->harga,
+            "image" => $path,
+            "status" => $status,
+        ];
+        $menu->update($data);
 
        
-
         // Simpan perubahan ke database
-        $menu->update($data);
+        DB::table('menu_kategori')->where('menu_id', $id)->delete();
+        foreach ($request->kategori as $item) {
+            DB::table('menu_kategori')->insert([
+                "id" => Str::uuid(),
+                "menu_id" => $id,
+                "kategori_id" => $item
+            ]);
+        }
 
         // Redirect dengan pesan sukses
         return redirect()->route('menu.index')->with('success', 'Data Berhasil Diperbarui');

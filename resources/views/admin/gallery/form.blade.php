@@ -61,12 +61,29 @@
                                     </select>
                                 </div>
                             </div>
+                               <div class="form-group row">
+                                <label for="type" class="col-md-2 col-form-label form-control-label">Tipe</label>
+                                <div class="col-md-10">
+                                    <select class="form-control" id="type" name="type">
+                                        <option value="">-- Pilih Tipe --</option>
+                                            <option value="main_content"
+                                                {{ isset($data) && $data->type == "main_content" ? 'selected' : '' }}>Main Content
+                                            </option>
+                                               <option value="menu_content"
+                                                {{ isset($data) && $data->type == "menu_content" ? 'selected' : '' }}>Menu Content
+                                            </option>
+                                               <option value="other"
+                                                {{ isset($data) && $data->type == "other" ? 'selected' : '' }}>Lainnya
+                                            </option>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="form-group row">
                                 <label for="url"
                                     class="col-md-2 col-form-label form-control-label">Image</label>
                                 <div class="col-md-10">
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="url" name="url">
+                                        <input type="file" class="custom-file-input" id="url" name="url" multiple accept="*.jpg">
                                         <label class="custom-file-label" for="url">Choose file</label>
                                     </div>
                                 </div>

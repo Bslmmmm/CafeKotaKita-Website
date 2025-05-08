@@ -16,7 +16,7 @@ class Menu extends Model
     protected $fillable = ["kafe_id", "nama", "harga", "status", "image"];
     
     public function Kategori() {
-        return $this->belongsTo(Kategori::class, "menu_kategori");
+        return $this->belongsToMany(Kategori::class, "menu_kategori");
     }
     public function Kafe() {
         return $this->belongsTo(Kafe::class, "kafe_id");

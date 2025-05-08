@@ -25,6 +25,10 @@ class Kafe extends Model
     {
         return $this->belongsToMany(Genre::class, "genre_kafe");
     }
+    public function Fasilitas()
+    {
+        return $this->belongsToMany(Fasilitas::class, "fasilitas_kafe");
+    }
 
     public function Komentar() {
         return $this->hasMany(Komentar::class);

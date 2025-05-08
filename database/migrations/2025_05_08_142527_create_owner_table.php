@@ -1,0 +1,42 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('owner', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->uuid('user_id');
+            $table->uuid('kafe_id');
+            $table->string("npwp");
+            $table->string("foto_surat_kepemilikan");
+            $table->string("foto_surat_ijin_usaha");
+            $table->string("instagram_link")->nullable();
+            $table->string("tiktok_link")->nullable();
+            $table->string("facebook_link")->nullable();
+            $table->enum("status", ["pending", "aktif", "ditolak"]);
+            $table->string("keterangan_tambahan")->nullable();
+
+            $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('kafe_id')->references('id')->on('kafe')->onDelete('cascade');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('owner');
+    }
+};

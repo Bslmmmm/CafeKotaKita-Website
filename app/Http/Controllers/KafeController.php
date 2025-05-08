@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Fasilitas;
 use App\Models\Genre;
 use App\Models\Kafe;
 use Illuminate\Http\Request;
@@ -23,7 +24,8 @@ class KafeController extends Controller
     public function create()
     {
         $genre = Genre::all();
-        return view('admin.kafe.form', compact("genre"));
+        $fasilitas = Fasilitas::all();
+        return view('admin.kafe.form', compact("genre", 'fasilitas'));
     }
 
     /**
@@ -64,6 +66,14 @@ class KafeController extends Controller
                 "genre_id" => $item
             ]);
         }
+        foreach($request->fasilitas as $item)
+        {
+            DB::table('fasilitas_kafe')->insert([
+                "id" => Str::uuid(),
+                "kafe_id" => $kafe_id,
+                "fasilitas_id" => $item
+            ]);
+        }
         return redirect()->route('kafe.index')->with('succes', 'Data berhasil ditambahkan!');
     }
 
@@ -72,7 +82,7 @@ class KafeController extends Controller
      */
     public function show( $id)
     {
-        $data = Kafe::find($id);
+        $data = Kafe::with(["fasilitas", "genre"])->findOrFail($id);
         return view('home');
     }
 
@@ -81,42 +91,64 @@ class KafeController extends Controller
      */
     public function edit($id)
     {
-        $data = Kafe::findOrFail($id);
-        return view('admin.kafe.form', compact('data'));
+        $data = Kafe::with(["fasilitas", "genre"])->findOrFail($id);
+        $genre = Genre::all();
+        $fasilitas = Fasilitas::all();
+        return view('admin.kafe.form', compact('data', 'genre', 'fasilitas'));
     }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, $id)
-    {
-        $request->validate([
-            'nama' => 'required|string|max:255',
-            'alamat' => 'required|string|max:255',
-            'telp' => 'required|string|max:15',
-            'latitude' => 'required|string|max:255',
-            'longitude' => 'required|string|max:255',
-        ]);
-        // Handle status dari toggle switch
-        $status = "tutup"; // Default status
-        if ($request->has('status')) {
-            $status = "buka";
-        }
+{
+    $request->validate([
+        'nama' => 'required|string|max:255',
+        'alamat' => 'required|string|max:255',
+        'telp' => 'required|string|max:15',
+        'latitude' => 'required|string|max:255',
+        'longitude' => 'required|string|max:255',
+    ]);
 
-        $data = [
-            "nama" => $request->nama,
-            "alamat" => $request->alamat,
-            "telp" => $request->telp,
-            "latitude" => $request->latitude,
-            "longitude" => $request->longitude,
-            "status" => $status
-        ];
-
-        $kafe = Kafe::findOrFail($id);
-        $kafe->update($data);
-
-        return redirect()->route('kafe.index')->with('succes', 'Data berhasil diupdate!');
+    // Handle status from toggle switch
+    $status = "tutup";
+    if ($request->has('status')) {
+        $status = "buka";
     }
+
+    // Update kafe data
+    $kafe = Kafe::findOrFail($id);
+    $kafe->update([
+        "nama" => $request->nama,
+        "alamat" => $request->alamat,
+        "telp" => $request->telp,
+        "latitude" => $request->latitude,
+        "longitude" => $request->longitude,
+        "status" => $status
+    ]);
+
+    // Sync genres
+    DB::table('genre_kafe')->where('kafe_id', $id)->delete();
+    foreach($request->genre as $item) {
+        DB::table('genre_kafe')->insert([
+            "id" => Str::uuid(),
+            "kafe_id" => $id,
+            "genre_id" => $item
+        ]);
+    }
+
+    // Sync facilities
+    DB::table('fasilitas_kafe')->where('kafe_id', $id)->delete();
+    foreach($request->fasilitas as $item) {
+        DB::table('fasilitas_kafe')->insert([
+            "id" => Str::uuid(),
+            "kafe_id" => $id,
+            "fasilitas_id" => $item
+        ]);
+    }
+
+    return redirect()->route('kafe.index')->with('success', 'Data berhasil diperbarui!');
+}
 
     /**
      * Remove the specified resource from storage.

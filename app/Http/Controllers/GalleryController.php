@@ -7,6 +7,7 @@ use App\Models\Kafe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class GalleryController extends Controller
 {
@@ -26,21 +27,24 @@ class GalleryController extends Controller
     {
         $request->validate([
             'kafe_id' => 'required|exists:kafe,id',
+            'type' => ['required',
+                Rule::unique('gallery')->where('kafe_id', $request->kafe_id)
+        ],
             'url' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
-
         if($request->hasFile('url')) {
             $file = $request->file('url');
             $filename = Str::uuid() . time() . '.' . $file->getClientOriginalExtension();
             $path = $file->storeAs('galeri', $filename, 'public');
 
-            Gallery::create([
-                "kafe_id" => $request->kafe_id,
-                "url" => $path
-            ]);
-
-            return redirect()->route('gallery.index')->with('success', 'Data Berhasil Ditambahkan');
         }
+        Gallery::create([
+            "kafe_id" => $request->kafe_id,
+            "type" => $request->type,
+            "url" => $path
+        ]);
+
+        return redirect()->route('gallery.index')->with('success', 'Data Berhasil Ditambahkan');
 
         return back()->with('error', 'Please select a valid image file.');
     }

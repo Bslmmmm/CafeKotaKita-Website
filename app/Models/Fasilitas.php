@@ -15,6 +15,6 @@ class Fasilitas extends Model
     protected $fillable = ['nama', 'deskripsi', 'image'];
 
     public function Kafe() {
-        return $this->belongsTo(Kafe::class);
+        return $this->belongsToMany(Kafe::class, 'fasilitas_kafe');
     }
 }

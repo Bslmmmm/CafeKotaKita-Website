@@ -7,19 +7,19 @@
             <div class="header-body">
                 <div class="row align-items-center py-4">
                     <div class="col-lg-6 col-7">
-                        <h6 class="h2 text-white d-inline-block mb-0">Data Menu</h6>
+                        <h6 class="h2 text-white d-inline-block mb-0">Data Owner</h6>
                         <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                             <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                                 <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}"><i
                                             class="fas fa-home"></i></a></li>
-                                <li class="breadcrumb-item"><a href="#">Manajemen Menu</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Menu</li>
+                                <li class="breadcrumb-item"><a href="#">Manajemen User</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Owner</li>
                             </ol>
                         </nav>
                     </div>
-                    <div class="col-lg-6 col-5 text-right">
+                    {{-- <div class="col-lg-6 col-5 text-right">
                         <a href="{{route('menu.create')}}" class="btn btn-sm btn-neutral">Tambah</a>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -35,11 +35,12 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th>No</th>
-                                    <th>Gambar</th>
-                                    <th>Nama Menu</th>
+                                    <th>Nama</th>
+                                    <th>NPWP</th>
+                                    <th>No Telp</th>
                                     <th>Nama Kafe</th>
-                                    <th>Harga</th>
-                                    <th>Kategori</th>
+                                    <th>Surat Ijin Kepemilikan</th>
+                                    <th>Surat Ijin Usaha</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -49,38 +50,33 @@
                                 @foreach ($data as $d)
                                     <tr>
                                         <td>{{$no++}}</td>
-                                          <td>
-                                            <img src="{{ asset('storage/' . $d->image) }}"
+                                        <td>{{ $d->user->nama }}</td>
+                                        <td>{{ $d->npwp }}</td>
+                                        <td>{{ $d->user->no_telp }}</td>
+                                        <td>{{ $d->kafe->nama }}</td>
+                                       
+                                        <td>
+                                            <img src="{{ asset('storage/' . $d->foto_surat_kepemilikan) }}"
                                                  class="img-fluid" style="max-height: 80px;">
                                         </td>
-                                        <td>{{ $d->nama }}</td>
-                                        <td>{{ $d->kafe->nama }}</td>
-                                        <td>@idr( $d->harga )</td>
                                         <td>
-                                            <div class="row">
-                                                @foreach ($d->kategori->chunk(3) as $chunk)
-                                                    <div class="col-12">
-                                                        @foreach ($chunk as $item)
-                                                            <span
-                                                                class="badge badge-primary mb-1">{{ $item->nama }}</span>
-                                                        @endforeach
-                                                    </div>
-                                                @endforeach
-                                            </div>
+                                            <img src="{{ asset('storage/' . $d->foto_surat_ijin_usaha) }}"
+                                                 class="img-fluid" style="max-height: 80px;">
                                         </td>
+                                       
                                        <td>
                                             <span
-                                                class="badge mb-1 {{ $d->status == 'tersedia' ? 'badge-success' : 'badge-danger' }}">
+                                                class="badge mb-1 {{ $d->status == 'aktif' ? 'badge-success' : 'badge-warning' }}">
                                                 {{ $d->status }}
                                             </span>
                                         </td>
                                         <td class="table-actions">
-                                            <a href="{{route('menu.edit', $d->id)}}" class="table-action" data-toggle="tooltip"
-                                                data-original-title="Edit product">
+                                            <a href="{{route('user.validasi', $d->id)}}" class="table-action" data-toggle="tooltip"
+                                                data-original-title="Validasi">
                                                 <i class="fas fa-user-edit"></i>
                                             </a>
                                             <a href="#!" class="table-action table-action-delete" data-toggle="tooltip"
-                                                data-original-title="Delete product">
+                                                data-original-title="Nonaktif">
                                                 <i class="fas fa-trash"></i>
                                             </a>
                                         </td>

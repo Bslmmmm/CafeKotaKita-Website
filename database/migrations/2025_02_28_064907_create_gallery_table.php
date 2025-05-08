@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('gallery', function (Blueprint $table) {
             $table->uuid("id")->primary();
             $table->uuid("kafe_id");
+            $table->enum("type", ["main_content", "menu_content", "other"]);
             $table->string("url");
             $table->timestamps();
             $table->softDeletes();
 
+            $table->unique(['kafe_id', 'type']);
             $table->foreign('kafe_id')->references('id')->on('kafe')->onDelete('cascade');
         });
     }

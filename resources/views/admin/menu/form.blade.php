@@ -82,6 +82,21 @@
                                 </div>
                             </div>
                              <div class="form-group row">
+                                <label for="example-text-input"
+                                    class="col-md-2 col-form-label form-control-label">Kategori</label>
+                                <div class="container">
+                                    <div class="row">
+                                        @foreach ($kategori as $item)
+                                            <div class="col-3">
+                                                <input type="checkbox" name="kategori[]" value="{{ $item->id }}" @if($data->kategori->contains('id', $item->id)) checked @endif />
+                                                {{ $item->nama }}
+                                            </div>
+                                        @endforeach
+
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="form-group row">
                                 <label for="example-text-input" class="col-md-2 col-form-label form-control-label">Status</label>
                                     <label class="ml-2 mt-2 custom-toggle custom-toggle-success ">
                                         <input type="checkbox" name="status" checked="{{ $data->status ?? old('status') === 'tersedia' }}">

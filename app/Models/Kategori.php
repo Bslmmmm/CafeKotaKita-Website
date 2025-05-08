@@ -15,6 +15,6 @@ class Kategori extends Model
     protected $fillable = ['nama'];
 
     public function menu() {
-        return $this->hasMany(Menu::class, 'menu_kategori');
+        return $this->belongsToMany(Menu::class, 'menu_kategori');
     }
 }

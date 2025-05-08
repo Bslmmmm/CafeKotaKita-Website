@@ -18,7 +18,7 @@
                         </nav>
                     </div>
                     <div class="col-lg-6 col-5 text-right">
-                        <a href="{{route('kafe.create')}}" class="btn btn-sm btn-neutral">Tambah</a>
+                        <a href="{{ route('kafe.create') }}" class="btn btn-sm btn-neutral">Tambah</a>
                     </div>
                 </div>
             </div>
@@ -38,6 +38,7 @@
                                     <th>Alamat</th>
                                     <th>No Telp</th>
                                     <th>Genre</th>
+                                    <th>Fasilitas</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -49,22 +50,48 @@
                                         <td>{{ $d->alamat }}</td>
                                         <td>{{ $d->telp }}</td>
                                         <td>
-                                            @foreach ($d->genre as $item)
-                                                {{ $item->nama }}
-                                            @endforeach
-                                            </td>
-                                        <td>{{ $d->status }}</td>
+                                            <div class="row">
+                                                @foreach ($d->genre->chunk(3) as $chunk)
+                                                    <div class="col-12">
+                                                        @foreach ($chunk as $item)
+                                                            <span
+                                                                class="badge badge-primary mb-1">{{ $item->nama }}</span>
+                                                        @endforeach
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="row">
+                                                @foreach ($d->fasilitas->chunk(3) as $chunk)
+                                                    <div class="col-12">
+                                                        @foreach ($chunk as $item)
+                                                            <span
+                                                                class="badge badge-primary mb-1">{{ $item->nama }}</span>
+                                                        @endforeach
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span
+                                                class="badge mb-1 {{ $d->status == 'buka' ? 'badge-success' : 'badge-danger' }}">
+                                                {{ $d->status }}
+                                            </span>
+                                        </td>
                                         <td class="table-actions">
-                                            <a href="{{route('kafe.edit', $d->id)}}" class="table-action" data-toggle="tooltip"
-                                                data-original-title="Edit product">
+                                            <a href="{{ route('kafe.edit', $d->id) }}" class="table-action"
+                                                data-toggle="tooltip" data-original-title="Edit product">
                                                 <i class="fas fa-user-edit"></i>
                                             </a>
-                                            <form action="{{ route('kafe.destroy', $d->id) }}" method="POST" class="d-inline">
+                                            <form action="{{ route('kafe.destroy', $d->id) }}" method="POST"
+                                                class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="table-action table-action-delete btn btn-link p-0"
-                                                data-toggle="tooltip" data-original-title="Delete product"
-                                                onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
+                                                <button type="submit"
+                                                    class="table-action table-action-delete btn btn-link p-0"
+                                                    data-toggle="tooltip" data-original-title="Delete product"
+                                                    onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>

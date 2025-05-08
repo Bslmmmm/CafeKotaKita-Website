@@ -8,6 +8,7 @@ use App\Http\Controllers\GenreControlller;
 use App\Http\Controllers\KafeController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get("/", function () {
@@ -73,5 +74,10 @@ Route::prefix("admin")->group(function(){
         Route::get("edit/{id}", [GalleryController::class, "edit"])->name("gallery.edit");
         Route::patch("update/{id}", [GalleryController::class, "update"])->name("gallery.update");
         Route::delete("delete/{id}", [GalleryController::class, "destroy"])->name("gallery.destroy");
+    });
+    Route::prefix("user")->group(function () {
+        Route::get("/", [UserController::class, "index"])->name("user.index");
+        Route::get("owner", [UserController::class, "owner"])->name("user.owner");
+        Route::get("validasiOwner", [UserController::class, "validasiOwner"])->name("user.validasi");
     });
 });
