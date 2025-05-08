@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Coffee - Free Bootstrap 4 Template by Colorlib</title>
+    <title>KafeKotaKita</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -804,7 +804,7 @@
     </section>
 
 
-    <section class="ftco-appointment">
+    {{-- <section class="ftco-appointment">
         <div class="overlay"></div>
         <div class="container-wrap">
             <div class="row no-gutters d-md-flex align-items-center">
@@ -851,7 +851,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <footer class="ftco-footer ftco-section img">
         <div class="overlay"></div>
@@ -932,8 +932,9 @@
                         Copyright &copy;
                         <script>
                             document.write(new Date().getFullYear());
-                        </script> All rights reserved | This template is made with <i class="icon-heart"
-                            aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        </script> KafeKotaKita
+                        {{-- <i class="icon-heart"
+                            aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> --}}
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </p>
                 </div>

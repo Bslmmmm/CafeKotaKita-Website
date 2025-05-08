@@ -35,7 +35,7 @@ class MenuController extends Controller
             'status' => $request->status,
             'kafe_id' => $request->kafe_id,
         ]);
-        
+
         return redirect()->route('menu.index')->with('success', 'Menu berhasil ditambahkan.');
     }
 
