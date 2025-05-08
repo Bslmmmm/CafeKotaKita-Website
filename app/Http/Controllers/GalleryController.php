@@ -12,10 +12,9 @@ class GalleryController extends Controller
 {
     public function index(Request $req)
     {
-        $data = Gallery::all();
+        $data = Gallery::with('kafe')->get();
         return view('admin.gallery.index', compact('data'));
     }
-
 
     public function create()
     {
@@ -23,31 +22,28 @@ class GalleryController extends Controller
         return view('admin.gallery.form', compact('kafe'));
     }
 
-
     public function store(Request $request)
     {
         $request->validate([
             'kafe_id' => 'required|exists:kafe,id',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'url' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
-        if($request->hasFile('image')) {
-            $file = $request->file('image');
+        if($request->hasFile('url')) {
+            $file = $request->file('url');
             $filename = Str::uuid() . time() . '.' . $file->getClientOriginalExtension();
             $path = $file->storeAs('galeri', $filename, 'public');
 
-            $data = [
+            Gallery::create([
                 "kafe_id" => $request->kafe_id,
-                "image" => $path
-            ];
+                "url" => $path
+            ]);
 
-            Gallery::create($data);
             return redirect()->route('gallery.index')->with('success', 'Data Berhasil Ditambahkan');
         }
 
         return back()->with('error', 'Please select a valid image file.');
     }
-
 
     public function show($id)
     {
@@ -62,28 +58,26 @@ class GalleryController extends Controller
         return view('admin.gallery.form', compact('data', 'kafe'));
     }
 
-
     public function update(Request $request, $id)
     {
         $request->validate([
             'kafe_id' => 'required|exists:kafe,id',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
         $galeri = Gallery::findOrFail($id);
-
         $galeri->kafe_id = $request->kafe_id;
 
-        if ($request->hasFile('image')) {
-            if ($galeri->image) {
-                Storage::disk('public')->delete($galeri->image);
+        if ($request->hasFile('url')) {
+            if ($galeri->url) {
+                Storage::disk('public')->delete($galeri->url);
             }
 
-            $file = $request->file('image');
+            $file = $request->file('url');
             $filename = Str::uuid() . time() . '.' . $file->getClientOriginalExtension();
             $path = $file->storeAs('galeri', $filename, 'public');
 
-            $galeri->image = $path;
+            $galeri->url = $path;
         }
 
         $galeri->save();
@@ -95,8 +89,8 @@ class GalleryController extends Controller
     {
         $galeri = Gallery::findOrFail($id);
 
-        if ($galeri->image) {
-            Storage::disk('public')->delete($galeri->image);
+        if ($galeri->url) {
+            Storage::disk('public')->delete($galeri->url);
         }
 
         $galeri->delete();

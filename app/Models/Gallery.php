@@ -14,10 +14,10 @@ class Gallery extends Model
     protected $primaryKey = "id";
     protected $fillable = [
         'kafe_id',
-        'image',
+        'url',
     ];
 
-    public function Kafe() {
+    public function kafe() {
         return $this->belongsTo(Kafe::class);
     }
 }

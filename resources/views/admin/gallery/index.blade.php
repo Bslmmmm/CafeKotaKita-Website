@@ -1,8 +1,7 @@
 @extends('admin.layout.app')
-@section('title', 'Dashboard')
+@section('title', 'Admin - KafeKotaKita')
 @section('content')
     <div class="header bg-primary pb-6">
-
         <div class="container-fluid">
             <div class="header-body">
                 <div class="row align-items-center py-4">
@@ -33,7 +32,7 @@
                         <table class="table table-flush" id="datatable-basic">
                             <thead class="thead-light">
                                 <tr>
-                                    <th>Nama</th>
+                                    <th>Nama Kafe</th>
                                     <th>Image</th>
                                     <th>Action</th>
                                 </tr>
@@ -41,17 +40,29 @@
                             <tbody>
                                 @foreach ($data as $d)
                                     <tr>
-                                        <td>{{ $d->nama }}</td>
-                                        <td>{{ $d->url }}</td>
+                                        <td>{{ $d->kafe ? $d->kafe->nama : 'Tidak Ada Kafe' }}</td>
+                                        <td>
+                                            <img src="{{ asset('storage/' . $d->url) }}" alt="Gambar Gallery"
+                                                 class="img-fluid" style="max-height: 80px;">
+                                        </td>
                                         <td class="table-actions">
-                                            <a href="{{route('kafe.edit', $d->id)}}" class="table-action" data-toggle="tooltip"
-                                                data-original-title="Edit product">
+                                            <a href="{{route('gallery.edit', $d->id)}}" class="table-action" data-toggle="tooltip"
+                                                data-original-title="Edit galeri">
                                                 <i class="fas fa-user-edit"></i>
                                             </a>
-                                            <a href="#!" class="table-action table-action-delete" data-toggle="tooltip"
-                                                data-original-title="Delete product">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
+                                            <form action="{{ route('gallery.destroy', $d->id) }}" method="POST"
+                                                style="display: inline;"
+                                                onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
+                                                @csrf
+                                                @method('DELETE')
+
+                                                <!-- Icon delete button, click triggers form submission -->
+                                                <button type="submit" class="table-action table-action-delete"
+                                                    data-toggle="tooltip" data-original-title="Delete galeri"
+                                                    style="background: none; border: none; cursor: pointer;">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -62,5 +73,31 @@
             </div>
         </div>
     </div>
-    </div>
 @endsection
+
+@push('js')
+<script>
+    function konfirmasiHapus(url) {
+        if (confirm('Apakah Anda yakin ingin menghapus galeri ini?')) {
+            var form = document.createElement('form');
+            form.action = url;
+            form.method = 'POST';
+
+            var csrfToken = document.createElement('input');
+            csrfToken.type = 'hidden';
+            csrfToken.name = '_token';
+            csrfToken.value = '{{ csrf_token() }}';
+            form.appendChild(csrfToken);
+
+            var methodField = document.createElement('input');
+            methodField.type = 'hidden';
+            methodField.name = '_method';
+            methodField.value = 'DELETE';
+            form.appendChild(methodField);
+
+            document.body.appendChild(form);
+            form.submit();
+        }
+    }
+</script>
+@endpush

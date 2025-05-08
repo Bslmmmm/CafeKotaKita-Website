@@ -1,5 +1,5 @@
 @extends('admin.layout.app')
-@section('title', 'Dashboard')
+@section('title', 'Admin - KafeKotaKita')
 @section('content')
     <div class="header bg-primary pb-6">
 
@@ -45,25 +45,28 @@
                                     <tr>
                                         <td>{{ $d->nama }}</td>
                                         <td>{{ $d->deskripsi }}</td>
-                                        <td>{{ $d->image }}</td>
+                                        <td>
+                                            <img src="{{ asset('storage/' . $d->image) }}" alt="Gambar Fasilitas"
+                                            class="img-fluid" style="max-height: 80px">
+                                        </td>
                                         <td class="table-actions">
                                             <a href="{{ route('fasilitas.edit', $d->id) }}" class="table-action"
                                                 data-toggle="tooltip" data-original-title="Edit product">
                                                 <i class="fas fa-user-edit"></i>
                                             </a>
-                                            <form action="{{ route('fasilitas.destroy', $d->id) }}" method="POST"
-                                                style="display: inline;"
-                                                onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
-                                                @csrf
-                                                @method('DELETE')
+                                                <form action="{{ route('fasilitas.destroy', $d->id) }}" method="POST"
+                                                    style="display: inline;"
+                                                    onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
+                                                    @csrf
+                                                    @method('DELETE')
 
-                                                <!-- Icon delete button, click triggers form submission -->
-                                                <button type="submit" class="table-action table-action-delete"
-                                                    data-toggle="tooltip" data-original-title="Delete product"
-                                                    style="background: none; border: none; cursor: pointer;">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </form>
+                                                    <!-- Icon delete button, click triggers form submission -->
+                                                    <button type="submit" class="table-action table-action-delete"
+                                                        data-toggle="tooltip" data-original-title="Delete product"
+                                                        style="background: none; border: none; cursor: pointer;">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </form>
 
                                         </td>
                                     </tr>
