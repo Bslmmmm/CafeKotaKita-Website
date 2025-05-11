@@ -12,9 +12,9 @@ class Genre extends Model
 
     protected $table="genre";
     protected $primaryKey = "id";
-    protected $guarded = "id";
-    
+    protected $fillable = ["nama"];
+
     public function Kafe() {
-        return $this->belongsTo(Kafe::class);
+        return $this->belongsToMany(Kafe::class, "genre_kafe");
     }
 }

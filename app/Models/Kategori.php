@@ -12,9 +12,9 @@ class Kategori extends Model
 
     protected $table="kategori";
     protected $primaryKey = "id";
-    protected $guarded = "id";
-    
+    protected $fillable = ['nama'];
+
     public function menu() {
-        return $this->hasMany(Menu::class, 'menu_kategori');
+        return $this->belongsToMany(Menu::class, 'menu_kategori');
     }
 }

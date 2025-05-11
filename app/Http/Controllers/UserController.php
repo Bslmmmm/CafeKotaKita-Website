@@ -1,0 +1,33 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Kategori;
+use App\Models\Owner;
+use App\Models\User;
+use Illuminate\Http\Request;
+
+class UserController extends Controller
+{
+    public function index(Request $req)
+    {
+        $data = User::all();
+        return view('admin.user.index', compact('data'));
+    }
+    public function owner(Request $req)
+    {
+        $data = Owner::with(["kafe", "user"])->get();
+        return view('admin.user.owner', compact('data'));
+    }
+    public function validasiOwner($id)
+    {
+        $owner = Owner::findOrFail($id);
+
+        $status = $owner->status == "pending" ? "aktif" : "ditolak";
+
+        $data = [
+            "status" => $status,
+        ];
+        $owner->update($data);
+    }
+}

@@ -16,8 +16,8 @@ return new class extends Migration
             $table->uuid("kafe_id");
             $table->string('nama');
             $table->integer("harga");
+            $table->string("image")->nullable();
             $table->enum("status", ["tersedia", "habis"]);
-
             $table->timestamps();
             $table->softDeletes();
             $table->foreign("kafe_id")->references("id")->on("kafe")->onDelete("cascade");

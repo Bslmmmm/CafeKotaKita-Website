@@ -14,10 +14,18 @@ class User extends Authenticatable
 {
     use HasUuids, SoftDeletes;
 
-    protected $table="user";
+    protected $table="users";
     protected $primaryKey = "id";
-    protected $guarded = "id";
-    
+    protected $guarded = ['id'];
+
+    protected $fillable = [
+        'nama',
+        'email',
+        'alamat',
+        'no_telp',
+        'password',
+    ];
+
     public function Reservasi() {
         return $this->hasMany(Reservasi::class);
     }

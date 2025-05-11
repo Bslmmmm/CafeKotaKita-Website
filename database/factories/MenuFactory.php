@@ -18,7 +18,7 @@ class MenuFactory extends Factory
         
         return [
             'kafe_id' => null,
-            'nama' => $this->faker->unique()->word(),
+            'nama' => $this->faker->word,
             'harga' => $this->faker->numberBetween(10000, 50000),
             'status' => $this->faker->randomElement(['tersedia', 'habis']),
         ];

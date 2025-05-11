@@ -22,6 +22,7 @@ class KafeFactory extends Factory
         return [
             'nama' => $this->faker->unique()->randomElement($cafeNames),
             'alamat' => $this->faker->address(),
+            'telp' => $this->faker->e164PhoneNumber(),
             'latitude' => $this->faker->latitude(),
             'longitude' => $this->faker->longitude(),
             'status' => $this->faker->randomElement(['buka', 'tutup']),
