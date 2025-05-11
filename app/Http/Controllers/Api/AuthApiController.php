@@ -8,12 +8,14 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class AuthController extends Controller
+class AuthApiController extends Controller
 {
     public function register(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required|string|max:255',
+            'nama' => 'required|string|max:255',
+            'no_telp' => 'required|string|max:255',
+            'alamat' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
         ]);
@@ -32,7 +34,7 @@ class AuthController extends Controller
     {
         $data = $req->validate([
             'email' => 'required|string|email|max:255',
-            'password' => 'required|string|min:8',
+            'password' => 'required|string|min:6',
         ]);
         $data['password'] = bcrypt($data['password']);
         $user = User::where('email', $data['email'])->first();
@@ -47,5 +49,15 @@ class AuthController extends Controller
                 'message' => 'Invalid credentials',
             ], 401);
         }
+    }
+    function promoteOwner(Request $req)
+    {
+        $data = $req->validate([
+            'user_id' => 'required',
+            'npwp' => 'required',
+            'foto_surat_kepemilikan' => '',
+            'foto_surat_ijin_usaha' => '',
+
+        ]);
     }
 }

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('kafe', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->uuid('owner_id');
             $table->string('nama');
             $table->string('alamat');
             $table->string('telp');
@@ -21,6 +22,8 @@ return new class extends Migration
             $table->enum('status', ["buka", "tutup"]);
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('owner_id')->references('id')->on('owner')->onDelete('cascade');
         });
     }
 

@@ -14,10 +14,9 @@ return new class extends Migration
         Schema::create('owner', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('user_id');
-            $table->uuid('kafe_id');
             $table->string("npwp");
-            $table->string("foto_surat_kepemilikan");
-            $table->string("foto_surat_ijin_usaha");
+            $table->string("foto_surat_kepemilikan")->nullable();
+            $table->string("foto_surat_ijin_usaha")->nullable();
             $table->string("instagram_link")->nullable();
             $table->string("tiktok_link")->nullable();
             $table->string("facebook_link")->nullable();
@@ -28,7 +27,6 @@ return new class extends Migration
             $table->softDeletes();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('kafe_id')->references('id')->on('kafe')->onDelete('cascade');
         });
     }
 
