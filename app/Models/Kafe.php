@@ -27,7 +27,7 @@ class Kafe extends Model
     }
     public function Fasilitas()
     {
-        return $this->belongsToMany(Fasilitas::class, "fasilitas_kafe");
+        return $this->belongsToMany(Fasilitas::class, "fasilitas_kafe", "kafe_id", "facility_id");
     }
 
     public function Komentar() {

@@ -49,30 +49,30 @@
                                 @php $no =1; @endphp
                                 @foreach ($data as $d)
                                     <tr>
-                                        <td>{{$no++}}</td>
+                                        <td>{{ $no++ }}</td>
                                         <td>{{ $d->user->nama }}</td>
                                         <td>{{ $d->npwp }}</td>
                                         <td>{{ $d->user->no_telp }}</td>
                                         <td>{{ $d->kafe->nama }}</td>
-                                       
+
                                         <td>
                                             <img src="{{ asset('storage/' . $d->foto_surat_kepemilikan) }}"
-                                                 class="img-fluid" style="max-height: 80px;">
+                                                class="img-fluid" style="max-height: 80px;">
                                         </td>
                                         <td>
-                                            <img src="{{ asset('storage/' . $d->foto_surat_ijin_usaha) }}"
-                                                 class="img-fluid" style="max-height: 80px;">
+                                            <img src="{{ asset('storage/' . $d->foto_surat_ijin_usaha) }}" class="img-fluid"
+                                                style="max-height: 80px;">
                                         </td>
-                                       
-                                       <td>
+
+                                        <td>
                                             <span
                                                 class="badge mb-1 {{ $d->status == 'aktif' ? 'badge-success' : 'badge-warning' }}">
                                                 {{ $d->status }}
                                             </span>
                                         </td>
                                         <td class="table-actions">
-                                            <a href="{{route('user.validasi', $d->id)}}" class="table-action" data-toggle="tooltip"
-                                                data-original-title="Validasi">
+                                            <a href="{{ route('user.validasi', ['id' => $d->id]) }}" class="table-action"
+                                                data-toggle="tooltip" data-original-title="Validasi">
                                                 <i class="fas fa-user-edit"></i>
                                             </a>
                                             <a href="#!" class="table-action table-action-delete" data-toggle="tooltip"
