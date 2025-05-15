@@ -4,7 +4,7 @@
         <!-- Brand -->
         <div class="sidenav-header  d-flex  align-items-center">
             <a class="navbar-brand d-flex align-items-center" href="#">
-                <img src="{{ asset('assets/img/brand/logo-putih.png') }}" alt="Logo" class="navbar-brand-img"
+                <img src="{{ asset('assets/img/brand/logo-hitam.png') }}" alt="Logo" class="navbar-brand-img"
                     style="height: 40px; margin-right: 10px;">
                 <span
                     style="font-family: 'poppins', sans-serif; font-size: 20px; font-weight: bold; color: black; letter-spacing: 1px; text-shadow: 1px 1px 2px rgba(0,0,0,0.4);">
