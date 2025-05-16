@@ -18,6 +18,10 @@
     <link rel="stylesheet" href="css/aos.css">
 
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
             color: #333;
@@ -25,7 +29,20 @@
 
         .navbar {
             padding: 15px 0;
-            background: #fff !important;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1030;
+            background-color: transparent;
+            transition: background-color 0.3s ease;
+            /* background: #000;
+            color: #fff; */
+        }
+
+        .navbar.scrolled {
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         .navbar-brand {
@@ -97,6 +114,57 @@
             margin-bottom: 10px;
         }
 
+        .feature-item {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            cursor: pointer;
+        }
+
+        .feature-description {
+            margin-top: 8px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-left: 3px solid #000;
+        }
+
+        .stacked-images {
+            perspective: 1000px;
+            transform-style: preserve-3d;
+            margin-bottom: 30px;
+        }
+
+        /* Styling untuk setiap gambar dalam tumpukan */
+        .stacked-image {
+            transition: all 0.3s ease;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        /* Efek bayangan untuk gambar */
+        .shadow-lg {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Efek hover untuk gambar bertumpuk */
+        .stacked-images:hover .stacked-image:nth-child(1) {
+            transform: translateY(-10px) rotate(-3deg);
+        }
+
+        .stacked-images:hover .stacked-image:nth-child(2) {
+            transform: translateY(-5px) rotate(-1deg);
+        }
+
+        .stacked-images:hover .stacked-image:nth-child(3) {
+            transform: translateY(0) rotate(1deg);
+        }
+
+        Responsivitas untuk layar kecil @media (max-width: 992px) {
+            .stacked-images {
+                max-width: 400px;
+                margin: 0 auto 30px;
+            }
+        }
+
         .app-preview {
             border-radius: 25px;
             overflow: hidden;
@@ -116,6 +184,62 @@
 
         .about-section {
             padding: 80px 0;
+        }
+
+        .stacked-images-right {
+            perspective: 1000px;
+            transform-style: preserve-3d;
+            margin: 30px auto;
+            max-width: 90%;
+        }
+
+        /* Styling untuk setiap gambar dalam tumpukan */
+        .stacked-image {
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        /* Efek bayangan untuk gambar */
+        .shadow-lg {
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Border radius untuk gambar */
+        .rounded-lg {
+            border-radius: 15px;
+        }
+
+        /* Efek hover untuk gambar bertumpuk */
+        .stacked-images-right:hover .stacked-image:nth-child(1) {
+            transform: translateY(-5px) translateX(-5px) rotate(-2deg);
+        }
+
+        .stacked-images-right:hover .stacked-image:nth-child(2) {
+            transform: translateY(-3px) translateX(-3px) rotate(-1deg);
+        }
+
+        .stacked-images-right:hover .stacked-image:nth-child(3) {
+            transform: translateY(0) rotate(0deg);
+        }
+
+        /* Background untuk section */
+        .how-it-section {
+            background-color: #f8f9fa;
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Responsivitas untuk layar kecil */
+        @media (max-width: 992px) {
+            .stacked-images-right {
+                max-width: 350px;
+                margin: 40px auto;
+            }
+
+            .how-it-section {
+                padding: 60px 0;
+            }
         }
 
         .feature-card {
@@ -201,10 +325,10 @@
                         <a class="nav-link" href="#">HOME</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">ABOUT US</a>
+                        <a class="nav-link" href="#about">ABOUT US</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">GALLERY</a>
+                        <a class="nav-link" href="#gallery">GALLERY</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}">LOGIN</a>
@@ -302,7 +426,7 @@
     </section>
 
     <!-- About Section -->
-    <section class="how-it-section">
+    <section class="how-it-section" id="about">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
@@ -318,8 +442,25 @@
                         congue nunc.</p>
                 </div>
                 <div class="col-lg-6 text-center">
-                    <img src="images/page-awal.png" class="img-fluid" alt="KafeKotaKita">
-                    {{-- <a href="#" class="btn btn-get-started mt-3">GET STARTED</a> --}}
+                    <div class="stacked-images-right position-relative">
+                        <!-- Image 1 (top) -->
+                        <div class="stacked-image" style="position: relative; z-index: 3; width: 95%;">
+                            <img src="images/page-awal.png" class="img-fluid shadow-lg rounded-lg"
+                                alt="KafeKotaKita App">
+                        </div>
+                        <!-- Image 2 (middle) -->
+                        <div class="stacked-image"
+                            style="position: absolute; top: 20px; left: 40px; z-index: 2; width: 90%;">
+                            <img src="images/saved-page.png" class="img-fluid shadow-lg rounded-lg"
+                                alt="KafeKotaKita App">
+                        </div>
+                        <!-- Image 3 (bottom) -->
+                        <div class="stacked-image"
+                            style="position: absolute; top: 40px; left: 70px; z-index: 1; width: 85%;">
+                            <img src="images/community-page.png" class="img-fluid shadow-lg rounded-lg"
+                                alt="KafeKotaKita App">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -330,7 +471,19 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
-                    <img src="images/community-page.png" class="img-fluid" alt="App Screenshots">
+                    <!-- Stack of 3 images -->
+                    <div class="stacked-images position-relative">
+                        <!-- Image 1 (top) -->
+                        <div class="stacked-image" style="position: relative; z-index: 3; width: 95%;">
+                            <img src="images/community-page.png" class="img-fluid shadow-lg" alt="App Screenshots">
+                        </div>
+                        <!-- Image 2 (middle) -->
+                        <div class="stacked-image"
+                            style="position: absolute; top: 20px; left: 40px; z-index: 2; width: 90%;">
+                            <img src="images/saved-page.png" class="img-fluid shadow-lg" alt="App Screenshots">
+                        </div>
+
+                    </div>
                 </div>
                 <div class="col-lg-6">
                     <h2>Features</h2>
@@ -338,9 +491,26 @@
                         pharetra, diam in elementum facilisis, urna sem cursus augue.</p>
 
                     <div class="feature-list">
-                        <div class="feature-item">Filters</div>
-                        <div class="feature-item">Community</div>
-                        <div class="feature-item">Reservations</div>
+                        <div class="feature-item" onclick="toggleDetail(this, 'filters')">
+                            Filters
+                            <div class="feature-description" id="filters" style="display: none;">
+                                <p>Filters membantu menyaring konten sesuai kebutuhan pengguna.</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item" onclick="toggleDetail(this, 'community')">
+                            Community
+                            <div class="feature-description" id="community" style="display: none;">
+                                <p>Community memungkinkan pengguna terhubung dan berbagi pengalaman.</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item" onclick="toggleDetail(this, 'reservations')">
+                            Reservations
+                            <div class="feature-description" id="reservations" style="display: none;">
+                                <p>Reservations memudahkan pemesanan tempat secara online.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -348,7 +518,7 @@
     </section>
 
     <!-- Gallery Section -->
-    <section class="gallery-section">
+    <section class="gallery-section" id="gallery">
         <div class="container">
             <h2 class="section-title">Gallery</h2>
 
@@ -413,49 +583,58 @@
     <section class="explore-section">
         <div class="container">
             <h2 class="section-title">Explore Yourself!</h2>
-
             <div class="row">
-                <div class="col-md-3 text-center explore-item">
-                    <img src="images/icon-vibes.png" alt="Find Your Vibes" class="explore-icon">
-                    <h5>Find Your Vibes</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod facilisis elit ut amet
-                    </p>
+                <!-- Kolom Kiri -->
+                <div class="col-md-3">
+                    <!-- Item 1 Kiri -->
+                    <div class="text-center explore-item mb-4">
+                        <img src="images/icon-vibes.png" alt="Find Your Vibes" class="explore-icon">
+                        <h5>Find Your Vibes</h5>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+
+                    <!-- Item 2 Kiri -->
+                    <div class="text-center explore-item mb-4">
+                        <img src="images/icon-comment.png" alt="Post a Comment" class="explore-icon">
+                        <h5>Post a Comment</h5>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+
+                    <!-- Item 3 Kiri -->
+                    <div class="text-center explore-item">
+                        <img src="images/icon-reservation.png" alt="Book a Table" class="explore-icon">
+                        <h5>Book a Table</h5>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
                 </div>
-                <div class="col-md-6 text-center">
+
+                <!-- Kolom Tengah - Dashboard Image -->
+                <div class="col-md-6 d-flex align-items-center justify-content-center">
                     <img src="images/dashboard.png" class="img-fluid app-preview" alt="App Mockup">
                 </div>
-                <div class="col-md-3 text-center explore-item">
-                    <img src="images/icon-profile.png" alt="Customize Your Profile" class="explore-icon">
-                    <h5>Customize Your Profile</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod facilisis elit ut amet
-                    </p>
-                </div>
-            </div>
 
-            <div class="row mt-5">
-                <div class="col-md-3 text-center explore-item">
-                    <img src="images/icon-comment.png" alt="Post a Comment" class="explore-icon">
-                    <h5>Post a Comment</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod facilisis elit ut amet
-                    </p>
-                </div>
-                <div class="col-md-3 text-center explore-item">
-                    <img src="images/icon-reservation.png" alt="Book a Table" class="explore-icon">
-                    <h5>Book a Table</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod facilisis elit ut amet
-                    </p>
-                </div>
-                <div class="col-md-3 text-center explore-item">
-                    <img src="images/icon-vibes.png" alt="Find Nearest Cafe" class="explore-icon">
-                    <h5>Find Nearest Cafe</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod facilisis elit ut amet
-                    </p>
-                </div>
-                <div class="col-md-3 text-center explore-item">
-                    <img src="images/icon-reservation.png" alt="mobile jb app" class="explore-icon">
-                    <h5>mobile jb app</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod facilisis elit ut amet
-                    </p>
+                <!-- Kolom Kanan -->
+                <div class="col-md-3">
+                    <!-- Item 1 Kanan -->
+                    <div class="text-center explore-item mb-4">
+                        <img src="images/icon-profile.png" alt="Customize Your Profile" class="explore-icon">
+                        <h5>Customize Your Profile</h5>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+
+                    <!-- Item 2 Kanan -->
+                    <div class="text-center explore-item mb-4">
+                        <img src="images/icon-vibes.png" alt="Find Nearest Cafe" class="explore-icon">
+                        <h5>Find Nearest Cafe</h5>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+
+                    <!-- Item 3 Kanan -->
+                    <div class="text-center explore-item">
+                        <img src="images/icon-reservation.png" alt="mobile jb app" class="explore-icon">
+                        <h5>mobile jb app</h5>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -492,6 +671,20 @@
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/aos.js"></script>
     <script src="js/main.js"></script>
+
+    <script>
+        function toggleDetail(element, id) {
+            const detail = element.querySelector(`#${id}`);
+
+            // Toggle tampilan (sembunyikan jika sedang tampil, tampilkan jika tersembunyi)
+            if (detail.style.display === 'none') {
+                detail.style.display = 'block';
+            } else {
+                detail.style.display = 'none';
+            }
+        }
+    </script>
+
 </body>
 
 </html>
