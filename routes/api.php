@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\KafeApiController;
 use App\Http\Controllers\Api\MenuApiController;
 use Illuminate\Support\Facades\Route;
 
+
 Route::get("/", function () {
     return response()->json([
         "message" => "Welcome to Kafe API",
@@ -16,6 +17,10 @@ Route::get("/", function () {
 Route::prefix("auth")->group(function () {
     Route::post("register", [AuthApiController::class, "register"]);
     Route::post("login", [AuthApiController::class, "login"]);
+    Route::post("forgotpassword", [AuthApiController::class, "forgotpassword"]);
+    Route::post("verifyotp", [AuthApiController::class, "verifyotp"]);
+    Route::post("resetpassword", [AuthApiController::class, "resetpassword"]);
+
 });
 Route::prefix("kafe")->group(function () {
     Route::get("/findAll", [KafeApiController::class, "index"]);
@@ -45,3 +50,7 @@ Route::prefix("fasilitas")->group(function () {
 //     Route::patch("update/{id}", [ApiKafeController::class, "update"]);
 //     Route::delete("delete/{id}", [ApiKafeController::class, "destroy"]);
 // });
+
+
+
+
