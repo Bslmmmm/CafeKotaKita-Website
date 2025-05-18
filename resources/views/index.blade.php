@@ -5,201 +5,685 @@
     <title>KafeKotaKita</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" href="images/logo-merah.png" type="image/png">
+    <link rel="icon" href="images/logo-hitam.png" type="image/png">
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,700" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Great+Vibes" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="css/animate.css">
-
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="css/magnific-popup.css">
-
     <link rel="stylesheet" href="css/aos.css">
 
-    <link rel="stylesheet" href="css/ionicons.min.css">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
 
-    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="css/jquery.timepicker.css">
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+        }
 
+        .navbar {
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1030;
+            background-color: transparent;
+            transition: background-color 0.3s ease;
+            /* background: #000;
+            color: #fff; */
+        }
 
-    <link rel="stylesheet" href="css/flaticon.css">
-    <link rel="stylesheet" href="css/icomoon.css">
-    <link rel="stylesheet" href="css/style.css">
+        .navbar.scrolled {
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+        }
+
+        .logo-box {
+            /* background: #000; */
+            padding: 10px;
+            border-radius: 8px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            margin: 0 10px;
+        }
+
+        .btn-get-started {
+            background-color: #000;
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 5px;
+            font-weight: 500;
+        }
+
+        .btn-get-started:hover {
+            background-color: #222;
+            color: #fff;
+        }
+
+        .hero-section {
+            padding: 100px 0;
+        }
+
+        .hero-heading {
+            font-weight: 700;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .hero-subheading {
+            font-weight: 500;
+            margin-bottom: 30px;
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .feature-icon i {
+            color: #fff;
+            font-size: 2rem;
+        }
+
+        .feature-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .feature-item {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            cursor: pointer;
+        }
+
+        .feature-description {
+            margin-top: 8px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-left: 3px solid #000;
+        }
+
+        .stacked-images {
+            perspective: 1000px;
+            transform-style: preserve-3d;
+            margin-bottom: 30px;
+        }
+
+        /* Styling untuk setiap gambar dalam tumpukan */
+        .stacked-image {
+            transition: all 0.3s ease;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        /* Efek bayangan untuk gambar */
+        .shadow-lg {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Efek hover untuk gambar bertumpuk */
+        .stacked-images:hover .stacked-image:nth-child(1) {
+            transform: translateY(-10px) rotate(-3deg);
+        }
+
+        .stacked-images:hover .stacked-image:nth-child(2) {
+            transform: translateY(-5px) rotate(-1deg);
+        }
+
+        .stacked-images:hover .stacked-image:nth-child(3) {
+            transform: translateY(0) rotate(1deg);
+        }
+
+        Responsivitas untuk layar kecil @media (max-width: 992px) {
+            .stacked-images {
+                max-width: 400px;
+                margin: 0 auto 30px;
+            }
+        }
+
+        .app-preview {
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .how-it-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .about-section {
+            padding: 80px 0;
+        }
+
+        .stacked-images-right {
+            perspective: 1000px;
+            transform-style: preserve-3d;
+            margin: 30px auto;
+            max-width: 90%;
+        }
+
+        /* Styling untuk setiap gambar dalam tumpukan */
+        .stacked-image {
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        /* Efek bayangan untuk gambar */
+        .shadow-lg {
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Border radius untuk gambar */
+        .rounded-lg {
+            border-radius: 15px;
+        }
+
+        /* Efek hover untuk gambar bertumpuk */
+        .stacked-images-right:hover .stacked-image:nth-child(1) {
+            transform: translateY(-5px) translateX(-5px) rotate(-2deg);
+        }
+
+        .stacked-images-right:hover .stacked-image:nth-child(2) {
+            transform: translateY(-3px) translateX(-3px) rotate(-1deg);
+        }
+
+        .stacked-images-right:hover .stacked-image:nth-child(3) {
+            transform: translateY(0) rotate(0deg);
+        }
+
+        /* Background untuk section */
+        .how-it-section {
+            background-color: #f8f9fa;
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Responsivitas untuk layar kecil */
+        @media (max-width: 992px) {
+            .stacked-images-right {
+                max-width: 350px;
+                margin: 40px auto;
+            }
+
+            .how-it-section {
+                padding: 60px 0;
+            }
+        }
+
+        .feature-card {
+            margin-top: 30px;
+        }
+
+        .feature-list {
+            margin-top: 30px;
+        }
+
+        .feature-item {
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .gallery-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .gallery-item {
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .explore-section {
+            padding: 80px 0;
+        }
+
+        .explore-item {
+            margin-bottom: 40px;
+        }
+
+        .explore-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+        }
+
+        .download-section {
+            padding: 40px 0;
+        }
+
+        .store-badge {
+            height: 50px;
+            margin: 10px;
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+            width: 40px;
+            height: 40px;
+            background: #000;
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .dashboard-img {
+            max-width: 250px;
+            margin: 0 auto;
+            display: block;
+        }
+    </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-            <a class="navbar-brand" href="#">KafeKota<small>Kita</small></a>
-            {{-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
-                aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="oi oi-menu"></span> Menu
-            </button> --}}
-            <div class="collapse navbar-collapse" id="ftco-nav">
+            <a class="navbar-brand" href="#">
+                <div class="logo-box">
+                    {{-- <img src="images/logo-hitam.png" alt="" width="60" height="60"> --}}
+                </div>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active"><a href="#" class="nav-link">Home</a></li>
-                    {{-- <li class="nav-item"><a href="menu.html" class="nav-link">Menu</a></li>
-                    <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
-                    <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-                    <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="room.html" id="dropdown04" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">Shop</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown04">
-                            <a class="dropdown-item" href="shop.html">Shop</a>
-                            <a class="dropdown-item" href="product-single.html">Single Product</a>
-                            <a class="dropdown-item" href="room.html">Cart</a>
-                            <a class="dropdown-item" href="checkout.html">Checkout</a>
-                        </div> --}}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">HOME</a>
                     </li>
-                    {{-- <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li> --}}
-                    <li class="nav-item"><a href="{{ route('login') }}" class="nav-link">
-                        Login
-                    </a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">ABOUT US</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#gallery">GALLERY</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}">LOGIN</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-get-started" href="#">GET STARTED</a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
-    <!-- END nav -->
 
-    <section class="home-slider owl-carousel">
-        <div class="slider-item" style="background-image: url(images/bg_1.jpg);">
-            <div class="overlay"></div>
-            <div class="container">
-                <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
-
-                    <div class="col-md-8 col-sm-12 text-center ftco-animate">
-                        <span class="subheading">Selamat Datang di KafeKotaKita</span>
-                        <h1 class="mb-4">Pengalaman Menikmati Kopi Terbaik</h1>
-                        <p class="mb-4 mb-md-5">Temukan kafe terbaik di kota Anda dengan mudah dan cepat melalui aplikasi kami.</p>
-                        <p>
-                            <a href="#download-app" class="btn btn-primary p-3 px-xl-4 py-xl-3">Unduh Aplikasi</a>
-                            <a href="#our-menu" class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3">Lihat Menu</a>
-                        </p>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="slider-item" style="background-image: url(images/bg_2.jpg);">
-            <div class="overlay"></div>
-            <div class="container">
-                <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
-
-                    <div class="col-md-8 col-sm-12 text-center ftco-animate">
-                        <span class="subheading">Nikmati Rasa &amp; Suasana yang Menawan</span>
-                        <h1 class="mb-4">Kopi Berkualitas & Tempat yang Nyaman</h1>
-                        <p class="mb-4 mb-md-5">Aplikasi kami membantu Anda menemukan kafe dengan cepat dan mudah.</p>
-                        <p>
-                            <a href="#download-app" class="btn btn-primary p-3 px-xl-4 py-xl-3">Unduh Aplikasi</a>
-                            <a href="#our-menu" class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3">Lihat Menu</a>
-                        </p>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="slider-item" style="background-image: url(images/bg_3.jpg);">
-            <div class="overlay"></div>
-            <div class="container">
-                <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
-
-                    <div class="col-md-8 col-sm-12 text-center ftco-animate">
-                        <span class="subheading">Kopi Siap Disajikan</span>
-                        <h1 class="mb-4">Nikmati Kopi Hangat dan Segar</h1>
-                        <p class="mb-4 mb-md-5">Unduh aplikasi kami dan temukan kafe favorit Anda dengan mudah.</p>
-                        <p>
-                            <a href="#download-app" class="btn btn-primary p-3 px-xl-4 py-xl-3">Unduh Aplikasi</a>
-                            <a href="#our-menu" class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3">Lihat Menu</a>
-                        </p>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="ftco-about d-md-flex" id="our-menu">
-        <div class="one-half img" style="background-image: url(images/about.jpg);"></div>
-        <div class="one-half ftco-animate">
-            <div class="overlap">
-                <div class="heading-section ftco-animate ">
-                    <span class="subheading">Temukan</span>
-                    <h2 class="mb-4">Kafe Anda</h2>
-                </div>
-                <div>
-                    <p>Kami menawarkan anda untuk memilih kafe sesuai dengan genre, fasilitas, dll. </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- The rest of the page remains unchanged -->
-
-    <footer class="ftco-footer ftco-section img">
-        <div class="overlay"></div>
+    <!-- Hero Section -->
+    <section class="hero-section">
         <div class="container">
-            <div class="row mb-5">
-                    <div class="container-wrap">
-                        <div class="wrap d-md-flex align-items-xl-center justify-content-center">
-                            <div class="info text-center">
-                                <h2>Unduh Aplikasi Mobile KafeKotaKita</h2>
-                                <p>Temukan kafe terbaik di kota Anda dengan mudah melalui aplikasi mobile kami. Dapatkan pengalaman terbaik dalam mencari dan menikmati kopi favorit Anda.</p>
-                                <a href="https://play.google.com/store/apps/details?id=com.kafekotakita.app" target="_blank" class="btn btn-success mr-3">Google Play Store</a>
-                                <a href="https://apps.apple.com/app/id123456789" target="_blank" class="btn btn-primary">App Store</a>
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h5>KAFE KOTA KITA</h5>
+                    <h1 class="hero-heading">Find The Style You Want Here</h1>
+                    <a href="#" class="btn btn-get-started">GET STARTED</a>
+                </div>
+                <div class="col-lg-6">
+                    <img src="images/dashboard.png" class="img-fluid app-preview" alt="KafeKotaKita App">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-section">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <div class="feature-icon">
+                        <i class="fas fa-filter"></i>
+                    </div>
+                    <h4 class="feature-title">Find with filters</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod</p>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h4 class="feature-title">Sharing Experiences</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod facilisis elit ut amet
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h4 class="feature-title">Set Your Reservation</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Looks Section -->
+    <section class="about-section">
+        <div class="container">
+            <h2 class="section-title">How It Looks</h2>
+            <p class="text-center mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+
+            <div class="text-center">
+                <div id="appCarousel" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="images/page-awal.png" class="dashboard-img" alt="App Dashboard">
+                            <h5 class="mt-4">First Page</h5>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="images/dashboard.png" class="dashboard-img" alt="App Dashboard">
+                            <h5 class="mt-4">Dashboard</h5>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="images/community-page.png" class="dashboard-img" alt="App Community">
+                            <h5 class="mt-4">Community</h5>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="images/saved-page.png" class="dashboard-img" alt="App Dashboard">
+                            <h5 class="mt-4">Saved Cafe</h5>
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#appCarousel" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    </a>
+                    <a class="carousel-control-next" href="#appCarousel" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="how-it-section" id="about">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h2>What is KafeKotaKita?</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod facilisis elit ut amet
+                        placerat. Id amet molestie libero viverra, neque, aenean enim in sollicitudin. Vitae fermentum
+                        vulputate facilisis velit accumsan. Nulla facilisi. Integer nisl accumsan ante. In posuere
+                        volutpat, tempus hendrerit magna ut sed pellentesque, consequat pulvinar nibh. Vestibulum
+                        gravida sagittis elit, non fringilla felis. Vestibulum gravida sagittis elit, non fringilla
+                        felis, vel consequat vel pellentesque eu. Vestibulum gravida sagittis elit, non fringilla felis,
+                        vel consequat vel pellentesque eu. Vestibulum magna molestie, elit amet lobortis lorem,
+                        vestibulum. Curabitur quespia ncessim nunc qurt adipisum. Nulla ut cursus sem. Cras volutpat
+                        congue nunc.</p>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <div class="stacked-images-right position-relative">
+                        <!-- Image 1 (top) -->
+                        <div class="stacked-image" style="position: relative; z-index: 3; width: 95%;">
+                            <img src="images/page-awal.png" class="img-fluid shadow-lg rounded-lg"
+                                alt="KafeKotaKita App">
+                        </div>
+                        <!-- Image 2 (middle) -->
+                        <div class="stacked-image"
+                            style="position: absolute; top: 20px; left: 40px; z-index: 2; width: 90%;">
+                            <img src="images/saved-page.png" class="img-fluid shadow-lg rounded-lg"
+                                alt="KafeKotaKita App">
+                        </div>
+                        <!-- Image 3 (bottom) -->
+                        <div class="stacked-image"
+                            style="position: absolute; top: 40px; left: 70px; z-index: 1; width: 85%;">
+                            <img src="images/community-page.png" class="img-fluid shadow-lg rounded-lg"
+                                alt="KafeKotaKita App">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="about-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <!-- Stack of 3 images -->
+                    <div class="stacked-images position-relative">
+                        <!-- Image 1 (top) -->
+                        <div class="stacked-image" style="position: relative; z-index: 3; width: 95%;">
+                            <img src="images/community-page.png" class="img-fluid shadow-lg" alt="App Screenshots">
+                        </div>
+                        <!-- Image 2 (middle) -->
+                        <div class="stacked-image"
+                            style="position: absolute; top: 20px; left: 40px; z-index: 2; width: 90%;">
+                            <img src="images/saved-page.png" class="img-fluid shadow-lg" alt="App Screenshots">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h2>Features</h2>
+                    <p>Vivamus fermentum magna non facilisis dignissim. Sed a venenatis mi, vel tempus magna. Fusce
+                        pharetra, diam in elementum facilisis, urna sem cursus augue.</p>
+
+                    <div class="feature-list">
+                        <div class="feature-item" onclick="toggleDetail(this, 'filters')">
+                            Filters
+                            <div class="feature-description" id="filters" style="display: none;">
+                                <p>Filters membantu menyaring konten sesuai kebutuhan pengguna.</p>
                             </div>
-                            <div class="app-image ml-5">
-                                <img src="images/logo-putih.png" alt="KafeKotaKita Mobile App" style="max-width: 120px;">
+                        </div>
+
+                        <div class="feature-item" onclick="toggleDetail(this, 'community')">
+                            Community
+                            <div class="feature-description" id="community" style="display: none;">
+                                <p>Community memungkinkan pengguna terhubung dan berbagi pengalaman.</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item" onclick="toggleDetail(this, 'reservations')">
+                            Reservations
+                            <div class="feature-description" id="reservations" style="display: none;">
+                                <p>Reservations memudahkan pemesanan tempat secara online.</p>
                             </div>
                         </div>
                     </div>
-
-            </div>
-            <div class="row">
-                <div class="col-md-12 text-center">
-
-                    <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        Copyright &copy;
-                        <script>
-                            document.write(new Date().getFullYear());
-                        </script> KafeKotaKita
-                    </p>
                 </div>
             </div>
         </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section" id="gallery">
+        <div class="container">
+            <h2 class="section-title">Gallery</h2>
+
+            <div class="carousel slide" id="galleryCarousel" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="row">
+                            <div class="col">
+                                <div class="gallery-item">
+                                    <img src="images/Reset Password.png" class="img-fluid" alt="Reset Password">
+                                    <div class="p-3 text-center">
+                                        <h5>Reset Password</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="gallery-item">
+                                    <img src="images/OTP verification.png" class="img-fluid" alt="Verification">
+                                    <div class="p-3 text-center">
+                                        <h5>Verification</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="gallery-item">
+                                    <img src="images/Forgot Password.png" class="img-fluid" alt="Forgot Password">
+                                    <div class="p-3 text-center">
+                                        <h5>Forgot Password</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="gallery-item">
+                                    <img src="images/Sign in.png" class="img-fluid" alt="Create Account">
+                                    <div class="p-3 text-center">
+                                        <h5>Create Account</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="gallery-item">
+                                    <img src="images/Login.png" class="img-fluid" alt="Log In">
+                                    <div class="p-3 text-center">
+                                        <h5>Log In</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#galleryCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                </a>
+                <a class="carousel-control-next" href="#galleryCarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Explore Section -->
+    <section class="explore-section">
+        <div class="container">
+            <h2 class="section-title">Explore Yourself!</h2>
+            <div class="row">
+                <!-- Kolom Kiri -->
+                <div class="col-md-3">
+                    <!-- Item 1 Kiri -->
+                    <div class="text-center explore-item mb-4">
+                        <img src="images/icon-vibes.png" alt="Find Your Vibes" class="explore-icon">
+                        <h5>Find Your Vibes</h5>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+
+                    <!-- Item 2 Kiri -->
+                    <div class="text-center explore-item mb-4">
+                        <img src="images/icon-comment.png" alt="Post a Comment" class="explore-icon">
+                        <h5>Post a Comment</h5>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+
+                    <!-- Item 3 Kiri -->
+                    <div class="text-center explore-item">
+                        <img src="images/icon-reservation.png" alt="Book a Table" class="explore-icon">
+                        <h5>Book a Table</h5>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                </div>
+
+                <!-- Kolom Tengah - Dashboard Image -->
+                <div class="col-md-6 d-flex align-items-center justify-content-center">
+                    <img src="images/dashboard.png" class="img-fluid app-preview" alt="App Mockup">
+                </div>
+
+                <!-- Kolom Kanan -->
+                <div class="col-md-3">
+                    <!-- Item 1 Kanan -->
+                    <div class="text-center explore-item mb-4">
+                        <img src="images/icon-profile.png" alt="Customize Your Profile" class="explore-icon">
+                        <h5>Customize Your Profile</h5>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+
+                    <!-- Item 2 Kanan -->
+                    <div class="text-center explore-item mb-4">
+                        <img src="images/icon-vibes.png" alt="Find Nearest Cafe" class="explore-icon">
+                        <h5>Find Nearest Cafe</h5>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+
+                    <!-- Item 3 Kanan -->
+                    <div class="text-center explore-item">
+                        <img src="images/icon-reservation.png" alt="mobile jb app" class="explore-icon">
+                        <h5>mobile jb app</h5>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section class="download-section">
+        <div class="container text-center">
+            <a href="https://play.google.com/store/apps/details?id=com.kafekotakita.app" target="_blank">
+                <img src="images/icon-playstore.png" alt="Get it on Google Play" class="store-badge">
+            </a>
+            <a href="https://apps.apple.com/app/id123456789" target="_blank">
+                <img src="images/icon-appstore.png" alt="Download on the App Store" class="store-badge">
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container text-center">
+            <p>Copyright &copy;
+                <script>
+                    document.write(new Date().getFullYear());
+                </script> KafeKotaKita
+            </p>
+        </div>
     </footer>
 
-    <!-- loader -->
-    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
-            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4"
-                stroke="#eeeeee" />
-            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4"
-                stroke-miterlimit="10" stroke="#F96D00" />
-        </svg></div>
-
+    <!-- Scripts -->
     <script src="js/jquery.min.js"></script>
-    <script src="js/jquery-migrate-3.0.1.min.js"></script>
-    <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/popper.min.js"></script>
     <script src="js/jquery.easing.1.3.js"></script>
-    <script src="js/jquery.waypoints.min.js"></script>
-    <script src="js/jquery.stellar.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
-    <script src="js/jquery.magnific-popup.min.js"></script>
     <script src="js/aos.js"></script>
-    <script src="js/jquery.animateNumber.min.js"></script>
-    <script src="js/bootstrap-datepicker.js"></script>
-    <script src="js/jquery.timepicker.min.js"></script>
-    <script src="js/scrollax.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-    <script src="js/google-map.js"></script>
     <script src="js/main.js"></script>
+
+    <script>
+        function toggleDetail(element, id) {
+            const detail = element.querySelector(`#${id}`);
+
+            // Toggle tampilan (sembunyikan jika sedang tampil, tampilkan jika tersembunyi)
+            if (detail.style.display === 'none') {
+                detail.style.display = 'block';
+            } else {
+                detail.style.display = 'none';
+            }
+        }
+    </script>
 
 </body>
 
