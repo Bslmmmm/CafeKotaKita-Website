@@ -50,7 +50,7 @@
         }
 
         .logo-box {
-            background: #000;
+            /* background: #000; */
             padding: 10px;
             border-radius: 8px;
             width: 40px;
@@ -313,7 +313,7 @@
         <div class="container">
             <a class="navbar-brand" href="#">
                 <div class="logo-box">
-                    <img src="images/logo-hitam.png" alt="" width="60" height="60">
+                    {{-- <img src="images/logo-hitam.png" alt="" width="60" height="60"> --}}
                 </div>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
