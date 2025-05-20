@@ -39,7 +39,8 @@
                                     <th>No Telp</th>
                                     <th>Genre</th>
                                     <th>Fasilitas</th>
-                                    <th>Status</th>
+                                    <th>Jam Buka</th>
+                                    <th>Jam Tutup</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -74,10 +75,11 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <span
-                                                class="badge mb-1 {{ $d->status == 'buka' ? 'badge-success' : 'badge-danger' }}">
-                                                {{ $d->status }}
-                                            </span>
+                                            {{$d->jam_buka}}
+                                        </td>
+                                        
+                                        <td>
+                                            {{$d->jam_tutup}}
                                         </td>
                                         <td class="table-actions">
                                             <a href="{{ route('kafe.edit', $d->id) }}" class="table-action"

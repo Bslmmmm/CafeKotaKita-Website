@@ -5,8 +5,8 @@ use App\Http\Controllers\Api\FasilitasApiController;
 use App\Http\Controllers\Api\GenreApiController;
 use App\Http\Controllers\Api\KafeApiController;
 use App\Http\Controllers\Api\MenuApiController;
+use App\Http\Controllers\Api\RatingApiController;
 use Illuminate\Support\Facades\Route;
-
 
 Route::get("/", function () {
     return response()->json([
@@ -17,10 +17,6 @@ Route::get("/", function () {
 Route::prefix("auth")->group(function () {
     Route::post("register", [AuthApiController::class, "register"]);
     Route::post("login", [AuthApiController::class, "login"]);
-    Route::post("forgotpassword", [AuthApiController::class, "forgotpassword"]);
-    Route::post("verifyotp", [AuthApiController::class, "verifyotp"]);
-    Route::post("resetpassword", [AuthApiController::class, "resetpassword"]);
-
 });
 Route::prefix("kafe")->group(function () {
     Route::get("/findAll", [KafeApiController::class, "index"]);
@@ -33,6 +29,9 @@ Route::prefix("kafe")->group(function () {
 Route::prefix("genre")->group(function () {
     Route::get("findAll", [GenreApiController::class, "index"]);
     Route::get("findKafeByGenre/{id}", [GenreApiController::class, "searchById"]);
+});
+Route::prefix("rating")->group(function () {
+    Route::post("addRate", [RatingApiController::class, "store"]);
 });
 Route::prefix("menu")->group(function () {
     Route::get("findAll", [MenuApiController::class, "index"]);
@@ -50,7 +49,3 @@ Route::prefix("fasilitas")->group(function () {
 //     Route::patch("update/{id}", [ApiKafeController::class, "update"]);
 //     Route::delete("delete/{id}", [ApiKafeController::class, "destroy"]);
 // });
-
-
-
-

@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('telp');
             $table->string('latitude');
             $table->string('longitude');
-            $table->enum('status', ["buka", "tutup"]);
+            $table->time('jam_buka');
+            $table->time('jam_tutup');
             $table->timestamps();
             $table->softDeletes();
 

@@ -6,15 +6,20 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Komentar extends Model
+class Rating extends Model
 {
     use HasUuids, SoftDeletes;
 
-    protected $table="komentar";
+    protected $table="rating";
     protected $primaryKey = "id";
-    protected $guarded = "id";
+    protected $fillable = ['user_id', 'kafe_id', 'rate'];
     
     public function Kafe() {
         return $this->belongsTo(Kafe::class);
+    }
+
+    public function User()
+    {
+        return $this->belongsTo(User::class);
     }
 }

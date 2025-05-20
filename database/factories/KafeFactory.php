@@ -25,7 +25,8 @@ class KafeFactory extends Factory
             'telp' => $this->faker->e164PhoneNumber(),
             'latitude' => $this->faker->latitude(),
             'longitude' => $this->faker->longitude(),
-            'status' => $this->faker->randomElement(['buka', 'tutup']),
+            'jam_buka' => $this->faker->time('H:i'),
+            'jam_tutup' => $this->faker->time('H:i'),
         ];
     }
 }

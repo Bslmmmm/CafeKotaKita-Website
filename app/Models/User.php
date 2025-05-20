@@ -32,6 +32,10 @@ class User extends Authenticatable
     public function Reservasi() {
         return $this->hasMany(Reservasi::class);
     }
+    public function Rating()
+    {
+        return $this->hasMany(Rating::class);
+    }
 }
 
 
