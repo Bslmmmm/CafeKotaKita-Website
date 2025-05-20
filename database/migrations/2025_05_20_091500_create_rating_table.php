@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid("id")->primary();
             $table->uuid("user_id");
             $table->uuid("kafe_id");
-            $table->integer("rate");
+            $table->double("rate");
             $table->timestamps();
             $table->softDeletes();
 
