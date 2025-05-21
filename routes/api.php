@@ -17,6 +17,9 @@ Route::get("/", function () {
 Route::prefix("auth")->group(function () {
     Route::post("register", [AuthApiController::class, "register"]);
     Route::post("login", [AuthApiController::class, "login"]);
+    Route::post("forgotpassword", [AuthApiController::class, "forgotpassword"]);
+    Route::post("verifyOtp", [AuthApiController::class, "verifyOtp"]);
+    Route::post("resetpassword", [AuthApiController::class, "resetpassword"]);
 });
 Route::prefix("kafe")->group(function () {
     Route::get("/findAll", [KafeApiController::class, "index"]);

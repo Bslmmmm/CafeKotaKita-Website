@@ -77,44 +77,49 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="example-text-input"
-                                    class="col-md-2 col-form-label form-control-label">Genre</label>
-                                <div class="container">
-                                    <div class="row">
-                                        @foreach ($genre as $item)
-                                            <div class="col-3">
-                                                <input type="checkbox" name="genre[]" value="{{ $item->id }}" @if($data->genre->contains('id', $item->id)) checked @endif />
-                                                {{ $item->nama }}
-                                            </div>
-                                        @endforeach
-
-                                    </div>
+                                <label for="jam_buka" class="col-md-2 col-form-label form-control-label">Jam Buka</label>
+                                <div class="col-md-10">
+                                    <input class="form-control" type="time" name="jam_buka"
+                                        value="{{ isset($data) ? \Carbon\Carbon::parse($data->jam_buka)->format('H:i') : old('jam_buka') }}">
                                 </div>
                             </div>
-                               <div class="form-group row">
-                                <label for="example-text-input"
-                                    class="col-md-2 col-form-label form-control-label">Fasilitas</label>
-                                <div class="container">
-                                    <div class="row">
-                                        @foreach ($fasilitas as $item)
-                                            <div class="col-3">
-                                                <input type="checkbox" name="fasilitas[]" value="{{ $item->id }}" @if($data->fasilitas->contains('id', $item->id)) checked @endif />
-                                                {{ $item->nama }}
-                                            </div>
-                                        @endforeach
 
-                                    </div>
+                            <div class="form-group row">
+                                <label for="jam_tutup" class="col-md-2 col-form-label form-control-label">Jam Tutup</label>
+                                <div class="col-md-10">
+                                    <input class="form-control" type="time" name="jam_tutup"
+                                        value="{{ isset($data) ? \Carbon\Carbon::parse($data->jam_tutup)->format('H:i') : old('jam_tutup') }}">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="example-search-input"
-                                    class="col-md-2 col-form-label form-control-label">Status</label>
-                                <label class="ml-2 mt-2 custom-toggle custom-toggle-success ">
-                                    <input type="checkbox" name="status"
-                                        checked="{{ $data->status ?? old('status') === 'buka' }}">
-                                    <span class="custom-toggle-slider rounded-circle" data-label-off="Tutup"
-                                        data-label-on="Buka"></span>
-                                </label>
+                                <label for="example-text-input" class="col-md-2 col-form-label form-control-label">Genre</label>
+                                <div class="col-md-10">
+                                    <select class="form-control" name="genre[]" id="exampleFormControlSelect1">
+                                        <option disabled>-- Pilih Genre --</option>
+                                        @foreach ($genre as $item)
+                                            <option value="{{ $item->id }}"
+                                                @if (optional($data)->genre?->contains('id', $item->id)) selected @endif>
+                                                {{ $item->nama }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="example-text-input"
+                                    class="col-md-2 col-form-label form-control-label">Fasilitas</label>
+                                <div class="col-md-10">
+                                    <select class="form-control" name="fasilitas[]" id="exampleFormControlSelect1">
+                                        <option disabled>-- Pilih Fasilitas --</option>
+                                        @foreach ($fasilitas as $item)
+                                            <option value="{{ $item->id }}"
+                                                @if (optional($data)->fasilitas?->contains('id', $item->id)) selected @endif>
+                                                {{ $item->nama }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12 text-right">

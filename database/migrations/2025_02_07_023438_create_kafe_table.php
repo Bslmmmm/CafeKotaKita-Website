@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('kafe', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('owner_id');
+            $table->uuid('owner_id')->nullable();
             $table->string('nama');
             $table->string('alamat');
             $table->string('telp');

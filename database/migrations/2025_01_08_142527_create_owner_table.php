@@ -14,14 +14,11 @@ return new class extends Migration
         Schema::create('owner', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('user_id');
-            $table->string("npwp");
             $table->string("foto_surat_kepemilikan")->nullable();
             $table->string("foto_surat_ijin_usaha")->nullable();
             $table->string("instagram_link")->nullable();
-            $table->string("tiktok_link")->nullable();
-            $table->string("facebook_link")->nullable();
             $table->enum("status", ["pending", "aktif", "ditolak"]);
-            $table->string("keterangan_tambahan")->nullable();
+            $table->string("keterangan_tambahan");
 
             $table->timestamps();
             $table->softDeletes();
