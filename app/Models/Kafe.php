@@ -13,7 +13,7 @@ class Kafe extends Model
 
     protected $table="kafe";
     protected $primaryKey = "id";
-    protected $fillable = ['nama', 'alamat', 'telp', 'latitude', 'longitude', 'status'];
+    protected $fillable = ['nama', 'alamat', 'telp', 'latitude', 'longitude', 'jam_buka', 'jam_tutup'];
 
     public function Menu() {
         return $this->hasMany(Menu::class);
@@ -30,8 +30,8 @@ class Kafe extends Model
         return $this->belongsToMany(Fasilitas::class, "fasilitas_kafe");
     }
 
-    public function Komentar() {
-        return $this->hasMany(Komentar::class);
+    public function Rating() {
+        return $this->hasMany(Rating::class);
     }
 
     public function Reservasi() {

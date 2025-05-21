@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\FasilitasApiController;
 use App\Http\Controllers\Api\GenreApiController;
 use App\Http\Controllers\Api\KafeApiController;
 use App\Http\Controllers\Api\MenuApiController;
+use App\Http\Controllers\Api\RatingApiController;
 use Illuminate\Support\Facades\Route;
 
 Route::get("/", function () {
@@ -28,6 +29,9 @@ Route::prefix("kafe")->group(function () {
 Route::prefix("genre")->group(function () {
     Route::get("findAll", [GenreApiController::class, "index"]);
     Route::get("findKafeByGenre/{id}", [GenreApiController::class, "searchById"]);
+});
+Route::prefix("rating")->group(function () {
+    Route::post("addRate", [RatingApiController::class, "store"]);
 });
 Route::prefix("menu")->group(function () {
     Route::get("findAll", [MenuApiController::class, "index"]);

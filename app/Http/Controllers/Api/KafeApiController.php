@@ -16,7 +16,7 @@ class KafeApiController extends Controller
     {
         try {
             $kafe = Kafe::with(["genre", "fasilitas", "gallery"])
-                ->where("status", "buka")
+                ->withAvg("rating as total_rating", "rate")
                 ->get();
 
             if ($kafe->isEmpty()) {
@@ -154,7 +154,8 @@ class KafeApiController extends Controller
     public function getDetailKafe($id)
     {
         try {
-            $data = Kafe::with("gallery")->find($id);
+            $data = Kafe::with("gallery")
+                ->withAvg("rating as total_rating", "rate")->find($id);
 
             if (empty($data)) {
                 return response()->json([

@@ -78,6 +78,6 @@ Route::prefix("admin")->group(function(){
     Route::prefix("user")->group(function () {
         Route::get("/", [UserController::class, "index"])->name("user.index");
         Route::get("owner", [UserController::class, "owner"])->name("user.owner");
-        Route::get("validasiOwner", [UserController::class, "validasiOwner"])->name("user.validasi");
+        Route::get("validasiOwner/{id}", [UserController::class, "validasiOwner"])->name("user.validasi");
     });
 });
