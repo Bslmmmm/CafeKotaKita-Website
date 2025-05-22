@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string("foto_surat_ijin_usaha")->nullable();
             $table->string("instagram_link")->nullable();
             $table->enum("status", ["pending", "aktif", "ditolak"]);
-            $table->string("keterangan_tambahan");
+            $table->string("keterangan_tambahan")->nullable();
 
             $table->timestamps();
             $table->softDeletes();

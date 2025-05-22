@@ -17,7 +17,6 @@ class OwnerSeeder extends Seeder
     {
         Owner::create([
             "user_id" => User::get()->first()->id,
-            "npwp" => "23023023230",
             "status" => "pending"
         ]);
     }
