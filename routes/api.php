@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthApiController;
+use App\Http\Controllers\Api\BookmarkApiController;
 use App\Http\Controllers\Api\FasilitasApiController;
 use App\Http\Controllers\Api\GenreApiController;
 use App\Http\Controllers\Api\KafeApiController;
@@ -36,6 +37,11 @@ Route::prefix("genre")->group(function () {
 Route::prefix("rating")->group(function () {
     Route::post("addRate", [RatingApiController::class, "store"]);
 });
+Route::prefix("bookmark")->group(function () {
+    Route::get("findBookmarkByUser/{id}", [BookmarkApiController::class, "index"]);
+    Route::post("addBookmark", [BookmarkApiController::class, "store"]);
+    Route::delete("removeBookmark", [BookmarkApiController::class, "destroy"]);
+});
 Route::prefix("menu")->group(function () {
     Route::get("findAll", [MenuApiController::class, "index"]);
     Route::get("findKafeByMenu/{id}", [MenuApiController::class, "searchById"]);
@@ -45,10 +51,3 @@ Route::prefix("fasilitas")->group(function () {
     Route::get("searchFasilitas", [FasilitasApiController::class, "search"]);
     Route::get("findKafeByFasilitas/{id}", [FasilitasApiController::class, "searchById"]);
 });
-// Route::prefix("menu")->group(function () {
-//     Route::get("/", [ApiKafeController::class, "index"]);
-//     Route::get("{id}", [ApiKafeController::class, "show"]);
-//     Route::post("store", [ApiKafeController::class, "store"]);
-//     Route::patch("update/{id}", [ApiKafeController::class, "update"]);
-//     Route::delete("delete/{id}", [ApiKafeController::class, "destroy"]);
-// });
