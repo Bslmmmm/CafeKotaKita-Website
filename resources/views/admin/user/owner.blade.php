@@ -53,7 +53,7 @@
                                         <td>{{ $d->user->nama }}</td>
                                         <td>{{ $d->npwp }}</td>
                                         <td>{{ $d->user->no_telp }}</td>
-                                        <td>{{ $d->kafe->nama }}</td>
+                                        <td>{{ $d->kafe->nama ?? "" }}</td>
 
                                         <td>
                                             <img src="{{ asset('storage/' . $d->foto_surat_kepemilikan) }}"
