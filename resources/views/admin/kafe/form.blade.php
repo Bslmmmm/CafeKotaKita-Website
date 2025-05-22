@@ -92,35 +92,39 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="example-text-input" class="col-md-2 col-form-label form-control-label">Genre</label>
-                                <div class="col-md-10">
-                                    <select class="form-control" name="genre[]" id="exampleFormControlSelect1">
-                                        <option disabled>-- Pilih Genre --</option>
+                                <label for="example-text-input"
+                                    class="col-md-2 col-form-label form-control-label">Genre</label>
+                                <div class="container">
+                                    <div class="row">
                                         @foreach ($genre as $item)
-                                            <option value="{{ $item->id }}"
-                                                @if (optional($data)->genre?->contains('id', $item->id)) selected @endif>
-                                                {{ $item->nama }}
-                                            </option>
+                                            <div class="col-3">
+                                                <input type="checkbox" name="genre[]" value="{{ $item->id }}"
+                                                @if ($data && $data->genre->contains('id', $item->id)) checked @endif /> {{ $item->nama }}
+                                            </div>
                                         @endforeach
-                                    </select>
+
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label for="example-text-input"
                                     class="col-md-2 col-form-label form-control-label">Fasilitas</label>
-                                <div class="col-md-10">
-                                    <select class="form-control" name="fasilitas[]" id="exampleFormControlSelect1">
-                                        <option disabled>-- Pilih Fasilitas --</option>
+                                <div class="container">
+                                    <div class="row">
                                         @foreach ($fasilitas as $item)
-                                            <option value="{{ $item->id }}"
-                                                @if (optional($data)->fasilitas?->contains('id', $item->id)) selected @endif>
+                                            <div class="col-3">
+                                                <input type="checkbox" name="fasilitas[]" value="{{ $item->id }}"
+                                                    @if ($data && $data->fasilitas->contains('id', $item->id)) checked @endif />
                                                 {{ $item->nama }}
-                                            </option>
+                                            </div>
                                         @endforeach
-                                    </select>
+
+                                    </div>
                                 </div>
                             </div>
+
+
                             <div class="row">
                                 <div class="col-md-12 text-right">
                                     <a href="{{ route('kafe.index') }}" class="btn btn-secondary">Batal</a>
