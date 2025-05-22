@@ -33,6 +33,10 @@ class Kafe extends Model
     public function Rating() {
         return $this->hasMany(Rating::class);
     }
+    public function Bookmark()
+    {
+        return $this->hasMany(Bookmark::class);
+    }
 
     public function Reservasi() {
         return $this->hasMany(Reservasi::class);

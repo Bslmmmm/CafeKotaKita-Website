@@ -18,6 +18,7 @@
   <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
   <title>Login - KafeKotaKita</title>
+  <link rel="icon" href="images/logo-hitam.png" type="image/png">
   <!-- Favicon -->
   <link rel="icon" href="{{asset('assets/img/brand/favicon.png')}}" type="image/png">
   <!-- Fonts -->

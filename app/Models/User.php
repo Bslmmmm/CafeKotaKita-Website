@@ -36,6 +36,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Rating::class);
     }
+    public function Bookmark()
+    {
+        return $this->hasMany(Bookmark::class);
+    }
 }
 
 
