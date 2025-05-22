@@ -19,12 +19,11 @@ class AuthApiController extends Controller
     {
         $data = $request->validate([
             'nama' => 'required|string|max:255',
-            'no_telp' => 'required|string|max:255',
-            'alamat' => 'required|string|max:255',
+            'no_telp' => 'nullable|string|max:255',
+            'alamat' => 'nullable|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
         ]);
-
 
         $data['password'] = bcrypt($data['password']);
 
