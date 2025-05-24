@@ -34,14 +34,18 @@ class AuthApiController extends Controller
             'message' => 'User registered successfully',
         ], 201);
     }
-    function login(Request $request)
+ function login(Request $request)
 {
     $request->validate([
-        'email' => 'required|string|email',
+        'login' => 'required|string', // bisa email atau nama
         'password' => 'required|string',
     ]);
 
-    $user = User::where('email', $request->email)->first();
+    // Cek apakah input login berupa email atau nama
+    $loginField = filter_var($request->login, FILTER_VALIDATE_EMAIL) ? 'email' : 'nama';
+
+    // Ambil user berdasarkan field yang sesuai
+    $user = User::where($loginField, $request->login)->first();
 
     if (!$user) {
         return response()->json([
@@ -55,7 +59,6 @@ class AuthApiController extends Controller
         ], 401);
     }
 
-    // Jika tidak ingin menggunakan token, cukup return data user saja
     return response()->json([
         'message' => 'Login berhasil',
         'user' => [
@@ -66,6 +69,7 @@ class AuthApiController extends Controller
         ]
     ], 200);
 }
+
 
 public function forgotpassword(Request $request)
 {
@@ -87,6 +91,8 @@ public function forgotpassword(Request $request)
         $message->to($email)
                 ->subject('Kode OTP Reset Password');
     });
+
+
 
     return response()->json(['message' => 'Kode OTP berhasil dikirim ke email']);
 }
@@ -148,6 +154,52 @@ public function resetpassword(Request $request)
 
     return response()->json(['message' => 'Password berhasil direset']);
 }
+
+
+public function checkusername(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'nama' => 'required|string|min:3|max:255'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'available' => false,
+                'message' => 'Username tidak valid'
+            ], 400);
+        }
+
+        $exists = User::where('nama', $request->nama)->exists();
+
+        return response()->json([
+            'available' => !$exists,
+            'message' => $exists ? 'Username sudah digunakan' : 'Username tersedia'
+        ]);
+    }
+
+    /**
+     * Check email availability
+     */
+    public function checkemail(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|max:255'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'available' => false,
+                'message' => 'Email tidak valid'
+            ], 400);
+        }
+
+        $exists = User::where('email', $request->email)->exists();
+
+        return response()->json([
+            'available' => !$exists,
+            'message' => $exists ? 'Email sudah terdaftar' : 'Email tersedia'
+        ]);
+    }
 
     function promoteOwner(Request $req)
     {
