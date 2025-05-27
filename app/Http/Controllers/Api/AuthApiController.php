@@ -35,40 +35,52 @@ class AuthApiController extends Controller
         ], 201);
     }
     function login(Request $request)
-    {
-        $request->validate([
-            // 'login' => 'required|string', // bisa email atau nama
-            'password' => 'required|string',
-        ]);
+{
+    $request->validate([
+        'login' => 'required|array', // validasi bahwa login adalah array/object
+        'password' => 'required|string',
+    ]);
 
-        // Cek apakah input login berupa email atau nama
-        $loginField = filter_var($request->login, FILTER_VALIDATE_EMAIL) ? 'email' : 'nama';
-        // return $loginField;
-        // Ambil user berdasarkan field yang sesuai
-        $user = User::where($loginField, $request->login)->first();
+    // Ambil nilai dari nested object
+    $loginData = $request->input('login');
 
-        if (!$user) {
-            return response()->json([
-                'message' => 'User tidak ditemukan'
-            ], 404);
-        }
-
-        if (!Hash::check($request->password, $user->password)) {
-            return response()->json([
-                'message' => 'Password tidak cocok'
-            ], 401);
-        }
-
+    // Cek apakah ada email atau nama
+    if (isset($loginData['email'])) {
+        $loginValue = $loginData['email'];
+        $loginField = 'email';
+    } elseif (isset($loginData['nama'])) {
+        $loginValue = $loginData['nama'];
+        $loginField = 'nama';
+    } else {
         return response()->json([
-            'message' => 'Login berhasil',
-            'user' => [
-                'id' => $user->id,
-                'nama' => $user->nama,
-                'email' => $user->email,
-                'role' => $user->role
-            ]
-        ], 200);
+            'message' => 'Email atau nama harus diisi'
+        ], 400);
     }
+
+    $user = User::where($loginField, $loginValue)->first();
+
+    if (!$user) {
+        return response()->json([
+            'message' => 'User tidak ditemukan'
+        ], 404);
+    }
+
+    if (!Hash::check($request->password, $user->password)) {
+        return response()->json([
+            'message' => 'Password tidak cocok'
+        ], 401);
+    }
+
+    return response()->json([
+        'message' => 'Login berhasil',
+        'user' => [
+            'id' => $user->id,
+            'nama' => $user->nama,
+            'email' => $user->email,
+            'role' => $user->role
+        ]
+    ], 200);
+}
 
 
     public function forgotpassword(Request $request)
