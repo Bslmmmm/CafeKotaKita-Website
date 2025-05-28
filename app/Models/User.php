@@ -28,6 +28,7 @@ implements JWTSubject
         'no_telp',
         'password',
         'role',
+        'foto_profil',
     ];
 
     public function getJWTIdentifier()

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->enum('role', ['admin', 'user'])->default('user');
+            $table->string("foto_profil")->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

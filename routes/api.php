@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\GenreApiController;
 use App\Http\Controllers\Api\KafeApiController;
 use App\Http\Controllers\Api\MenuApiController;
 use App\Http\Controllers\Api\RatingApiController;
+use App\Http\Controllers\Api\UserApiController;
 use Illuminate\Support\Facades\Route;
 
 Route::get("/", function () {
@@ -54,4 +55,8 @@ Route::prefix("fasilitas")->group(function () {
     Route::get("findAll", [FasilitasApiController::class, "index"]);
     Route::get("searchFasilitas", [FasilitasApiController::class, "search"]);
     Route::get("findKafeByFasilitas/{id}", [FasilitasApiController::class, "searchById"]);
+});
+Route::prefix("user")->group(function () {
+    Route::get("findById/{id}", [UserApiController::class, "searchById"]);
+    Route::patch("update/{id}", [UserApiController::class, "update"]);
 });
