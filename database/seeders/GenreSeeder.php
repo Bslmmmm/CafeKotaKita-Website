@@ -23,13 +23,20 @@ class GenreSeeder extends Seeder
                 'id' => Str::uuid(),
                 'nama' => 'Retro'
             ],
-            [
-                'id' => Str::uuid(),
-                'nama' => 'Sci Fi'
-            ],
-            ['id' => Str::uuid(), 'nama' => 'Kantor'],
-            ['id' => Str::uuid(), 'nama' => 'Romance'],
-            ['id' => Str::uuid(), 'nama' => 'Modern']
+            ['id' => Str::uuid(), 'nama' => 'Co-Working Space'],
+            ['id' => Str::uuid(), 'nama' => 'Modern'],
+            ['id' => Str::uuid(), 'nama' => 'Pet-Friendly'],
+            ['id' => Str::uuid(), 'nama' => 'View-Oriented'],
+            ['id' => Str::uuid(), 'nama' => 'Keluarga'],
+            ['id' => Str::uuid(), 'nama' => 'Coffee Specialty'],
+            ['id' => Str::uuid(), 'nama' => 'Rooftop'],
+            ['id' => Str::uuid(), 'nama' => 'Nature'],
+            ['id' => Str::uuid(), 'nama' => 'Industrial'],
+            ['id' => Str::uuid(), 'nama' => 'Jepang'],
+            ['id' => Str::uuid(), 'nama' => 'Tea House'],
+            ['id' => Str::uuid(), 'nama' => 'Outdoor'],
+
+
         ];
 
         // Using insert method to avoid model events
