@@ -15,6 +15,11 @@ Route::get("/", function () {
     return view('index');
 });
 
+Route::get('/welcome', function () {
+    return view('welcome');
+});
+
+
 // Definisikan route login
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 // Route Login
