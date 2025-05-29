@@ -18,10 +18,11 @@ class BookmarkApiController extends Controller
     public function index($id)
     {
         try {
-            $bookmarks = Bookmark::with('kafe') // cukup ambil relasi kafe saja jika user sudah diketahui
+            $bookmarks = Bookmark::with(['kafe', 'gallery' => function ($query) {
+                $query->where('type', 'main_content');
+            }])
                 ->where('user_id', $id)
                 ->get();
-
             return response()->json([
                 'status' => 'success',
                 'data' => $bookmarks,
