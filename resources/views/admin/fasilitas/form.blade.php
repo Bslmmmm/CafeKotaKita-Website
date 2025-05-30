@@ -52,7 +52,7 @@
                                         value="{{ $data->deskripsi ?? old('deskripsi') }}" name="deskripsi">
                                 </div>
                             </div>
-                            
+
                             <div class="form-group row">
                               <label class="col-md-2 col-form-label form-control-label">Image</label>
                               <div class="col-md-10">
@@ -60,10 +60,10 @@
 
                                   <!-- Image Preview -->
                                   @if(isset($data) && $data->image)
-                                      <img id="gambar-preview" src="{{ url('storage/'.$data->image) }}" alt="Gambar Pratinjau" 
+                                      <img id="gambar-preview" src="{{ url('storage/'.$data->image) }}" alt="Gambar Pratinjau"
                                            style="max-width: 50%; margin-top: 20px; display: block;">
                                   @else
-                                      <img id="gambar-preview" src="#" alt="Gambar Pratinjau" 
+                                      <img id="gambar-preview" src="#" alt="Gambar Pratinjau"
                                            style="max-width: 50%; margin-top: 20px; display: none;">
                                   @endif
                               </div>
