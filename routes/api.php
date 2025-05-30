@@ -66,7 +66,7 @@ Route::prefix("fasilitas")->group(function () {
 
 Route::prefix("user")->group(function () {
     Route::get("findById/{id}", [UserApiController::class, "searchById"]);
-    Route::patch("update/{id}", [UserApiController::class, "update"]);
+    Route::post("update/{id}", [UserApiController::class, "update"]);
 });
 
 Route::prefix('community')->group(function () {

@@ -37,70 +37,85 @@ class UserApiController extends Controller
             ], 500);
         }
     }
-    public function update(Request $request, $id)
-    {
-        try {
-            // Validate input
-            $validator = Validator::make($request->all(), [
-                'username' => 'required|string|max:255',
-                'foto_profil' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
-            ]);
+ public function update(Request $request, $id)
+{
+    try {
+        // Validasi input termasuk no_telp dan foto_profil
+        $validator = Validator::make($request->all(), [
+            'nama' => 'required|string|max:255',
+            'no_telp' => 'nullable|string|max:20',
+            'foto_profil' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
 
-            if ($validator->fails()) {
-                return response()->json([
-                    'status' => 'error',
-                    'message' => 'Validasi gagal',
-                    'errors' => $validator->errors()
-                ], 422);
-            }
-
-            // Find user
-            $user = User::find($id);
-            if (!$user) {
-                return response()->json([
-                    'status' => 'error',
-                    'message' => 'User tidak ditemukan'
-                ], 404);
-            }
-
-            // Update username if provided
-            if ($request->has('username')) {
-                $user->username = $request->username;
-            }
-
-            // Handle profile photo upload
-            if ($request->hasFile('foto_profil')) {
-                // Delete old photo if exists
-                if ($user->foto_profil) {
-                    Storage::delete('public/profiles/' . $user->foto_profil);
-                }
-
-                // Store new photo
-                $file = $request->file('foto_profil');
-                $filename = time() . '_' . $file->getClientOriginalName();
-                $path = $file->storeAs('public/profiles', $filename);
-
-                $user->foto_profil = $filename;
-            }
-
-            $user->save();
-
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Profil berhasil diperbarui',
-                'data' => [
-                    'username' => $user->username,
-                    'foto_profil_url' => $user->foto_profil
-                        ? asset('storage/profiles/' . $user->foto_profil)
-                        : null
-                ]
-            ], 200);
-        } catch (Exception $e) {
+        if ($validator->fails()) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Gagal memperbarui profil: ' . $e->getMessage()
-            ], 500);
+                'message' => 'Validasi gagal',
+                'errors' => $validator->errors()
+            ], 422);
         }
+
+        // Cari user
+        $user = User::find($id);
+        if (!$user) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'User tidak ditemukan'
+            ], 404);
+        }
+
+        // Update nama
+        if ($request->has('nama')) {
+            $user->nama = $request->nama;
+        }
+
+        // Update no_telp
+        if ($request->has('no_telp')) {
+            $user->no_telp = $request->no_telp;
+        }
+
+        // Handle foto profil
+        if ($request->hasFile('foto_profil')) {
+            // Hapus foto lama jika ada
+            if ($user->foto_profil) {
+                Storage::disk('public')->delete('profiles/' . $user->foto_profil);
+            }
+
+            // Simpan foto baru
+            $file = $request->file('foto_profil');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->storeAs('profiles', $filename, 'public');
+
+            // Simpan nama file ke DB
+            $user->foto_profil = $filename;
+        }
+
+        $user->save();
+
+        // Kembalikan respons JSON
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Profil berhasil diperbarui',
+            'data' => [
+                'id' => $user->id,
+                'nama' => $user->nama,
+                'email' => $user->email,
+                'no_telp' => $user->no_telp,
+                'foto_profil_url' => $user->foto_profil
+                    ? asset('storage/profiles/' . $user->foto_profil)
+                    : null,
+                'role' => $user->role,
+            ]
+        ], 200);
+    } catch (Exception $e) {
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Gagal memperbarui profil: ' . $e->getMessage()
+        ], 500);
     }
+}
+
+
+
 
 }
