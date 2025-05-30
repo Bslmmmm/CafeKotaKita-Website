@@ -53,7 +53,7 @@
                     <div class="col ml--2">
                       <div class="d-flex justify-content-between align-items-center">
                         <div>
-                          <h4 class="mb-0 text-sm">John Snow</h4>
+                          <h4 class="mb-0 text-sm">Admin</h4>
                         </div>
                         <div class="text-right text-muted">
                           <small>2 hrs ago</small>
@@ -72,7 +72,7 @@
                     <div class="col ml--2">
                       <div class="d-flex justify-content-between align-items-center">
                         <div>
-                          <h4 class="mb-0 text-sm">John Snow</h4>
+                          <h4 class="mb-0 text-sm">Admin</h4>
                         </div>
                         <div class="text-right text-muted">
                           <small>3 hrs ago</small>
@@ -91,7 +91,7 @@
                     <div class="col ml--2">
                       <div class="d-flex justify-content-between align-items-center">
                         <div>
-                          <h4 class="mb-0 text-sm">John Snow</h4>
+                          <h4 class="mb-0 text-sm">Admin</h4>
                         </div>
                         <div class="text-right text-muted">
                           <small>5 hrs ago</small>
@@ -105,12 +105,12 @@
                   <div class="row align-items-center">
                     <div class="col-auto">
                       <!-- Avatar -->
-                      <img alt="Image placeholder" src="{{asset('assets/img/theme/team-4.jpg')}}" class="avatar rounded-circle">
+                      <img alt="Image placeholder" src="{{asset('assets/img/theme/icon_profile.png')}}" class="avatar rounded-circle">
                     </div>
                     <div class="col ml--2">
                       <div class="d-flex justify-content-between align-items-center">
                         <div>
-                          <h4 class="mb-0 text-sm">John Snow</h4>
+                          <h4 class="mb-0 text-sm">Admin</h4>
                         </div>
                         <div class="text-right text-muted">
                           <small>2 hrs ago</small>
@@ -129,7 +129,7 @@
                     <div class="col ml--2">
                       <div class="d-flex justify-content-between align-items-center">
                         <div>
-                          <h4 class="mb-0 text-sm">John Snow</h4>
+                          <h4 class="mb-0 text-sm">Admin</h4>
                         </div>
                         <div class="text-right text-muted">
                           <small>3 hrs ago</small>
@@ -195,18 +195,18 @@
             <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <div class="media align-items-center">
                 <span class="avatar avatar-sm rounded-circle">
-                  <img alt="Image placeholder" src="{{asset('assets/img/theme/team-4.jpg')}}">
+                  <img alt="Image placeholder" src="{{asset('assets/img/theme/icon_profile.png')}}">
                 </span>
                 <div class="media-body  ml-2  d-none d-lg-block">
-                  <span class="mb-0 text-sm  font-weight-bold">John Snow</span>
+                  <span class="mb-0 text-sm  font-weight-bold">Admin</span>
                 </div>
               </div>
             </a>
             <div class="dropdown-menu  dropdown-menu-right ">
               <div class="dropdown-header noti-title">
-                <h6 class="text-overflow m-0">Welcome!</h6>
+                <h6 class="text-overflow m-0">Welcome Admin!</h6>
               </div>
-              <a href="#!" class="dropdown-item">
+              {{-- <a href="#!" class="dropdown-item">
                 <i class="ni ni-single-02"></i>
                 <span>My profile</span>
               </a>
@@ -220,7 +220,7 @@
               </a>
               <a href="#!" class="dropdown-item">
                 <i class="ni ni-support-16"></i>
-                <span>Support</span>
+                <span>Support</span> --}}
               </a>
               <form action="{{ route('logout') }}" method="POST" class="dropdown-item p-0 m-0 border-0 bg-transparent">
                 @csrf

@@ -366,33 +366,39 @@
                     <div class="feature-icon">
                         <i class="fas fa-filter"></i>
                     </div>
-                    <h4 class="feature-title">Find with filters</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod</p>
+                    <h4 class="feature-title">Cari Kafe Sesuai Mood</h4>
+                    <p>Bingung mau nongkrong di mana? Temukan kafe yang pas dengan suasana hati kamu – dari yang cozy
+                        sampai yang estetik, lengkap dengan fasilitas yang kamu butuhkan.</p>
                 </div>
                 <div class="col-md-4">
                     <div class="feature-icon">
                         <i class="fas fa-comments"></i>
                     </div>
-                    <h4 class="feature-title">Sharing Experiences</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod facilisis elit ut amet
-                    </p>
+                    <h4 class="feature-title">Lihat & Bagikan Review</h4>
+                    <p>Lihat ulasan jujur dari pengunjung lain, dan ceritakan pengalamanmu sendiri. Bantu sesama pencari
+                        kafe menemukan tempat terbaik!</p>
                 </div>
                 <div class="col-md-4">
                     <div class="feature-icon">
                         <i class="fas fa-calendar-check"></i>
                     </div>
-                    <h4 class="feature-title">Set Your Reservation</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a</p>
+                    <h4 class="feature-title">Langsung Booking Tempat</h4>
+                    <p>Suka kafenya? Jangan sampai kehabisan tempat! Langsung lakukan reservasi dari aplikasi dan
+                        siap-siap nongkrong tanpa ribet.</p>
                 </div>
             </div>
         </div>
     </section>
 
+
     <!-- How It Looks Section -->
     <section class="about-section">
         <div class="container">
             <h2 class="section-title">How It Looks</h2>
-            <p class="text-center mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+            <p class="text-center mb-5">
+                Intip tampilan elegan dan user-friendly dari KafeKotaKita. Dirancang khusus agar kamu bisa mencari,
+                memilih, dan menyimpan kafe favorit dengan mudah dan cepat.
+            </p>
 
             <div class="text-center">
                 <div id="appCarousel" class="carousel slide" data-ride="carousel">
@@ -410,7 +416,7 @@
                             <h5 class="mt-4">Community</h5>
                         </div>
                         <div class="carousel-item">
-                            <img src="images/saved-page.png" class="dashboard-img" alt="App Dashboard">
+                            <img src="images/Saved Cafee.png" class="dashboard-img" alt="App Dashboard">
                             <h5 class="mt-4">Saved Cafe</h5>
                         </div>
                     </div>
@@ -425,21 +431,24 @@
         </div>
     </section>
 
+
     <!-- About Section -->
     <section class="how-it-section" id="about">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
                     <h2>What is KafeKotaKita?</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod facilisis elit ut amet
-                        placerat. Id amet molestie libero viverra, neque, aenean enim in sollicitudin. Vitae fermentum
-                        vulputate facilisis velit accumsan. Nulla facilisi. Integer nisl accumsan ante. In posuere
-                        volutpat, tempus hendrerit magna ut sed pellentesque, consequat pulvinar nibh. Vestibulum
-                        gravida sagittis elit, non fringilla felis. Vestibulum gravida sagittis elit, non fringilla
-                        felis, vel consequat vel pellentesque eu. Vestibulum gravida sagittis elit, non fringilla felis,
-                        vel consequat vel pellentesque eu. Vestibulum magna molestie, elit amet lobortis lorem,
-                        vestibulum. Curabitur quespia ncessim nunc qurt adipisum. Nulla ut cursus sem. Cras volutpat
-                        congue nunc.</p>
+                    <p>
+                        <strong>KafeKotaKita</strong> adalah aplikasi pencarian kafe yang membantu kamu menemukan tempat
+                        nongkrong terbaik di kota sesuai dengan selera dan kebutuhanmu.
+                        Mau cari kafe dengan suasana retro, fasilitas Wi-Fi super cepat, atau tempat yang nyaman untuk
+                        kerja? Semua bisa kamu temukan di sini!
+                        <br><br>
+                        Dengan fitur filter berdasarkan genre, fasilitas, hingga review dari pengguna lain, KafeKotaKita
+                        memudahkanmu memilih kafe yang pas tanpa perlu bingung atau buang waktu.
+                        Aplikasi ini hadir untuk jadi teman andalanmu saat mencari tempat ngopi, meeting, atau sekadar
+                        bersantai.
+                    </p>
                 </div>
                 <div class="col-lg-6 text-center">
                     <div class="stacked-images-right position-relative">
@@ -487,28 +496,41 @@
                 </div>
                 <div class="col-lg-6">
                     <h2>Features</h2>
-                    <p>Vivamus fermentum magna non facilisis dignissim. Sed a venenatis mi, vel tempus magna. Fusce
-                        pharetra, diam in elementum facilisis, urna sem cursus augue.</p>
+                    <p>
+                        KafeKotaKita hadir dengan fitur-fitur cerdas untuk membantu kamu menemukan kafe favorit dengan
+                        cepat dan mudah.
+                        Tak perlu bingung, semua kebutuhanmu ada di sini – cukup satu aplikasi untuk semua!
+                    </p>
 
                     <div class="feature-list">
                         <div class="feature-item" onclick="toggleDetail(this, 'filters')">
                             Filters
                             <div class="feature-description" id="filters" style="display: none;">
-                                <p>Filters membantu menyaring konten sesuai kebutuhan pengguna.</p>
+                                <p>
+                                    Gunakan filter untuk menyesuaikan pencarian berdasarkan genre, fasilitas,
+                                    dan suasana yang kamu inginkan.
+                                    Temukan kafe yang benar-benar cocok dengan seleramu!
+                                </p>
                             </div>
                         </div>
 
                         <div class="feature-item" onclick="toggleDetail(this, 'community')">
                             Community
                             <div class="feature-description" id="community" style="display: none;">
-                                <p>Community memungkinkan pengguna terhubung dan berbagi pengalaman.</p>
+                                <p>
+                                    Terhubung dengan pengguna lain, baca dan bagikan pengalaman nongkrongmu.
+                                    Dapatkan rekomendasi jujur langsung dari sesama pecinta kafe.
+                                </p>
                             </div>
                         </div>
 
                         <div class="feature-item" onclick="toggleDetail(this, 'reservations')">
                             Reservations
                             <div class="feature-description" id="reservations" style="display: none;">
-                                <p>Reservations memudahkan pemesanan tempat secara online.</p>
+                                <p>
+                                    Ingin memastikan tempatmu tersedia? Lakukan reservasi langsung dari aplikasi tanpa
+                                    perlu repot menelepon atau antre.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -590,21 +612,22 @@
                     <div class="text-center explore-item mb-4">
                         <img src="images/icon-vibes.png" alt="Find Your Vibes" class="explore-icon">
                         <h5>Find Your Vibes</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <p>Temukan kafe dengan suasana yang cocok dengan mood kamu — mulai dari yang cozy hingga retro.
+                        </p>
                     </div>
 
                     <!-- Item 2 Kiri -->
                     <div class="text-center explore-item mb-4">
                         <img src="images/icon-comment.png" alt="Post a Comment" class="explore-icon">
                         <h5>Post a Comment</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <p>Berbagi ulasan, beri rating, dan bantu pengguna lain menemukan tempat nongkrong terbaik.</p>
                     </div>
 
                     <!-- Item 3 Kiri -->
                     <div class="text-center explore-item">
                         <img src="images/icon-reservation.png" alt="Book a Table" class="explore-icon">
                         <h5>Book a Table</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <p>Ingin tempat aman? Pesan meja secara langsung tanpa harus repot antre atau telepon.</p>
                     </div>
                 </div>
 
@@ -619,21 +642,23 @@
                     <div class="text-center explore-item mb-4">
                         <img src="images/icon-profile.png" alt="Customize Your Profile" class="explore-icon">
                         <h5>Customize Your Profile</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <p>Atur profilmu, simpan kafe favorit, dan buat daftar kunjungan versimu sendiri.</p>
                     </div>
 
                     <!-- Item 2 Kanan -->
                     <div class="text-center explore-item mb-4">
                         <img src="images/icon-vibes.png" alt="Find Nearest Cafe" class="explore-icon">
                         <h5>Find Nearest Cafe</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <p>Gunakan fitur lokasi untuk mencari kafe terdekat tanpa ribet. Langsung tahu mana yang paling
+                            dekat!</p>
                     </div>
 
                     <!-- Item 3 Kanan -->
                     <div class="text-center explore-item">
                         <img src="images/icon-reservation.png" alt="mobile jb app" class="explore-icon">
-                        <h5>mobile jb app</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <h5>Discover Jember Cafes</h5>
+                        <p>Jelajahi berbagai kafe unik di Kota Jember yang mungkin belum pernah kamu kunjungi
+                            sebelumnya!</p>
                     </div>
                 </div>
             </div>

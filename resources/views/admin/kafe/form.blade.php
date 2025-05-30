@@ -96,13 +96,18 @@
                                     class="col-md-2 col-form-label form-control-label">Genre</label>
                                 <div class="container">
                                     <div class="row">
-                                        @foreach ($genre as $item)
-                                            <div class="col-3">
-                                                <input type="checkbox" name="genre[]" value="{{ $item->id }}"
-                                                @if ($data && $data->genre->contains('id', $item->id)) checked @endif /> {{ $item->nama }}
-                                            </div>
-                                        @endforeach
-
+                                        @if ($genre->count() == 0)
+                                            <p class="text-danger">Tidak ada genre tersedia. Tambahkan genre terlebih
+                                                dahulu.</p>
+                                        @else
+                                            @foreach ($genre as $item)
+                                                <div class="col-3">
+                                                    <input type="checkbox" name="genre[]" value="{{ $item->id }}"
+                                                        @if ($data && $data->genre->contains('id', $item->id)) checked @endif />
+                                                    {{ $item->nama }}
+                                                </div>
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -112,14 +117,19 @@
                                     class="col-md-2 col-form-label form-control-label">Fasilitas</label>
                                 <div class="container">
                                     <div class="row">
-                                        @foreach ($fasilitas as $item)
-                                            <div class="col-3">
-                                                <input type="checkbox" name="fasilitas[]" value="{{ $item->id }}"
-                                                    @if ($data && $data->fasilitas->contains('id', $item->id)) checked @endif />
-                                                {{ $item->nama }}
-                                            </div>
-                                        @endforeach
-
+                                        @if ($fasilitas->count() == 0)
+                                            <p class="text-danger">Tidak ada fasilitas tersedia. Tambahkan fasilitas
+                                                terlebih
+                                                dahulu.</p>
+                                            @else
+                                            @foreach ($fasilitas as $item)
+                                                <div class="col-3">
+                                                    <input type="checkbox" name="fasilitas[]" value="{{ $item->id }}"
+                                                        @if ($data && $data->fasilitas->contains('id', $item->id)) checked @endif />
+                                                    {{ $item->nama }}
+                                                </div>
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
                             </div>
