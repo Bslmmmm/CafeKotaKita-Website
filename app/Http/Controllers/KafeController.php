@@ -61,7 +61,7 @@ class KafeController extends Controller
             DB::table('fasilitas_kafe')->insert([
                 "id" => Str::uuid(),
                 "kafe_id" => $kafe_id,
-                "facility_id" => $item
+                "fasilitas_id" => $item
             ]);
         }
 
@@ -122,7 +122,7 @@ class KafeController extends Controller
         DB::table('fasilitas_kafe')->insert([
             "id" => Str::uuid(),
             "kafe_id" => $id,
-            "facility_id" => $item
+            "fasilitas_id" => $item
         ]);
     }
 
