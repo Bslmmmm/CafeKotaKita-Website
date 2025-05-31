@@ -32,7 +32,7 @@ class MenuController extends Controller
             'nama' => 'required|string|max:35',
             'kafe_id' => 'required|string|max:100',
             'harga' => 'required|string|max:100',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // max 2MB
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // max 2MB
         ]);
         
 
