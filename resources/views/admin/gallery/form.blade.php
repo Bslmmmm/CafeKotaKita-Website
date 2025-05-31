@@ -83,7 +83,7 @@
                                     class="col-md-2 col-form-label form-control-label">Image</label>
                                 <div class="col-md-10">
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="url" name="url" multiple accept="*.jpg">
+                                        <input type="file" name="url" class="custom-file-input" accept="image/*">
                                         <label class="custom-file-label" for="url">Choose file</label>
                                     </div>
                                 </div>
