@@ -70,8 +70,32 @@ class FasilitasSeeder extends Seeder
             ],
             [
                 'id' => Str::uuid(),
-                'nama' => 'Musala',
+                'nama' => 'Musholla',
                 'deskripsi' => 'Tempat shalat yang nyaman',
+                'image' => null
+            ],
+            [
+                'id' => Str::uuid(),
+                'nama' => 'Boardgame',
+                'deskripsi' => 'Fasilitas permainan boardgame untuk pengunjung',
+                'image' => null
+            ],
+            [
+                'id' => Str::uuid(),
+                'nama' => 'Cashless',
+                'deskripsi' => 'Menerima pembayaran non-tunai seperti kartu atau aplikasi',
+                'image' => null
+            ],
+            [
+                'id' => Str::uuid(),
+                'nama' => 'Cash',
+                'deskripsi' => 'Menerima pembayaran tunai secara langsung',
+                'image' => null
+            ],
+            [
+                'id' => Str::uuid(),
+                'nama' => 'Meeting',
+                'deskripsi' => 'Ruang atau fasilitas untuk pertemuan dan meeting',
                 'image' => null
             ]
         ];
