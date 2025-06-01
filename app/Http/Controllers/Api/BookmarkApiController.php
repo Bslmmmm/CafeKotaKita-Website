@@ -124,4 +124,42 @@ class BookmarkApiController extends Controller
             ], 500);
         }
     }
+
+public function check(Request $request)
+{
+    try {
+        $input = [
+            'user_id' => $request->input('user_id'),
+            'kafe_id' => $request->input('kafe_id'),
+        ];
+
+        $validated = validator($input, [
+            'kafe_id' => 'required|uuid',
+            'user_id' => 'required|uuid',
+        ])->validate();
+
+        $bookmark = Bookmark::where('user_id', $validated['user_id'])
+            ->where('kafe_id', $validated['kafe_id'])
+            ->first();
+
+        return response()->json([
+            'status' => 'success',
+            'is_bookmarked' => $bookmark ? true : false,
+        ], 200);
+
+    } catch (ValidationException $e) {
+        return response()->json([
+            'message' => 'Validation failed',
+            'errors' => $e->errors()
+        ], 422);
+    } catch (\Exception $e) {
+        return response()->json([
+            'message' => 'An error occurred',
+            'error' => $e->getMessage(),
+            'trace' => $e->getTraceAsString(), // Remove in production
+        ], 500);
+    }
+}
+
+
 }

@@ -12,6 +12,8 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use App\Models\Bookmark;
+
 
 
 class AuthApiController extends Controller
@@ -66,27 +68,34 @@ function login(Request $request)
         ], 404);
     }
 
-    if (!Hash::check($request->password, $user->password)) {
-        return response()->json([
-            'message' => 'Password tidak cocok'
-        ], 401);
-    }
-
-
-
+if (!Hash::check($request->password, $user->password)) {
     return response()->json([
-        'message' => 'Login berhasil',
-        'user' => [
-            'id' => $user->id,
-            'nama' => $user->nama,
-            'email' => $user->email,
-            'no_telp' => $user->no_telp,
-            'foto_profil_url' => $user->foto_profil
-                ? asset('storage/profiles/' . $user->foto_profil)
-                : null,
-            'role' => $user->role
-        ]
-    ], 200);
+        'message' => 'Password tidak cocok'
+    ], 401);
+}
+
+// Ambil data bookmark user
+$bookmarks = Bookmark::with(['kafe.gallery' => function ($query) {
+    $query->where('type', 'main_content');
+}])
+->where('user_id', $user->id)
+->get();
+
+return response()->json([
+    'message' => 'Login berhasil',
+    'user' => [
+        'id' => $user->id,
+        'nama' => $user->nama,
+        'email' => $user->email,
+        'no_telp' => $user->no_telp,
+        'foto_profil_url' => $user->foto_profil
+            ? asset('storage/profiles/' . $user->foto_profil)
+            : null,
+        'role' => $user->role
+    ],
+    'bookmarked_cafes' => $bookmarks,
+], 200);
+
 }
 
 

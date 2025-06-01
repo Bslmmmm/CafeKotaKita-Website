@@ -51,6 +51,8 @@ Route::prefix("bookmark")->group(function () {
     Route::get("findBookmarkByUser/{id}", [BookmarkApiController::class, "index"]);
     Route::post("addBookmark", [BookmarkApiController::class, "store"]);
     Route::delete("removeBookmark", [BookmarkApiController::class, "destroy"]);
+    Route::post('check', [BookmarkApiController::class, 'check']);
+
 });
 
 Route::prefix("menu")->group(function () {
