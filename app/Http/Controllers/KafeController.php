@@ -48,21 +48,25 @@ class KafeController extends Controller
         ];
 
         $kafe_id = Kafe::create($data)->id;
-        foreach($request->genre as $item)
-        {
-            DB::table('genre_kafe')->insert([
-                "id" => Str::uuid(),
-                "kafe_id" => $kafe_id,
-                "genre_id" => $item
-            ]);
+        if ($request->has('genre')) {
+
+            foreach ($request->genre as $item) {
+                DB::table('genre_kafe')->insert([
+                    "id" => Str::uuid(),
+                    "kafe_id" => $kafe_id,
+                    "genre_id" => $item
+                ]);
+            }
         }
-        foreach($request->fasilitas as $item)
-        {
-            DB::table('fasilitas_kafe')->insert([
-                "id" => Str::uuid(),
-                "kafe_id" => $kafe_id,
-                "fasilitas_id" => $item
-            ]);
+        if ($request->has('fasilitas')) {
+
+            foreach ($request->fasilitas as $item) {
+                DB::table('fasilitas_kafe')->insert([
+                    "id" => Str::uuid(),
+                    "kafe_id" => $kafe_id,
+                    "fasilitas_id" => $item
+                ]);
+            }
         }
 
         return redirect()->route('kafe.index')->with('success', 'Data berhasil ditambahkan!');
@@ -107,7 +111,7 @@ class KafeController extends Controller
 
         DB::table('genre_kafe')->where('kafe_id', $id)->delete();
         if ($request->has('genre')) {
-            foreach($request->genre as $item) {
+            foreach ($request->genre as $item) {
                 DB::table('genre_kafe')->insert([
                     "id" => Str::uuid(),
                     "kafe_id" => $id,
@@ -116,22 +120,28 @@ class KafeController extends Controller
             }
         }
 
-    // Sync facilities
-    DB::table('fasilitas_kafe')->where('kafe_id', $id)->delete();
-    foreach($request->fasilitas as $item) {
-        DB::table('fasilitas_kafe')->insert([
-            "id" => Str::uuid(),
-            "kafe_id" => $id,
-            "fasilitas_id" => $item
-        ]);
-    }
+        // Sync facilities
+        DB::table('fasilitas_kafe')->where('kafe_id', $id)->delete();
+        if ($request->has('fasilitas')) {
 
+            foreach ($request->fasilitas as $item) {
+            DB::table('fasilitas_kafe')->insert([
+                "id" => Str::uuid(),
+                "kafe_id" => $id,
+                "fasilitas_id" => $item
+            ]);
+        }
+    }
         return redirect()->route('kafe.index')->with('success', 'Data berhasil diperbarui!');
     }
 
     public function destroy($id)
     {
         $kafe = Kafe::findOrFail($id);
+        DB::table('genre_kafe')->where('kafe_id', $id)->delete();
+
+        DB::table('fasilitas_kafe')->where('kafe_id', $id)->delete();
+
         $kafe->delete();
 
         return redirect()->route('kafe.index')->with('success', 'Data berhasil dihapus!');

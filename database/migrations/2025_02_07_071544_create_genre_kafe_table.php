@@ -12,12 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('genre_kafe', function (Blueprint $table) {
+            $table->uuid("id")->primary();
             $table->uuid('kafe_id');
             $table->uuid('genre_id');
             $table->timestamps();
             $table->softDeletes();
-
-            $table->primary(['kafe_id', 'genre_id']);
 
             $table->foreign('kafe_id')->references('id')->on('kafe')->onDelete('cascade');
             $table->foreign('genre_id')->references('id')->on('genre')->onDelete('cascade');
