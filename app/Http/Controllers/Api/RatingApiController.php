@@ -62,4 +62,43 @@ class RatingApiController extends Controller
             ], 500);
         }
     }
+public function checkUserRating(Request $request)
+{
+    try {
+        $validated = validator($request->all(), [
+            'user_id' => 'required|uuid',
+            'kafe_id' => 'required|uuid',
+        ])->validate();
+
+        $existingRating = Rating::where('user_id', $validated["user_id"])
+            ->where('kafe_id', $validated['kafe_id'])
+            ->first();
+
+        if ($existingRating) {
+            return response()->json([
+                'rated' => true,
+                'rate_value' => $existingRating->rate, // opsional, bisa ditampilkan juga
+                'message' => 'User has already rated this cafe.'
+            ], 200);
+        }
+
+        return response()->json([
+            'rated' => false,
+            'message' => 'User has not rated this cafe yet.'
+        ], 200);
+
+    } catch (ValidationException $e) {
+        return response()->json([
+            'message' => 'Validation failed',
+            'errors' => $e->errors()
+        ], 422);
+    } catch (\Exception $e) {
+        return response()->json([
+            'message' => 'An error occurred',
+            'error' => $e->getMessage(),
+        ], 500);
+    }
+}
+
+
 }

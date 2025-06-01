@@ -40,9 +40,10 @@ class UserApiController extends Controller
  public function update(Request $request, $id)
 {
     try {
-        // Validasi input termasuk no_telp dan foto_profil
+        // Validasi input termasuk no_telp, email, dan foto_profil
         $validator = Validator::make($request->all(), [
             'nama' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $id,
             'no_telp' => 'nullable|string|max:20',
             'foto_profil' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
@@ -69,6 +70,11 @@ class UserApiController extends Controller
             $user->nama = $request->nama;
         }
 
+        // Update email
+        if ($request->has('email')) {
+            $user->email = $request->email;
+        }
+
         // Update no_telp
         if ($request->has('no_telp')) {
             $user->no_telp = $request->no_telp;
@@ -92,7 +98,6 @@ class UserApiController extends Controller
 
         $user->save();
 
-        // Kembalikan respons JSON
         return response()->json([
             'status' => 'success',
             'message' => 'Profil berhasil diperbarui',
@@ -114,6 +119,7 @@ class UserApiController extends Controller
         ], 500);
     }
 }
+
 
 
 

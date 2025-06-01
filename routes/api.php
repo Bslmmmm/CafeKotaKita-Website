@@ -45,6 +45,9 @@ Route::prefix("genre")->group(function () {
 
 Route::prefix("rating")->group(function () {
     Route::post("addRate", [RatingApiController::class, "store"]);
+    Route::post("checkUserRating", [RatingApiController::class, "checkUserRating"]);
+
+
 });
 
 Route::prefix("bookmark")->group(function () {
