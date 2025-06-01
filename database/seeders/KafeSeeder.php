@@ -9,7 +9,6 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-
 class KafeSeeder extends Seeder
 {
     public function run(): void
@@ -18,7 +17,7 @@ class KafeSeeder extends Seeder
         $genres = Genre::all()->keyBy('nama');
         $fasilitas = Fasilitas::all()->keyBy('nama');
 
-        // Data kafe
+        // Data kafe lengkap
         $kafes = [
             [
                 'id' => Str::uuid(),
@@ -30,8 +29,8 @@ class KafeSeeder extends Seeder
                 'longitude' => '113.6283861',
                 'jam_buka' => '00:00',
                 'jam_tutup' => '23:59',
-                'genres' => ['Tradisional', 'Retro'],
-                'fasilitas' => ['Wi-Fi', 'Stop Kontak', 'Toilet', 'Cashless', 'Cash']
+                'genres' => ['Modern', 'Rooftop', 'Co-Working Space'],
+                'fasilitas' => ['Wi-Fi', 'AC', 'Stop Kontak', 'Toilet', 'Cashless', 'Cash', 'Area Kerja']
             ],
             [
                 'id' => Str::uuid(),
@@ -43,10 +42,126 @@ class KafeSeeder extends Seeder
                 'longitude' => '113.6436995',
                 'jam_buka' => '10:00',
                 'jam_tutup' => '03:00',
-                'genres' => ['Modern', 'Co-Working Space'],
-                'fasilitas' => ['Wi-Fi', 'AC', 'Stop Kontak', 'Toilet', 'Cashless']
+                'genres' => ['Modern', 'Industrial', 'Outdoor'],
+                'fasilitas' => ['Wi-Fi', 'AC', 'Meja Outdoor', 'Stop Kontak', 'Toilet', 'Cashless', 'Cash']
             ],
-            // ... (tambahkan data kafe lainnya dengan format yang sama)
+            [
+                'id' => Str::uuid(),
+                'owner_id' => null,
+                'nama' => 'Viking Coffe',
+                'alamat' => 'Jalan semeru 47, Kloncing, Karangrejo, kec.sumbersari, kabupaten jember, jawa timur, Jawa Timur 68124',
+                'telp' => '085233156241',
+                'latitude' => '-8.1770277',
+                'longitude' => '113.6466928',
+                'jam_buka' => '08:00',
+                'jam_tutup' => '02:00',
+                'genres' => ['Outdoor'],
+                'fasilitas' => ['Wi-Fi', 'Meja Outdoor', 'Stop Kontak', 'Toilet', 'Cashless', 'Cash', 'Musholla', 'Live Music']
+            ],
+            [
+                'id' => Str::uuid(),
+                'owner_id' => null,
+                'nama' => 'Poppins',
+                'alamat' => 'Jl. Semeru No.235, Tegal Boto Kidul, Sumbersari, Kec. Sumbersari, Kabupaten Jember, Jawa Timur 68124',
+                'telp' => '088326192667',
+                'latitude' => '-8.1762306',
+                'longitude' => '113.6403166',
+                'jam_buka' => '10:00',
+                'jam_tutup' => '03:00',
+                'genres' => ['Outdoor', 'Industrial'],
+                'fasilitas' => ['Wi-Fi', 'Meja Outdoor', 'Stop Kontak', 'Toilet', 'Cashless', 'Cash', 'Live Music']
+            ],
+            [
+                'id' => Str::uuid(),
+                'owner_id' => null,
+                'nama' => 'Kopi Boss Jember',
+                'alamat' => 'Jl. Tidar Plindu, Karangrejo, Kec. Sumbersari, Kabupaten Jember, Jawa Timur 68124',
+                'telp' => '0895329542125',
+                'latitude' => '-8.173717',
+                'longitude' => '113.6489769',
+                'jam_buka' => '08:00',
+                'jam_tutup' => '03:00',
+                'genres' => ['View-Oriented', 'Tradisional', 'Outdoor'],
+                'fasilitas' => ['Wi-Fi', 'Musholla', 'Meja Outdoor', 'Stop Kontak', 'Toilet', 'Cashless', 'Cash', 'Parkir Luas', 'Live Music']
+            ],
+            [
+                'id' => Str::uuid(),
+                'owner_id' => null,
+                'nama' => 'Alocasia Cafe and Eatery',
+                'alamat' => 'Jl. Riau Gg. Paving, Krajan Barat, Sumbersari, Kec. Sumbersari, Kabupaten Jember, Jawa Timur',
+                'telp' => '085934670958',
+                'latitude' => '-8.173717',
+                'longitude' => '113.6489769',
+                'jam_buka' => '10:00',
+                'jam_tutup' => '21:30',
+                'genres' => ['Nature', 'Co-Working Space'],
+                'fasilitas' => ['AC', 'Wi-Fi', 'Musholla', 'Meja Outdoor', 'Stop Kontak', 'Toilet', 'Cashless', 'Cash', 'Parkir Luas', 'Live Music']
+            ],
+            [
+                'id' => Str::uuid(),
+                'owner_id' => null,
+                'nama' => 'Eterno Coffee & Eatery',
+                'alamat' => 'Ruko Greenland, Jl. Tidar Cluster no. 5, Kloncing, Karangrejo, Kec. Sumbersari, Kabupaten Jember, Jawa Timur 68124',
+                'telp' => '082142567676',
+                'latitude' => '-8.1711335',
+                'longitude' => '113.6468099',
+                'jam_buka' => '09:00',
+                'jam_tutup' => '23:00',
+                'genres' => ['Modern', 'Co-Working Space'],
+                'fasilitas' => ['AC', 'Wi-Fi', 'Meja Outdoor', 'Stop Kontak', 'Toilet', 'Cashless', 'Cash', 'Parkir Luas']
+            ],
+            [
+                'id' => Str::uuid(),
+                'owner_id' => null,
+                'nama' => 'Nuansa Kopi',
+                'alamat' => 'Jl. Semeru, Kloncing, Karangrejo, Kec. Sumbersari, Kabupaten Jember, Jawa Timur 68124',
+                'telp' => '081322001006',
+                'latitude' => '-8.1765442',
+                'longitude' => '113.6453766',
+                'jam_buka' => '09:00',
+                'jam_tutup' => '23:30',
+                'genres' => ['View-Oriented', 'Nature'],
+                'fasilitas' => ['AC', 'Wi-Fi', 'Musholla', 'Meja Outdoor', 'Stop Kontak', 'Toilet', 'Cashless', 'Cash', 'Parkir Luas']
+            ],
+            [
+                'id' => Str::uuid(),
+                'owner_id' => null,
+                'nama' => 'Rekopi Chapter 2',
+                'alamat' => 'Jl. Semeru Sebelum Pertigaan Scaba, Kloncing, Karangrejo, Kec. Sumbersari, Kabupaten Jember, Jawa Timur 68121',
+                'telp' => '085733096122',
+                'latitude' => '-8.1770094',
+                'longitude' => '113.6467911',
+                'jam_buka' => '10:00',
+                'jam_tutup' => '03:00',
+                'genres' => ['Co-Working Space'],
+                'fasilitas' => ['Wi-Fi', 'Stop Kontak', 'Toilet', 'Cashless', 'Cash']
+            ],
+            [
+                'id' => Str::uuid(),
+                'owner_id' => null,
+                'nama' => '50:50 Cafe Jember',
+                'alamat' => 'Jl. Semeru, Kloncing, Karangrejo, Kec. Sumbersari, Kabupaten Jember, Jawa Timur 68124',
+                'telp' => '087754751959',
+                'latitude' => '-8.1767018',
+                'longitude' => '113.6455774',
+                'jam_buka' => '07:00',
+                'jam_tutup' => '02:00',
+                'genres' => ['Tradisional'],
+                'fasilitas' => ['Wi-Fi', 'Stop Kontak', 'Toilet', 'Cashless', 'Cash', 'Live Music']
+            ],
+            [
+                'id' => Str::uuid(),
+                'owner_id' => null,
+                'nama' => 'Monochrome. Cafe & Eatery',
+                'alamat' => 'Jl. Semeru No.27, Kloncing, Karangrejo, Kec. Sumbersari, Kabupaten Jember, Jawa Timur 68124',
+                'telp' => '0822344892467',
+                'latitude' => '-8.1770101',
+                'longitude' => '113.6456726',
+                'jam_buka' => '10:00',
+                'jam_tutup' => '00:00',
+                'genres' => ['Industrial', 'Outdoor'],
+                'fasilitas' => ['Wi-Fi', 'Meja Outdoor', 'Stop Kontak', 'Toilet', 'Cashless', 'Cash', 'Live Music']
+            ],
             [
                 'id' => Str::uuid(),
                 'owner_id' => null,
