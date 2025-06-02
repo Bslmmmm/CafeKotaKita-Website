@@ -8,6 +8,7 @@ use App\Http\Controllers\GenreControlller;
 use App\Http\Controllers\KafeController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -85,5 +86,11 @@ Route::prefix("admin")->group(function(){
         Route::get("owner", [UserController::class, "owner"])->name("user.owner");
         Route::get("validasiOwner/{id}", [UserController::class, "validasiOwner"])->name("user.validasi");
         Route::get("tolakValidasi/{id}", [UserController::class, "tolakValidasi"])->name("user.tolakValidasi");
+    });
+    Route::prefix("report")->group(function () {
+        Route::get("bookmark", [ReportController::class, "reportBookmark"])->name("report.bookmark");
+        Route::get("owner", [ReportController::class, "owner"])->name("user.owner");
+        Route::get("validasiOwner/{id}", [ReportController::class, "validasiOwner"])->name("user.validasi");
+        Route::get("tolakValidasi/{id}", [ReportController::class, "tolakValidasi"])->name("user.tolakValidasi");
     });
 });

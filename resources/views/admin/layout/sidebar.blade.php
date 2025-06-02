@@ -96,6 +96,30 @@
                         </div>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="#reportMenu" data-toggle="collapse" role="button"
+                            aria-expanded="false" aria-controls="reportMenu">
+                            <i class="fas fa-hamburger" aria-hidden="true"></i>
+                            <span class="nav-link-text">Manajemen Laporan</span>
+                        </a>
+                        <div class="collapse" id="reportMenu">
+                            <ul class="nav nav-sm flex-column">
+                                <li class="nav-item">
+                                    <a href="{{ route('report.bookmark') }}" class="nav-link">
+                                        <span class="sidenav-mini-icon"> </span>
+                                        <span class="sidenav-normal"> Bookmark </span>
+                                    </a>
+                                </li>
+                                {{-- <li class="nav-item">
+                                    <a href="{{ route('kategori.index') }}" class="nav-link">
+                                        <span class="sidenav-mini-icon"> </span>
+                                        <span class="sidenav-normal"> Pengunjung </span>
+                                    </a>
+                                </li> --}}
+
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('gallery.index') }}">
                             <i class="ni ni-chart-pie-35"></i>
                             <span class="nav-link-text">Galeri</span>
