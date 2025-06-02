@@ -31,7 +31,7 @@ class FasilitasController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // max 2MB
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // max 2MB
             'nama' => 'required|string|max:35',
             'deskripsi' => 'required|string|max:100',
         ]);

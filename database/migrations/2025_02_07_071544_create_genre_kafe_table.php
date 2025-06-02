@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('genre_kafe', function (Blueprint $table) {
             $table->uuid("id")->primary();
-            $table->uuid("kafe_id");
-            $table->uuid("genre_id");
+            $table->uuid('kafe_id');
+            $table->uuid('genre_id');
             $table->timestamps();
             $table->softDeletes();
 

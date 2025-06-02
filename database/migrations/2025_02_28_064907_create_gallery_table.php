@@ -19,7 +19,6 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->unique(['kafe_id', 'type']);
             $table->foreign('kafe_id')->references('id')->on('kafe')->onDelete('cascade');
         });
     }

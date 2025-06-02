@@ -75,7 +75,7 @@
                                                 data-toggle="tooltip" data-original-title="Validasi">
                                                 <i class="fas fa-user-edit"></i>
                                             </a>
-                                            <a href="#!" class="table-action table-action-delete" data-toggle="tooltip"
+                                            <a href="{{ route('user.tolakValidasi', ['id' => $d->id]) }}" class="table-action table-action-delete" data-toggle="tooltip"
                                                 data-original-title="Nonaktif">
                                                 <i class="fas fa-trash"></i>
                                             </a>

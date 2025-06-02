@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('fasilitas_kafe', function (Blueprint $table) {
@@ -23,11 +20,8 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('cafe_facility');
+        Schema::dropIfExists('fasilitas_kafe');
     }
 };

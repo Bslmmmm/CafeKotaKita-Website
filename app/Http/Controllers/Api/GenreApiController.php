@@ -41,7 +41,9 @@ class GenreApiController extends Controller
     public function searchById($id)
     {
         try {
-            $data = Genre::with("kafe")->find($id);
+            $data = Genre::with(["kafe" => function ($query) {
+                $query->withAvg('rating as total_rating', 'rate');
+            }])->find($id);
 
             if (empty($data)) {
                 return response()->json([

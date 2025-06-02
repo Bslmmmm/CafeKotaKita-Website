@@ -45,12 +45,18 @@ Route::prefix("genre")->group(function () {
 
 Route::prefix("rating")->group(function () {
     Route::post("addRate", [RatingApiController::class, "store"]);
+    Route::post("checkUserRating", [RatingApiController::class, "checkUserRating"]);
+
+
 });
 
 Route::prefix("bookmark")->group(function () {
     Route::get("findBookmarkByUser/{id}", [BookmarkApiController::class, "index"]);
     Route::post("addBookmark", [BookmarkApiController::class, "store"]);
     Route::delete("removeBookmark", [BookmarkApiController::class, "destroy"]);
+    Route::post('check', [BookmarkApiController::class, 'check']);
+    Route::get('reportByPeriode', [BookmarkApiController::class, 'reportByPeriode']);
+
 });
 
 Route::prefix("menu")->group(function () {
@@ -66,7 +72,7 @@ Route::prefix("fasilitas")->group(function () {
 
 Route::prefix("user")->group(function () {
     Route::get("findById/{id}", [UserApiController::class, "searchById"]);
-    Route::patch("update/{id}", [UserApiController::class, "update"]);
+    Route::post("update/{id}", [UserApiController::class, "update"]);
 });
 
 Route::prefix('community')->group(function () {

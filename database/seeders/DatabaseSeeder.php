@@ -11,9 +11,9 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             OwnerSeeder::class,
             GenreSeeder::class,
+            FasilitasSeeder::class,
             KafeSeeder::class,
             MenuSeeder::class,
-            FasilitasSeeder::class,
         ]);
     }
 }

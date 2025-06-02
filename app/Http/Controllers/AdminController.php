@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bookmark;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Owner;
@@ -21,7 +22,8 @@ class AdminController extends Controller
         $totalKafe = Kafe::count();
         $totalGenre = Genre::count();
         $totalKategori = Kategori::count();
+        $totalBookmark = Bookmark::count();
 
-        return view('admin.dashboard', compact('user', 'totalUser', 'totalOwner', 'totalKafe', 'totalGenre', 'totalKategori'));
+        return view('admin.dashboard', compact('user', 'totalUser', 'totalOwner', 'totalKafe', 'totalGenre', 'totalKategori', 'totalBookmark'));
     }
 }

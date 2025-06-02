@@ -8,6 +8,7 @@ use App\Http\Controllers\GenreControlller;
 use App\Http\Controllers\KafeController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,7 +18,7 @@ Route::get("/", function () {
 
 Route::get('/welcome', function () {
     return view('welcome');
-});
+})->middleware('auth')->name('welcome');
 
 
 // Definisikan route login
@@ -30,7 +31,7 @@ Route::post('/register', [AuthController::class, 'register'])->name('register.su
 // Route Logout
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::prefix("admin")->group(function(){
+Route::prefix("admin")->middleware(['auth', 'admin'])->group(function(){
     Route::get("dashboard", [AdminController::class, "index"])->name("admin.dashboard");
     Route::prefix("kafe")->group(function() {
         Route::get("/", [KafeController::class, "index"])->name("kafe.index");
@@ -84,5 +85,12 @@ Route::prefix("admin")->group(function(){
         Route::get("/", [UserController::class, "index"])->name("user.index");
         Route::get("owner", [UserController::class, "owner"])->name("user.owner");
         Route::get("validasiOwner/{id}", [UserController::class, "validasiOwner"])->name("user.validasi");
+        Route::get("tolakValidasi/{id}", [UserController::class, "tolakValidasi"])->name("user.tolakValidasi");
+    });
+    Route::prefix("report")->group(function () {
+        Route::get("bookmark", [ReportController::class, "reportBookmark"])->name("report.bookmark");
+        Route::get("owner", [ReportController::class, "owner"])->name("user.owner");
+        Route::get("validasiOwner/{id}", [ReportController::class, "validasiOwner"])->name("user.validasi");
+        Route::get("tolakValidasi/{id}", [ReportController::class, "tolakValidasi"])->name("user.tolakValidasi");
     });
 });

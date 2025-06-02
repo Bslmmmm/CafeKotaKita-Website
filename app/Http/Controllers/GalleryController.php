@@ -27,9 +27,7 @@ class GalleryController extends Controller
     {
         $request->validate([
             'kafe_id' => 'required|exists:kafe,id',
-            'type' => ['required',
-                Rule::unique('gallery')->where('kafe_id', $request->kafe_id)
-        ],
+            'type' => 'required',
             'url' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
         if($request->hasFile('url')) {

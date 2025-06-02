@@ -154,7 +154,7 @@ class KafeApiController extends Controller
     public function getDetailKafe($id)
     {
         try {
-            $data = Kafe::with("gallery")
+            $data = Kafe::with(["gallery", "genre", "fasilitas"])
                 ->withAvg("rating as total_rating", "rate")->find($id);
 
             if (empty($data)) {

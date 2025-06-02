@@ -23,11 +23,24 @@ class UserController extends Controller
     {
         $owner = Owner::findOrFail($id);
 
-        $status = $owner->status == "pending" ? "aktif" : "ditolak";
+        $status = "aktif";
 
         $data = [
             "status" => $status,
         ];
         $owner->update($data);
+        return redirect()->route('user.owner');
+    }
+    public function tolakValidasi($id)
+    {
+        $owner = Owner::findOrFail($id);
+
+        $status = "ditolak";
+
+        $data = [
+            "status" => $status,
+        ];
+        $owner->update($data);
+        return redirect()->route('user.owner');
     }
 }

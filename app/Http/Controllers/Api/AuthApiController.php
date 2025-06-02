@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Tymon\JWTAuth\Facades\JWTAuth;
+use App\Models\Bookmark;
+
 
 
 class AuthApiController extends Controller
@@ -34,17 +37,17 @@ class AuthApiController extends Controller
             'message' => 'User registered successfully',
         ], 201);
     }
-    function login(Request $request)
+
+
+function login(Request $request)
 {
     $request->validate([
         'login' => 'required|array', // validasi bahwa login adalah array/object
         'password' => 'required|string',
     ]);
 
-    // Ambil nilai dari nested object
     $loginData = $request->input('login');
 
-    // Cek apakah ada email atau nama
     if (isset($loginData['email'])) {
         $loginValue = $loginData['email'];
         $loginField = 'email';
@@ -65,22 +68,36 @@ class AuthApiController extends Controller
         ], 404);
     }
 
-    if (!Hash::check($request->password, $user->password)) {
-        return response()->json([
-            'message' => 'Password tidak cocok'
-        ], 401);
-    }
-
+if (!Hash::check($request->password, $user->password)) {
     return response()->json([
-        'message' => 'Login berhasil',
-        'user' => [
-            'id' => $user->id,
-            'nama' => $user->nama,
-            'email' => $user->email,
-            'role' => $user->role
-        ]
-    ], 200);
+        'message' => 'Password tidak cocok'
+    ], 401);
 }
+
+// Ambil data bookmark user
+$bookmarks = Bookmark::with(['kafe.gallery' => function ($query) {
+    $query->where('type', 'main_content');
+}])
+->where('user_id', $user->id)
+->get();
+
+return response()->json([
+    'message' => 'Login berhasil',
+    'user' => [
+        'id' => $user->id,
+        'nama' => $user->nama,
+        'email' => $user->email,
+        'no_telp' => $user->no_telp,
+        'foto_profil_url' => $user->foto_profil
+            ? asset('storage/profiles/' . $user->foto_profil)
+            : null,
+        'role' => $user->role
+    ],
+    'bookmarked_cafes' => $bookmarks,
+], 200);
+
+}
+
 
 
     public function forgotpassword(Request $request)
