@@ -15,29 +15,25 @@ class AuthController extends Controller
     }
 
     public function login(Request $req)
-    {
-        $credentials = $req->only("email", "password");
+{
+    $credentials = $req->only("email", "password");
 
-        if (Auth::attempt($credentials)) {
-            if (Auth::check()) {
-                $user = Auth::user();
+    if (Auth::attempt($credentials)) {
+        $req->session()->regenerate();
+        $user = Auth::user();
 
-                if ($user->role == 'admin') {
-                    return redirect()->route('admin.dashboard');
-                } else {
-                    return redirect()->route('welcome');
-                }
-
-                // $req->session()->regenerate();
-                // return redirect()->route('admin.dashboard');
-            }
+        if ($user->role === 'admin') {
+            return redirect()->route('admin.dashboard');
+        } else {
+            return redirect()->route('welcome');
         }
-
-        // Jika login gagal, kembalikan ke halaman login dengan pesan error
-        return back()->withErrors([
-            'email' => 'Email atau password salah.',
-        ]);
     }
+
+    return back()->withErrors([
+        'email' => 'Email atau password salah.',
+    ]);
+}
+
 
     public function logout(Request $req)
     {

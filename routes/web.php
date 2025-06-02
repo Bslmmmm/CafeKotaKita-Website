@@ -17,7 +17,7 @@ Route::get("/", function () {
 
 Route::get('/welcome', function () {
     return view('welcome');
-})->name('welcome');
+})->middleware('auth')->name('welcome');
 
 
 // Definisikan route login
@@ -30,7 +30,7 @@ Route::post('/register', [AuthController::class, 'register'])->name('register.su
 // Route Logout
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::prefix("admin")->group(function(){
+Route::prefix("admin")->middleware(['auth', 'admin'])->group(function(){
     Route::get("dashboard", [AdminController::class, "index"])->name("admin.dashboard");
     Route::prefix("kafe")->group(function() {
         Route::get("/", [KafeController::class, "index"])->name("kafe.index");
