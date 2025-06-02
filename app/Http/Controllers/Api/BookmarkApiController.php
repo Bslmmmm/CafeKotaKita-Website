@@ -18,9 +18,14 @@ class BookmarkApiController extends Controller
     public function index($id)
     {
         try {
-            $bookmarks = Bookmark::with(['kafe.gallery' => function ($query) {
-                $query->where('type', 'main_content');
-            }])
+            $bookmarks = Bookmark::with([
+                'kafe.gallery' => function ($query) {
+                    $query->where('type', 'main_content');
+                },
+                'kafe' => function ($query) {
+                    $query->withAvg('rating as total_rating', 'rate');
+                }
+            ])
                 ->where('user_id', $id)
                 ->get();
             return response()->json([
