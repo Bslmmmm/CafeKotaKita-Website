@@ -5,17 +5,17 @@
     <title>KafeKotaKita</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" href="images/logo-hitam.png" type="image/png">
+    <link rel="icon" href="{{ asset('images/logo-hitam.png') }}" type="image/png">
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
-    <link rel="stylesheet" href="css/animate.css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="css/aos.css">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/open-iconic-bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/aos.css') }}">
 
     <style>
         html {
@@ -34,7 +34,7 @@
             left: 0;
             right: 0;
             z-index: 1030;
-            background-color: transparent;
+            background-color: white;
             transition: background-color 0.3s ease;
             /* background: #000;
             color: #fff; */
@@ -313,7 +313,7 @@
         <div class="container">
             <a class="navbar-brand" href="#">
                 <div class="logo-box">
-                    {{-- <img src="images/logo-hitam.png" alt="" width="60" height="60"> --}}
+                    {{-- <img src="{{asset("images/logo-hitam.png")}} alt="" width="60" height="60"> --}}
                 </div>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
@@ -331,7 +331,9 @@
                         <a class="nav-link" href="#gallery">GALLERY</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">LOGIN</a>
+                        <a class="nav-link" href="{{route('login')}}">
+                            {{ Auth::check() ? 'LOGOUT' : 'LOGIN' }}
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-get-started" href="#">GET STARTED</a>
@@ -351,7 +353,7 @@
                     <a href="#" class="btn btn-get-started">GET STARTED</a>
                 </div>
                 <div class="col-lg-6">
-                    <img src="images/dashboard.png" class="img-fluid app-preview" alt="KafeKotaKita App">
+                    <img src="{{ asset('images/dashboard.png') }}" class="img-fluid app-preview" alt="KafeKotaKita App">
                 </div>
             </div>
         </div>
@@ -404,19 +406,21 @@
                 <div id="appCarousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="images/page-awal.png" class="dashboard-img" alt="App Dashboard">
+                            <img src="{{ asset('images/page-awal.png') }}" class="dashboard-img" alt="App Dashboard">
                             <h5 class="mt-4">First Page</h5>
                         </div>
                         <div class="carousel-item">
-                            <img src="images/dashboard.png" class="dashboard-img" alt="App Dashboard">
+                            <img src="{{ asset('images/dashboard.png') }}" class="dashboard-img" alt="App Dashboard">
                             <h5 class="mt-4">Dashboard</h5>
                         </div>
                         <div class="carousel-item">
-                            <img src="images/community-page.png" class="dashboard-img" alt="App Community">
+                            <img src="{{ asset('images/community-page.png') }}" class="dashboard-img"
+                                alt="App Community">
                             <h5 class="mt-4">Community</h5>
                         </div>
                         <div class="carousel-item">
-                            <img src="images/Saved Cafee.png" class="dashboard-img" alt="App Dashboard">
+                            <img src="{{ asset('images/Saved Cafee.png') }}" class="dashboard-img"
+                                alt="App Dashboard">
                             <h5 class="mt-4">Saved Cafe</h5>
                         </div>
                     </div>
@@ -454,20 +458,20 @@
                     <div class="stacked-images-right position-relative">
                         <!-- Image 1 (top) -->
                         <div class="stacked-image" style="position: relative; z-index: 3; width: 95%;">
-                            <img src="images/page-awal.png" class="img-fluid shadow-lg rounded-lg"
+                            <img src="{{ asset('images/page-awal.png') }}" class="img-fluid shadow-lg rounded-lg"
                                 alt="KafeKotaKita App">
                         </div>
                         <!-- Image 2 (middle) -->
                         <div class="stacked-image"
                             style="position: absolute; top: 20px; left: 40px; z-index: 2; width: 90%;">
-                            <img src="images/saved-page.png" class="img-fluid shadow-lg rounded-lg"
+                            <img src="{{ asset('images/saved-page.png') }}" class="img-fluid shadow-lg rounded-lg"
                                 alt="KafeKotaKita App">
                         </div>
                         <!-- Image 3 (bottom) -->
                         <div class="stacked-image"
                             style="position: absolute; top: 40px; left: 70px; z-index: 1; width: 85%;">
-                            <img src="images/community-page.png" class="img-fluid shadow-lg rounded-lg"
-                                alt="KafeKotaKita App">
+                            <img src="{{ asset('images/community-page.png') }}"
+                                class="img-fluid shadow-lg rounded-lg" alt="KafeKotaKita App">
                         </div>
                     </div>
                 </div>
@@ -484,12 +488,14 @@
                     <div class="stacked-images position-relative">
                         <!-- Image 1 (top) -->
                         <div class="stacked-image" style="position: relative; z-index: 3; width: 95%;">
-                            <img src="images/community-page.png" class="img-fluid shadow-lg" alt="App Screenshots">
+                            <img src="{{ asset('images/community-page.png') }}" class="img-fluid shadow-lg"
+                                alt="App Screenshots">
                         </div>
                         <!-- Image 2 (middle) -->
                         <div class="stacked-image"
                             style="position: absolute; top: 20px; left: 40px; z-index: 2; width: 90%;">
-                            <img src="images/saved-page.png" class="img-fluid shadow-lg" alt="App Screenshots">
+                            <img src="{{ asset('images/saved-page.png') }}" class="img-fluid shadow-lg"
+                                alt="App Screenshots">
                         </div>
 
                     </div>
@@ -550,7 +556,8 @@
                         <div class="row">
                             <div class="col">
                                 <div class="gallery-item">
-                                    <img src="images/Reset Password.png" class="img-fluid" alt="Reset Password">
+                                    <img src="{{ asset('images/Reset Password.png') }}" class="img-fluid"
+                                        alt="Reset Password">
                                     <div class="p-3 text-center">
                                         <h5>Reset Password</h5>
                                     </div>
@@ -558,7 +565,8 @@
                             </div>
                             <div class="col">
                                 <div class="gallery-item">
-                                    <img src="images/OTP verification.png" class="img-fluid" alt="Verification">
+                                    <img src="{{ asset('images/OTP verification.png') }}" class="img-fluid"
+                                        alt="Verification">
                                     <div class="p-3 text-center">
                                         <h5>Verification</h5>
                                     </div>
@@ -566,7 +574,8 @@
                             </div>
                             <div class="col">
                                 <div class="gallery-item">
-                                    <img src="images/Forgot Password.png" class="img-fluid" alt="Forgot Password">
+                                    <img src="{{ asset('images/Forgot Password.png') }}" class="img-fluid"
+                                        alt="Forgot Password">
                                     <div class="p-3 text-center">
                                         <h5>Forgot Password</h5>
                                     </div>
@@ -574,7 +583,8 @@
                             </div>
                             <div class="col">
                                 <div class="gallery-item">
-                                    <img src="images/Sign in.png" class="img-fluid" alt="Create Account">
+                                    <img src="{{ asset('images/Sign in.png') }}" class="img-fluid"
+                                        alt="Create Account">
                                     <div class="p-3 text-center">
                                         <h5>Create Account</h5>
                                     </div>
@@ -582,7 +592,7 @@
                             </div>
                             <div class="col">
                                 <div class="gallery-item">
-                                    <img src="images/Login.png" class="img-fluid" alt="Log In">
+                                    <img src="{{ asset('images/Login.png') }}" class="img-fluid" alt="Log In">
                                     <div class="p-3 text-center">
                                         <h5>Log In</h5>
                                     </div>
@@ -610,7 +620,7 @@
                 <div class="col-md-3">
                     <!-- Item 1 Kiri -->
                     <div class="text-center explore-item mb-4">
-                        <img src="images/icon-vibes.png" alt="Find Your Vibes" class="explore-icon">
+                        <img src="{{ asset('images/icon-vibes.png') }}" alt="Find Your Vibes" class="explore-icon">
                         <h5>Find Your Vibes</h5>
                         <p>Temukan kafe dengan suasana yang cocok dengan mood kamu — mulai dari yang cozy hingga retro.
                         </p>
@@ -618,14 +628,15 @@
 
                     <!-- Item 2 Kiri -->
                     <div class="text-center explore-item mb-4">
-                        <img src="images/icon-comment.png" alt="Post a Comment" class="explore-icon">
+                        <img src="{{ asset('images/icon-comment.png') }}" alt="Post a Comment" class="explore-icon">
                         <h5>Post a Comment</h5>
                         <p>Berbagi ulasan, beri rating, dan bantu pengguna lain menemukan tempat nongkrong terbaik.</p>
                     </div>
 
                     <!-- Item 3 Kiri -->
                     <div class="text-center explore-item">
-                        <img src="images/icon-reservation.png" alt="Book a Table" class="explore-icon">
+                        <img src="{{ asset('images/icon-reservation.png') }}" alt="Book a Table"
+                            class="explore-icon">
                         <h5>Book a Table</h5>
                         <p>Ingin tempat aman? Pesan meja secara langsung tanpa harus repot antre atau telepon.</p>
                     </div>
@@ -633,21 +644,23 @@
 
                 <!-- Kolom Tengah - Dashboard Image -->
                 <div class="col-md-6 d-flex align-items-center justify-content-center">
-                    <img src="images/dashboard.png" class="img-fluid app-preview" alt="App Mockup">
+                    <img src="{{ asset('images/dashboard.png') }}" class="img-fluid app-preview" alt="App Mockup">
                 </div>
 
                 <!-- Kolom Kanan -->
                 <div class="col-md-3">
                     <!-- Item 1 Kanan -->
                     <div class="text-center explore-item mb-4">
-                        <img src="images/icon-profile.png" alt="Customize Your Profile" class="explore-icon">
+                        <img src="{{ asset('images/icon-profile.png') }}" alt="Customize Your Profile"
+                            class="explore-icon">
                         <h5>Customize Your Profile</h5>
                         <p>Atur profilmu, simpan kafe favorit, dan buat daftar kunjungan versimu sendiri.</p>
                     </div>
 
                     <!-- Item 2 Kanan -->
                     <div class="text-center explore-item mb-4">
-                        <img src="images/icon-vibes.png" alt="Find Nearest Cafe" class="explore-icon">
+                        <img src="{{ asset('images/icon-vibes.png') }}" alt="Find Nearest Cafe"
+                            class="explore-icon">
                         <h5>Find Nearest Cafe</h5>
                         <p>Gunakan fitur lokasi untuk mencari kafe terdekat tanpa ribet. Langsung tahu mana yang paling
                             dekat!</p>
@@ -655,7 +668,8 @@
 
                     <!-- Item 3 Kanan -->
                     <div class="text-center explore-item">
-                        <img src="images/icon-reservation.png" alt="mobile jb app" class="explore-icon">
+                        <img src="{{ asset('images/icon-reservation.png') }}" alt="mobile jb app"
+                            class="explore-icon">
                         <h5>Discover Jember Cafes</h5>
                         <p>Jelajahi berbagai kafe unik di Kota Jember yang mungkin belum pernah kamu kunjungi
                             sebelumnya!</p>
@@ -669,10 +683,7 @@
     <section class="download-section">
         <div class="container text-center">
             <a href="https://play.google.com/store/apps/details?id=com.kafekotakita.app" target="_blank">
-                <img src="images/icon-playstore.png" alt="Get it on Google Play" class="store-badge">
-            </a>
-            <a href="https://apps.apple.com/app/id123456789" target="_blank">
-                <img src="images/icon-appstore.png" alt="Download on the App Store" class="store-badge">
+                <img src="{{ asset('images/icon-playstore.png') }}" alt="Get it on Google Play" class="store-badge">
             </a>
         </div>
     </section>
@@ -689,13 +700,13 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/jquery.easing.1.3.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/aos.js"></script>
-    <script src="js/main.js"></script>
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/popper.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.easing.1.3.js') }}"></script>
+    <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('js/aos.js') }}"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
 
     <script>
         function toggleDetail(element, id) {

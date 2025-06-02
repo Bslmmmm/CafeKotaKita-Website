@@ -43,7 +43,9 @@ class GenreApiController extends Controller
         try {
             $data = Genre::with(["kafe" => function ($query) {
                 $query->withAvg('rating as total_rating', 'rate');
-            }])->find($id);
+            },   "kafe.gallery" => function ($query) {
+                $query->where('type', 'main_content');
+            },])->find($id);
 
             if (empty($data)) {
                 return response()->json([
@@ -90,7 +92,9 @@ class GenreApiController extends Controller
 
             $genres = Genre::with(['kafe' => function ($query) {
                 $query->where('status', 'buka');
-            }])
+            },  "gallery" => function ($query) {
+                $query->where('type', 'main_content');
+            },])
                 ->where('nama', 'LIKE', "%{$keyword}%")
                 ->get();
 

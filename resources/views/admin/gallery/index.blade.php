@@ -43,7 +43,8 @@
                                     <tr>
                                         <td>{{ $d->kafe ? $d->kafe->nama : 'Tidak Ada Kafe' }}</td>
                                         <td>
-                                            <img src="{{ asset('storage/' . $d->url) }}" alt="Gambar Gallery"
+                                        {{ Storage::url('images')}}
+                                            <img src="" alt="Gambar Gallery"
                                                 class="img-fluid" style="max-height: 80px;">
                                         </td>
                                         <td>{{ $d->type }}</td>

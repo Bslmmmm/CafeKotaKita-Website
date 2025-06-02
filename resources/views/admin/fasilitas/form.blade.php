@@ -53,7 +53,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
+                            {{-- <div class="form-group row">
                               <label class="col-md-2 col-form-label form-control-label">Image</label>
                               <div class="col-md-10">
                                   <input type="file" class="form-control" name="image" id="customFileLang" lang="en" multiple onchange="previewImage(this);">
@@ -67,7 +67,7 @@
                                            style="max-width: 50%; margin-top: 20px; display: none;">
                                   @endif
                               </div>
-                          </div>
+                          </div> --}}
 
                             <button type="submit"
                                 class="btn btn-success float-right">{{ isset($data) ? 'Update' : 'Simpan' }}</button>

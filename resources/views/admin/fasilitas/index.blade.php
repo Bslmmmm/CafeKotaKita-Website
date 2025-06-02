@@ -36,7 +36,6 @@
                                 <tr>
                                     <th>Nama</th>
                                     <th>Deskripsi</th>
-                                    <th>Image</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -45,10 +44,10 @@
                                     <tr>
                                         <td>{{ $d->nama }}</td>
                                         <td>{{ $d->deskripsi }}</td>
-                                        <td>
+                                        {{-- <td>
                                             <img src="{{ asset('storage/' . $d->image) }}" alt="Gambar Fasilitas"
                                             class="img-fluid" style="max-height: 80px">
-                                        </td>
+                                        </td> --}}
                                         <td class="table-actions">
                                             <a href="{{ route('fasilitas.edit', $d->id) }}" class="table-action"
                                                 data-toggle="tooltip" data-original-title="Edit product">
