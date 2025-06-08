@@ -71,7 +71,7 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link" href="#navbar-tables" data-toggle="collapse" role="button"
                             aria-expanded="false" aria-controls="navbar-tables">
                             <i class="fas fa-hamburger" aria-hidden="true"></i>
@@ -94,11 +94,11 @@
 
                             </ul>
                         </div>
-                    </li>
+                    </li> --}}
                     <li class="nav-item">
                         <a class="nav-link" href="#reportMenu" data-toggle="collapse" role="button"
                             aria-expanded="false" aria-controls="reportMenu">
-                            <i class="fas fa-hamburger" aria-hidden="true"></i>
+                            <i class="ni ni-chart-pie-35" aria-hidden="true"></i>
                             <span class="nav-link-text">Manajemen Laporan</span>
                         </a>
                         <div class="collapse" id="reportMenu">
@@ -121,19 +121,19 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('gallery.index') }}">
-                            <i class="ni ni-chart-pie-35"></i>
+                            <i class="fas fa-project-diagram"></i>
                             <span class="nav-link-text">Galeri</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('user.owner') }}">
-                            <i class="ni ni-chart-pie-35"></i>
+                            <i class="fas fa-person-booth"></i>
                             <span class="nav-link-text">Owner Kafe</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('user.index') }}">
-                            <i class="ni ni-chart-pie-35"></i>
+                            <i class="fas fa-user"></i>
                             <span class="nav-link-text">Users</span>
                         </a>
                     </li>

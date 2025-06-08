@@ -31,24 +31,22 @@ class FasilitasController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // max 2MB
             'nama' => 'required|string|max:35',
             'deskripsi' => 'required|string|max:100',
         ]);
 
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $filename = Str::uuid() . time() . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('fasilitas', $filename, 'public');
+        // if ($request->hasFile('image')) {
+        //     $file = $request->file('image');
+        //     $filename = Str::uuid() . time() . '.' . $file->getClientOriginalExtension();
+        //     $path = $file->storeAs('fasilitas', $filename, 'public');
 
-            $data = [
-                "nama" => $request->nama,
-                "deskripsi" => $request->deskripsi,
-                "image" => $path
-            ];
-            Fasilitas::create($data);
-            return redirect()->route('fasilitas.index')->with('success', 'Data Berhasil Ditambahkan');
-        }
+        // }
+        $data = [
+            "nama" => $request->nama,
+            "deskripsi" => $request->deskripsi,
+        ];
+        Fasilitas::create($data);
+        return redirect()->route('fasilitas.index')->with('success', 'Data Berhasil Ditambahkan');
         return back()->with('error', 'Please select a valid image file.');
     }
 
@@ -76,7 +74,6 @@ class FasilitasController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // max 2MB, gambar opsional
             'nama' => 'required|string|max:35',
             'deskripsi' => 'required|string|max:100',
         ]);
@@ -85,20 +82,20 @@ class FasilitasController extends Controller
         $fasilitas = Fasilitas::findOrFail($id);
 
         // Jika ada file gambar yang diupload
-        if ($request->hasFile('image')) {
-            // Hapus gambar lama jika ada
-            if ($fasilitas->image) {
-                Storage::disk('public')->delete($fasilitas->image);
-            }
+        // if ($request->hasFile('image')) {
+        //     // Hapus gambar lama jika ada
+        //     if ($fasilitas->image) {
+        //         Storage::disk('public')->delete($fasilitas->image);
+        //     }
 
-            // Proses upload gambar baru
-            $file = $request->file('image');
-            $filename = Str::uuid() . time() . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('fasilitas', $filename, 'public');
+        //     // Proses upload gambar baru
+        //     $file = $request->file('image');
+        //     $filename = Str::uuid() . time() . '.' . $file->getClientOriginalExtension();
+        //     $path = $file->storeAs('fasilitas', $filename, 'public');
 
-            // Update path gambar
-            $fasilitas->image = $path;
-        }
+        //     // Update path gambar
+        //     $fasilitas->image = $path;
+        // }
 
         // Update data lainnya
         $fasilitas->nama = $request->nama;
@@ -119,9 +116,9 @@ class FasilitasController extends Controller
     {
         $fasilitas = Fasilitas::findOrFail($id);
 
-        if ($fasilitas->image) {
-            Storage::disk('public')->delete($fasilitas->image);
-        }
+        // if ($fasilitas->image) {
+        //     Storage::disk('public')->delete($fasilitas->image);
+        // }
 
         $fasilitas->delete();
 

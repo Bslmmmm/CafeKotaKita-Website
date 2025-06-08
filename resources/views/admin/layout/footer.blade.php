@@ -28,7 +28,32 @@
 
 </div>
 <!-- Argon Scripts -->
+@if(session('error'))
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            html: `{!! implode('<br>', $errors->all()) !!}`,
+            confirmButtonText: 'OK'
+        });
+    });
+</script>
+@endif
 
+@if(session('success'))
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        Swal.fire({
+            icon: 'success',
+            title: 'Sukses!',
+            text: '{{ session('success') }}',
+            confirmButtonText: 'OK'
+        });
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@endif
 <script>
   // Function to preview the image when selected
   function previewImage(input) {

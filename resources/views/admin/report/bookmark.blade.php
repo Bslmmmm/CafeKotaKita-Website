@@ -165,12 +165,11 @@
             const tableTopUser = document.getElementById('dataTopUser');
             tableTopUser.innerHTML = '';
             const excelData = [
-                ['No', 'User ID', 'Nama', 'Periode', 'Total Bookmarks']
+                ['No', 'Nama', 'Total Bookmarks']
             ];
 
             data.top_users.forEach((item, index) => {
                 const no = index + 1;
-                const userId = item.user.id;
                 const nama = item.user.nama;
                 const periode = `${data.filters.bulan}/${data.filters.tahun}`;
                 const total = item.total_bookmarks;
@@ -178,14 +177,12 @@
                 const row = document.createElement('tr');
                 row.innerHTML = `
           <td>${no}</td>
-          <td>${userId}</td>
           <td>${nama}</td>
-          <td>${periode}</td>
           <td>${total}</td>
         `;
                 tableTopUser.appendChild(row);
 
-                excelData.push([no, userId, nama, periode, total]);
+                excelData.push([no, nama, total]);
             });
 
             window.lastExportedTopUsers = excelData;
@@ -195,27 +192,23 @@
             const tableTopKafe = document.getElementById('dataTopKafe');
             tableTopKafe.innerHTML = '';
             const excelData = [
-                ['No', 'Kafe ID', 'Nama Kafe', 'Periode', 'Total Bookmarks']
+                ['No', 'Nama Kafe', 'Total Bookmarks']
             ];
 
             data.top_kafe.forEach((item, index) => {
                 const no = index + 1;
-                const kafeId = item.kafe.id;
                 const namaKafe = item.kafe.nama;
-                const periode = `${data.filters.bulan}/${data.filters.tahun}`;
                 const total = item.total_bookmarks;
 
                 const row = document.createElement('tr');
                 row.innerHTML = `
           <td>${no}</td>
-          <td>${kafeId}</td>
           <td>${namaKafe}</td>
-          <td>${periode}</td>
           <td>${total}</td>
         `;
                 tableTopKafe.appendChild(row);
 
-                excelData.push([no, kafeId, namaKafe, periode, total]);
+                excelData.push([no,  namaKafe,  total]);
             });
 
             window.lastExportedTopKafe = excelData;
@@ -224,6 +217,8 @@
         window.exportAllToExcel = function() {
             const topUsers = window.lastExportedTopUsers;
             const topKafe = window.lastExportedTopKafe;
+            const tahun = tahunFilter.value;
+            const bulan = bulanFilter.value;
 
             if ((!topUsers || topUsers.length <= 1) && (!topKafe || topKafe.length <= 1)) {
                 alert('Tidak ada data untuk diekspor!');
@@ -241,8 +236,9 @@
                 const wsKafe = XLSX.utils.aoa_to_sheet(topKafe);
                 XLSX.utils.book_append_sheet(wb, wsKafe, 'Top Kafe');
             }
-
-            XLSX.writeFile(wb, 'Laporan_Top_Users_dan_Kafe.xlsx');
+            const today = new Date();
+            const dateString = today.toISOString().split('T')[0]; 
+            XLSX.writeFile(wb, `${dateString}_Laporan_Bookmark_Periode_${bulan}_${tahun}.xlsx`);
         };
 
     });

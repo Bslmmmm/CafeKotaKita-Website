@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get("/", function () {
     return view('index');
-});
+})->name('home');
 
 Route::get('/welcome', function () {
     return view('welcome');
@@ -89,7 +89,6 @@ Route::prefix("admin")->middleware(['auth', 'admin'])->group(function(){
     });
     Route::prefix("report")->group(function () {
         Route::get("bookmark", [ReportController::class, "reportBookmark"])->name("report.bookmark");
-        Route::get("owner", [ReportController::class, "owner"])->name("user.owner");
         Route::get("validasiOwner/{id}", [ReportController::class, "validasiOwner"])->name("user.validasi");
         Route::get("tolakValidasi/{id}", [ReportController::class, "tolakValidasi"])->name("user.tolakValidasi");
     });
